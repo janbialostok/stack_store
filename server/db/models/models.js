@@ -14,7 +14,13 @@ var creditSchema = new Schema({
 });
 
 var addressSchema = new Schema({
-
+    address1: { type: String, required: true },
+    address2: String,
+    city: { type: String, required: true },
+    stateProv: { type: String, required: true },
+    postalCode: { type: String, required: true },
+    country: { type: String, required: true },
+    phone: { type: String, required: true }
 });
 
 var reviewSchema = new Schema({
@@ -35,7 +41,7 @@ var itemSchema = new Schema({
     description: String,
     image: String,
     reviews: [reviewSchema],
-    seller: { type: Number, required: true }
+    sellerID: { type: Number, required: true }
 });
 
 Credit = mongoose.model('Credit', creditSchema);
