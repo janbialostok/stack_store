@@ -57,3 +57,12 @@ Review = mongoose.model('Review', reviewSchema);
 Cart = mongoose.model('Cart', cartSchema);
 User = mongoose.model('User', userSchema);
 Item = mongoose.model('Item', itemSchema);
+
+module.exports = {
+    Credit: Credit,
+    Address: Address,
+    Review: Review,
+    Cart: Cart,
+    User: User,
+    Item: Item
+}
