@@ -9,13 +9,14 @@
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/angular/angular.js"></script>
-    <script src="/angular-cookies/angular-cookies.js"></script>
+    <!-- <script src="/angular-cookies/angular-cookies.js"></script> -->
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/main.js"></script>
+
 </head>
-<body ng-app="FullstackGeneratedApp" ng-controller="MainController">
-    <navbar items="menuItems"></navbar>
-    <div ui-view></div>
+<body ng-app="StackStoreApp" ng-controller="MainController">
+    <nav-bar user="currentUser"></nav-bar>
+    <!-- <div ui-view></div> -->
 </body>
 </html>

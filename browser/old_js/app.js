@@ -1,10 +1,15 @@
 'use strict';
-var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt']);
+var app = angular.module('FullstackGeneratedApp', ['ui.router', 'fsaPreBuilt']);
 
 app.controller('MainController', function ($scope) {
-    $scope.currentUser = {
 
-    };
+    // Given to the <navbar> directive to show the menu.
+    $scope.menuItems = [
+        { label: 'Home', state: 'home' },
+        { label: 'About', state: 'about' },
+        { label: 'Tutorial', state: 'tutorial' }
+    ];
+
 });
 
 
