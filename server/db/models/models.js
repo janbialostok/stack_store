@@ -82,6 +82,7 @@ itemSchema.pre('save', function (next){
         total += review.rating;
     });
     this.avgReview = (total/this.reviews.length);
+    next();
 });
 
 Credit = mongoose.model('Credit', creditSchema);
