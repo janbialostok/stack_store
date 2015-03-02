@@ -30,7 +30,7 @@ var reviewSchema = new Schema({
     rating: { type: Number, min: 1, max: 5, required: true },
     comment: { type: String },
     username: { type: String, required: true },
-    userId: { type: String, required: true }
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" }
 });
 
 var cartSchema = new Schema({
@@ -62,7 +62,7 @@ var itemSchema = new Schema({
     description: String,
     image: String,
     reviews: [reviewSchema],
-    sellerID: { type: String, required: true }
+    sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" }
 });
 
 Credit = mongoose.model('Credit', creditSchema);
