@@ -5,6 +5,7 @@
   "main": "server/start.js",
   "scripts": {
     "start": "node server/start.js",
+    "dev": "nodemon server/start.js",
     "postinstall": "./node_modules/bower/bin/bower install && gulp build"
   },
   "dependencies": {
