@@ -53,7 +53,7 @@ var userSchema = new Schema({
     items: [String],
     shipping: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
     billing: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
-    creditCard: creditSchema,
+    creditCard: [creditSchema],
     cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });

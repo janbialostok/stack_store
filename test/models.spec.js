@@ -10,7 +10,7 @@ var models = require("../server/db/models/models.js");
 
 describe("Credit Card Model", function() {
     describe("Validations", function() {
-	var creditCard;
+	var creditCard;	
 
 	beforeEach(function() {
 	    creditCard = new models.Credit();
