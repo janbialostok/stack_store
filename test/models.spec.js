@@ -25,5 +25,16 @@ describe("Credit Card Model", function() {
 		done();
 	    });
 	});
+
+	it("Should err with data of zero length", function(done) {
+	    creditCard.number = "";
+	    creditCard.ccv = "";
+	    
+	    creditCard.validate(function(err) {
+		expect(err.errors).to.have.property("number");
+		expect(err.errors).to.have.property("ccv");
+		done();
+	    });
+	});
     });
 });
