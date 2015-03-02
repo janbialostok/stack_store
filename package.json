@@ -30,6 +30,7 @@
     "jshint-stylish": "^1.0.1",
     "lodash": "^3.3.0",
     "mongoose": "^3.8.23",
+    "mongoose-currency": "0.0.4",
     "morgan": "^1.5.1",
     "passport": "^0.2.1",
     "passport-facebook": "^1.0.3",

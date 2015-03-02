@@ -6,6 +6,8 @@ db.on('error', console.error.bind(console, 'mongodb connection error: '));
 var Credit, Address, Review, Cart, User, Item;
 
 var Schema = mongoose.Schema;
+require("mongoose-currency").loadType(mongoose);
+var Currency = mongoose.Types.Currency;
 
 var creditSchema = new Schema({
 
@@ -28,7 +30,12 @@ var userSchema = new Schema({
 });
 
 var itemSchema = new Schema({
-
+    name: { type: String, required: true },
+    price: { type: Currency, required: true},
+    description: String,
+    image: String,
+    reviews: [reviewSchema],
+    seller: { type: Number, required: true }
 });
 
 Credit = mongoose.model('Credit', creditSchema);
