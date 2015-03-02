@@ -6,14 +6,14 @@ chai.use(spies);
 chai.use(things);
 
 var expect = require("chai").expect;
-var models = require("../server/db/models");
+var models = require("../server/db/models/models.js");
 
 describe("Credit Card Model", function() {
     describe("Validations", function() {
 	var creditCard;
 
 	beforeEach(function() {
-	    creditCard = new models.Credit;
+	    creditCard = new models.Credit();
 	});
 
 	it("Should err without any data", function(done) {
