@@ -3,7 +3,7 @@
 app.directive('navBar', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'directives/navBar/navBar.html',
+		templateUrl: 'js/common/directives/navbar/navBar.html',
 		scope: {
 			user: '='
 		}

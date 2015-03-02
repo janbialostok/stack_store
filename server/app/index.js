@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 module.exports = app;
+
 require('./configure')(app);
 
 app.use('/api', require('./routes'));

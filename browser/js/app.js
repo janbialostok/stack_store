@@ -3,7 +3,11 @@ var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt']);
 
 app.controller('MainController', function ($scope) {
     $scope.currentUser = {
-
+    	permissionLevel: "auth",
+    	cart: {
+    		num: 5
+    	},
+    	username: "username"
     };
 });
 
