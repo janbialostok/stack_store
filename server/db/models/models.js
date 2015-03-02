@@ -28,14 +28,15 @@ var addressSchema = new Schema({
 
 var reviewSchema = new Schema({
     rating: { type: Number, min: 1, max: 5, required: true },
-    comment: { type: String },
+    comment: { type: String, min: 50 },
     username: { type: String, required: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" }
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    productId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Item' }
 });
 
 var cartSchema = new Schema({
     item: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-    status: { type: String, required: true, default: "Open" }
+    status: { type: String, required: true, default: 'Open' }
 });
 
 var userSchema = new Schema({
@@ -48,12 +49,13 @@ var userSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     image: String,
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     items: [String],
-    address: addressSchema,
+    shipping: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
+    billing: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
     creditCard: creditSchema,
-    cart: cartSchema,
-    orders: [cartSchema]
+    cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
 
 var itemSchema = new Schema({
@@ -62,7 +64,8 @@ var itemSchema = new Schema({
     description: String,
     image: String,
     reviews: [reviewSchema],
-    sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" }
+    sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    tags: [String]
 });
 
 Credit = mongoose.model('Credit', creditSchema);
