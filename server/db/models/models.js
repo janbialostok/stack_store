@@ -1,3 +1,4 @@
+var crypto = require("crypto");
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -45,7 +46,8 @@ var userSchema = new Schema({
     token: { type: String, required: true, unique: true },
     authType: { type: String, required: true },
     permLevel: { type: String, required: true },
-    password: { type: String, required: true },
+    hashPassword: { type: String, required: true },
+    salt: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     image: String,
@@ -64,8 +66,22 @@ var itemSchema = new Schema({
     description: String,
     image: String,
     reviews: [reviewSchema],
+    avgReview: { type: Number, min: 1, max: 5},
     sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     tags: [String]
+});
+
+userSchema.virtual('password').set(function (password){
+    this.salt = crypto.randomBytes(16).toString('base64');
+    this.hashPassword = crypto.pbkdf2Sync(password, this.salt, 100, 64).toString('base64');
+});
+
+itemSchema.pre('save', function (next){
+    var total = 0;
+    this.reviews.forEach(function (review){
+        total += review.rating;
+    });
+    this.avgReview = (total/this.reviews.length);
 });
 
 Credit = mongoose.model('Credit', creditSchema);
