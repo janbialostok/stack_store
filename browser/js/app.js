@@ -9,6 +9,12 @@ app.controller('MainController', function ($scope) {
     	},
     	username: "username"
     };
+
+    $scope.item = {
+        img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+        name: 'Blue Jeans',
+        price: 200
+    };
 });
 
 
