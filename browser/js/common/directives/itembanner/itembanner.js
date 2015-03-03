@@ -16,9 +16,8 @@ app.directive('itemBanner', function() {
 				scope.extra = [];
 				scope.active = scope.data.slice(index, stepSize);
 				index += stepSize;
-
 				while (index < scope.data.length) {
-					scope.extra.push(scope.data.slice(index,stepSize));
+					scope.extra.push(scope.data.slice(index,index + stepSize));
 					index += stepSize;
 				}
 			}
