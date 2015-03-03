@@ -49,9 +49,9 @@ var cartSchema = new Schema({
 
 var userSchema = new Schema({
     name: { type: String, required: true, unique: true },
-    key: { type: String, required: true, unique: true },
-    token: { type: String, required: true, unique: true },
-    authType: { type: String, required: true },
+    key: { type: String, unique: true },
+    token: { type: String, unique: true },
+    authType: { type: String, required: true, default: "local" },
     permLevel: { type: String, required: true },
     hashPassword: { type: String, required: true },
     salt: { type: String, required: true },
@@ -59,10 +59,10 @@ var userSchema = new Schema({
     lastName: { type: String, required: true },
     image: String,
     email: { type: String, required: true, unique: true },
-    items: [String],
+    items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
     shipping: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
     billing: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
-    creditCard: [creditSchema],
+    creditCard: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Credit' }],
     cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
