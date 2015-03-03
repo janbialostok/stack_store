@@ -60,10 +60,10 @@ var userSchema = new Schema({
     image: String,
     email: { type: String, required: true, unique: true },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-    shipping: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
-    billing: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Address' }],
-    creditCard: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Credit' }],
-    cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
+    shipping: [addressSchema],
+    billing: [addressSchema],
+    creditCard: [creditSchema],
+    cart: [cartSchema],
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
 
