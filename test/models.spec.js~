@@ -1,0 +1,9 @@
+var chai = require("chai"),
+    spies = require("chai-spies"),
+    things = require("chai-things");
+
+chai.use(spies);
+chai.use(things);
+
+var expect = require("chai").expect;
+var models = require("../server/db/models")

@@ -10,42 +10,42 @@ app.controller('MainController', function ($scope) {
     	username: "username"
     };
 
-    $scope.item = {
-        img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-        name: 'Blue Jeans',
-        price: 200
-    };
-
     $scope.items = [
         {
             img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
             name: 'Blue Jeans',
-            price: 1            
+            price: 1,
+	    rating: 3.2
         },
         {
             img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
             name: 'Blue Jeans',
-            price: 2            
+            price: 2, 
+	    rating: 3.5           
         },
         {
             img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
             name: 'Blue Jeans',
-            price: 3            
+            price: 3,
+	    rating: 1            
         },
         {
             img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
             name: 'Blue Jeans',
-            price: 4            
+            price: 4,
+	    rating: 5            
         },
         {
             img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
             name: 'Blue Jeans',
-            price: 5            
+            price: 5,
+	    rating: 4            
         },
         {
             img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
             name: 'Blue Jeans',
-            price: 6            
+            price: 6,
+	    rating: 3            
         }
     ];
 });

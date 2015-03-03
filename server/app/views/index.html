@@ -5,6 +5,7 @@
     <title>Fullstack Academy Generated Application</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     <script src="/lodash/lodash.js"></script>
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
@@ -18,8 +19,8 @@
 <body ng-app="StackStoreApp" ng-controller="MainController">
     <nav-bar user="currentUser"></nav-bar>
     <div class="container">
-        <!-- <item data="item" ng-repeat="i in [1,2,3,4,5]"></item> -->
-        <item-banner data="items" title="Hello this is a list"></item-banner>
+      <item-banner data="items" title="What's Popular"></item-banner>
+      <item-banner data="items" title="Recommended For You"></item-banner>
     </div>
 </body>
 </html>
