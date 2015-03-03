@@ -9,10 +9,6 @@ app.directive('itemBanner', function($window) {
 			title: '@'
 		},
 		link: function(scope, elem, attr) {
-			scope.extra = [];
-			scope.active = [];
-			updateBanner();
-
 			function updateBanner() {
 				var width = window.innerWidth;
 
@@ -38,6 +34,10 @@ app.directive('itemBanner', function($window) {
 				updateBanner();
 				scope.$digest();
 			});
+
+			scope.extra = [];
+			scope.active = [];
+			updateBanner();
 		}
 	};
 });
