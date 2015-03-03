@@ -15,6 +15,39 @@ app.controller('MainController', function ($scope) {
         name: 'Blue Jeans',
         price: 200
     };
+
+    $scope.items = [
+        {
+            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+            name: 'Blue Jeans',
+            price: 1            
+        },
+        {
+            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+            name: 'Blue Jeans',
+            price: 2            
+        },
+        {
+            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+            name: 'Blue Jeans',
+            price: 3            
+        },
+        {
+            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+            name: 'Blue Jeans',
+            price: 4            
+        },
+        {
+            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+            name: 'Blue Jeans',
+            price: 5            
+        },
+        {
+            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
+            name: 'Blue Jeans',
+            price: 6            
+        }
+    ]
 });
 
 
