@@ -1,6 +1,7 @@
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
+
 mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongodb connection error: '));
@@ -19,9 +20,10 @@ var ccNumValidator = validate({ validator: "isLength",
 
 var creditSchema = new Schema({
     number: { type: String, required: true, unique: true, validate: ccNumValidator },
-    expiration: { type: Date, required: true },
+    expirationMonth: { type: Number, required: true, min: 1, max: 12 },
+    expirationYear: { type: Number, required: true, min: 1000, max: 9999 },
     ccv: { type: String, required: true, validate: ccvValidator },
-    address: { type: mongoose.Schema.Types.ObjectId, ref: 'Address', required: true }
+    billingAddress: { type: [addressSchema], required: true }
 });
 
 var addressSchema = new Schema({
@@ -34,18 +36,24 @@ var addressSchema = new Schema({
     phone: { type: String, required: true }
 });
 
+var reviewValidator = validate({ validator: "isLength",
+				arguments: [25],
+				message: "Reviews must be at least 25 characters"});
+
 var reviewSchema = new Schema({
     rating: { type: Number, min: 1, max: 5, required: true },
-    comment: { type: String, min: 50 },
-    username: { type: String, required: true },
+    comment: { type: String, required: true, validate: reviewValidator },
     userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     productId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Item' }
 });
 
 var cartSchema = new Schema({
-    item: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+    items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
     status: { type: String, required: true, default: 'Open' }
 });
+
+var emailValidator = validate({ validator: "isEmailStr",
+				message: "Please enter a valid email address" });
 
 var userSchema = new Schema({
     name: { type: String, required: true, unique: true },
@@ -58,10 +66,9 @@ var userSchema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     image: String,
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true, validate: emailValidator },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-    shipping: [addressSchema],
-    billing: [addressSchema],
+    shippingAddress: [addressSchema],
     creditCard: [creditSchema],
     cart: [cartSchema],
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
@@ -73,7 +80,6 @@ var itemSchema = new Schema({
     description: String,
     image: String,
     reviews: [reviewSchema],
-    avgReview: { type: Number, min: 1, max: 5},
     sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     tags: [String]
 });
@@ -83,13 +89,12 @@ userSchema.virtual('password').set(function (password){
     this.hashPassword = crypto.pbkdf2Sync(password, this.salt, 100, 64).toString('base64');
 });
 
-itemSchema.pre('save', function (next){
-    var total = 0;
-    this.reviews.forEach(function (review){
-        total += review.rating;
-    });
-    this.avgReview = (total/this.reviews.length);
-    next();
+itemSchema.virtual('avgReview').set(function (){
+    var sum = this.reviews.reduce(function(prev, review) {
+	prev += review.rating;
+    }, 0);
+    
+    return Math.round10(sum/this.reviews.length, -2);
 });
 
 module.exports = {
