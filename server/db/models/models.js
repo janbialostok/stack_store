@@ -89,12 +89,12 @@ userSchema.virtual('password').set(function (password){
     this.hashPassword = crypto.pbkdf2Sync(password, this.salt, 100, 64).toString('base64');
 });
 
-itemSchema.virtual('avgReview').set(function (){
-    var sum = this.reviews.reduce(function(prev, review) {
-	prev += review.rating;
-    }, 0);
-    
-    return Math.round10(sum/this.reviews.length, -2);
+itemSchema.virtual('avgReview').get(function (){
+    var sum = 0;
+    this.reviews.forEach(function (review){
+        sum += review.rating;
+    });
+    return Math.round(sum/this.reviews.length, -2);
 });
 
 module.exports = {

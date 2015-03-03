@@ -341,3 +341,79 @@ describe("User Model", function() {
 		});
 	});
 });
+
+describe("Item Model", function(){
+	describe("Validation", function(){
+		var item;
+		var savedItem;
+		beforeEach(function(){
+			item = new models.Item();
+		});
+		afterEach(function (done){
+			models.User.remove({}, done);
+		});
+		after(function (done){
+			models.Item.remove({}, done);
+		})
+		it("Should error with no data", function (done){
+			item.validate(function (err){
+				expect(err.errors).to.have.property('name');
+				expect(err.errors).to.have.property('price');
+				expect(err.errors).to.have.property('sellerID');
+				expect(err.errors).to.have.property('quantity');
+				done();
+			});
+		});
+		it("Should save with valid data", function (done){
+			for (var key in testItem){
+				item[key] = testItem[key];
+			}
+			var user = new models.User(testUser);
+			user.save(function (err, returned){
+				item.sellerID = returned._id;
+				item.save(function (err, returnedItem){
+					savedItem = returnedItem;
+					expect(err).to.equal(null);
+					expect(typeof returnedItem).to.equal("object");
+					done();
+				});
+			});
+		});
+		it("Should allow review(s) to be added", function (done){
+			models.Item.findById(savedItem._id, function (err, returnedItem){
+				var review = new models.Review(testReview);
+				var user = new models.User(testUser);
+				user.save(function (err, returnedUser){
+					review.userId = returnedUser._id;
+					review.productId = returnedItem._id;
+					returnedItem.reviews.push(review);
+					returnedItem.save(function (err, i){
+						expect(i.reviews.length).to.equal(1);
+						expect(i.reviews[0]._id).to.equal(review._id);
+						models.User.remove({}, done);
+					})
+				});
+			});
+		});
+		it("Should calculate avg review score", function (done){
+			models.Item.findById(savedItem._id, function (err, returnedItem){
+				var review = new models.Review(testReview);
+				var user = new models.User(testUser);
+				user.save(function (err, returnedUser){
+					review.userId = returnedUser._id;
+					review.productId = returnedItem._id;
+					review.rating = 3;
+					returnedItem.reviews.push(review);
+					returnedItem.save(function (err, i){
+						expect(i.avgReview).to.equal(4);
+						models.User.remove({}, done);
+					});
+				});
+			});
+		});
+	});
+});
+
+
+
+
