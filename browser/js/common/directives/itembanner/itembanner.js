@@ -7,18 +7,23 @@ app.directive('itemBanner', function() {
 		scope: {
 			data: '='
 		},
-		link: function(scope, elem, attr) {
+		// link: function(scope, elem, attr) {
+		// 	scope.extra = [];
+		// 	scope.active = [];
 
-			var index = 0;
-			var step = 3;
-			scope.active = scope.data.slice(index, step);
-			index += step;
-			scope.extra = [];
+		// 	function splitData(stepSize) {
+		// 		var index = 0;
+		// 		scope.extra = [];
+		// 		scope.active = scope.data.slice(index, stepSize);
+		// 		index += stepSize;
 
-			while (scope.data.length) {
-				scope.extra.push(scope.data.slice(index,step));
-				index += step;
-			}
-		}
+		// 		while (scope.data.length) {
+		// 			scope.extra.push(scope.data.slice(index,stepSize));
+		// 			index += stepSize;
+		// 		}
+		// 	}
+
+		// 	splitData(4);
+		// }
 	};
 });

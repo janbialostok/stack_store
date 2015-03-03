@@ -47,7 +47,7 @@ app.controller('MainController', function ($scope) {
             name: 'Blue Jeans',
             price: 6            
         }
-    ]
+    ];
 });
 
 
