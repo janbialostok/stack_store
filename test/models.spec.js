@@ -121,3 +121,72 @@ describe("Credit Card Model", function() {
     });
 });
 
+describe("Review Model", function(){
+	describe("Validations", function(){
+		var review;
+		beforeEach(function(){
+			review = new models.Review();
+		});
+		it("Should err without any data", function (done){
+			review.validate(function (err){
+				expect(err.errors).to.have.property("rating");
+				expect(err.errors).to.have.property("username");
+				expect(err.errors).to.have.property("userId");
+				expect(err.errors).to.have.property("productId");
+				done();
+			});
+		});
+		it("Should err with a comment less than 50 characters", function (done){
+			for (var key in testReview){
+				review[key] = testReview[key];
+			}
+			review.comment = "";
+			var user = new models.User(testUser);
+			user.save(function (err, returned){
+				var item = new models.Item(testItem);
+				item.sellerID = returned._id;
+				console.log(returned);
+				item.save(function (err, returnedItem){
+					review.userId = returned._id;
+					review.productId = returnedItem._id;
+					models.User.findOne({ _id: returned._id }, function (err, u){
+						review.username = u.username;
+						review.validate(function (error){
+							expect(error.errors).to.have.property("comment");
+							models.Item.remove({}).exec(function(){
+								models.User.remove({}, done);
+							});
+						});
+					});
+				});
+			});
+		});
+		it("Should save with valid data", function (done){
+			for (var key in testReview){
+				review[key] = testReview[key];
+			}
+			var user = new models.User(testUser);
+			user.save(function (err, returned){
+				var item = new models.Item(testItem);
+				item.sellerID = returned._id;
+				item.save(function (err, returnedItem){
+					review.userId = returned._id;
+					review.productId = returnedItem._id;
+					models.User.findOne({ _id: returned._id }, function (err, u){
+						review.username = u.username;
+						review.save(function (err, returnedReview){
+							expect(err).to.equal(null);
+							expect(typeof returnedReview).to.equal("object");
+							models.Item.remove({}).exec(function(){
+								models.User.remove({}).exec(function(){
+									models.Review.remove({}, done);
+								})
+							});
+						});
+					});
+				});
+			});
+		});
+	});
+});
+
