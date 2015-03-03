@@ -52,8 +52,7 @@ var cartSchema = new Schema({
     status: { type: String, required: true, default: 'Open' }
 });
 
-var emailValidator = validate({ validator: "isEmailStr",
-				message: "Please enter a valid email address" });
+var emailValidator = validate({ validator: "isEmail", arguments: [this], message: "Please enter a valid email address"});
 
 var userSchema = new Schema({
     name: { type: String, required: true, unique: true },

@@ -20,7 +20,8 @@ var testAddress = {
 
 var testCredit = {
 	number: "1234567890123456",
-	expiration: new Date(),
+	expirationMonth: 1,
+	expirationYear: 2017,
 	ccv: "123"
 };
 
@@ -83,9 +84,10 @@ describe("Credit Card Model", function() {
 		it("Should err without any data", function(done) {
 		    creditCard.validate(function(err) {
 			expect(err.errors).to.have.property("number");
-			expect(err.errors).to.have.property("expiration");
+			expect(err.errors).to.have.property("expirationMonth");
+			expect(err.errors).to.have.property("expirationYear");
 			expect(err.errors).to.have.property("ccv");
-			expect(err.errors).to.have.property("address");
+			expect(err.errors).to.have.property("billingAddress");
 			done();
 		    });
 		});
@@ -103,19 +105,14 @@ describe("Credit Card Model", function() {
 
 		it("Should save with valid data", function (done){
 			var address = new models.Address(testAddress);
-			address.save(function (err, returnedAddress){
-				var addId = returnedAddress._id;
-				for (var key in testCredit){
-					creditCard[key] = testCredit[key];
-				}
-				creditCard.address = addId;
-				creditCard.save(function (err, credit){
-					expect(err).to.equal(null);
-					expect(typeof credit).to.equal("object");
-					models.Credit.remove({}).exec(function(){
-						models.Address.remove({}, done);
-					});
-				});
+			for (var key in testCredit){
+				creditCard[key] = testCredit[key];
+			}
+			creditCard.billingAddress = address;
+			creditCard.save(function (err, credit){
+				expect(err).to.equal(null);
+				expect(typeof credit).to.equal("object");
+				models.Credit.remove({}, done)
 			});
 		});
     });
@@ -130,22 +127,21 @@ describe("Review Model", function(){
 		it("Should err without any data", function (done){
 			review.validate(function (err){
 				expect(err.errors).to.have.property("rating");
-				expect(err.errors).to.have.property("username");
+				expect(err.errors).to.have.property("comment");
 				expect(err.errors).to.have.property("userId");
 				expect(err.errors).to.have.property("productId");
 				done();
 			});
 		});
-		it("Should err with a comment less than 50 characters", function (done){
+		it("Should err with a comment less than 25 characters", function (done){
 			for (var key in testReview){
 				review[key] = testReview[key];
 			}
-			review.comment = "";
+			review.comment = "A comment";
 			var user = new models.User(testUser);
 			user.save(function (err, returned){
 				var item = new models.Item(testItem);
 				item.sellerID = returned._id;
-				console.log(returned);
 				item.save(function (err, returnedItem){
 					review.userId = returned._id;
 					review.productId = returnedItem._id;
@@ -170,6 +166,7 @@ describe("Review Model", function(){
 				var item = new models.Item(testItem);
 				item.sellerID = returned._id;
 				item.save(function (err, returnedItem){
+					expect(returnedItem.sellerID).to.equal(returned._id)
 					review.userId = returned._id;
 					review.productId = returnedItem._id;
 					models.User.findOne({ _id: returned._id }, function (err, u){
@@ -177,6 +174,8 @@ describe("Review Model", function(){
 						review.save(function (err, returnedReview){
 							expect(err).to.equal(null);
 							expect(typeof returnedReview).to.equal("object");
+							expect(returnedReview.productId).to.equal(returnedItem._id);
+							expect(returnedReview.userId).to.equal(returned._id);
 							models.Item.remove({}).exec(function(){
 								models.User.remove({}).exec(function(){
 									models.Review.remove({}, done);
@@ -184,6 +183,70 @@ describe("Review Model", function(){
 							});
 						});
 					});
+				});
+			});
+		});
+	});
+});
+
+describe("Cart Model", function(){
+	describe("Validation", function(){
+		var cart;
+		var cartId;
+		beforeEach(function(){
+			cart = new models.Cart();
+		});
+		after(function(done){
+			models.Cart.remove({}, done);
+		});
+		it("Should create new cart in database with starting status of open", function(done){
+			cart.save(function (err, returnedCart){
+				cartId = returnedCart._id;
+				expect(err).to.equal(null);
+				expect(returnedCart.status).to.equal("Open");
+				done();
+			});
+		});
+		it("Should start with an item array with zero length", function (done){
+			models.Cart.findOne({ _id: cartId }, function (err, returnedCart){
+				expect(returnedCart.items.length).to.equal(0);
+				done();
+			});
+		});
+		it("Should allow for a single item to be placed in cart", function (done){
+			var user = new models.User(testUser);
+			user.save(function (err, returned){
+				var item = new models.Item(testItem);
+				item.sellerID = returned._id;
+				item.save(function (err, returnedItem){
+					cart.items.push(returnedItem);
+					cart.save(function (err, returnedCart){
+						expect(err).to.equal(null);
+						expect(returnedCart.items.length).to.equal(1);
+						expect(returnedCart.items[0]).to.equal(returnedItem._id);
+						models.Item.remove({}).exec(function(){
+							models.User.remove({}, done);
+						});
+					});	
+				});
+			});
+		});
+		it("Should allow many items to be placed in cart", function (done){
+			var user = new models.User(testUser);
+			user.save(function (err, returned){
+				var item = new models.Item(testItem);
+				item.sellerID = returned._id;
+				item.save(function (err, returnedItem){
+					for (var i = 0; i < 25; i++){
+						cart.items.push(returnedItem);
+					}
+					cart.save(function (err, returnedCart){
+						expect(err).to.equal(null);
+						expect(returnedCart.items.length).to.equal(25);
+						models.Item.remove({}).exec(function(){
+							models.User.remove({}, done);
+						});
+					});	
 				});
 			});
 		});
