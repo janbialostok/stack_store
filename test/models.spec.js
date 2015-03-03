@@ -45,7 +45,8 @@ var testItem = {
 	name: "Test Item",
 	price: "$100.00",
 	description: "Some test item",
-	quantity: 3
+	quantity: 3,
+	size: "M"
 };
 
 
