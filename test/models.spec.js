@@ -37,7 +37,7 @@ var testUser = {
 	firstName: "Jan",
 	lastName: "Bialostok",
 	email: "janbialostok@gmail.com"
-};
+}
 
 var testItem = {
 	name: "Test Item",
@@ -252,4 +252,6 @@ describe("Cart Model", function(){
 		});
 	});
 });
+
+
 
