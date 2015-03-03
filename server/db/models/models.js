@@ -80,7 +80,8 @@ var itemSchema = new Schema({
     image: String,
     reviews: [reviewSchema],
     sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-    tags: [String]
+    tags: [String],
+    quantity: {type: Number, required: true}
 });
 
 userSchema.virtual('password').set(function (password){

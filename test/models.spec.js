@@ -1,6 +1,7 @@
 var chai = require("chai"),
     spies = require("chai-spies"),
-    things = require("chai-things");
+    things = require("chai-things"),
+    crypto = require("crypto");
 
 chai.use(spies);
 chai.use(things);
@@ -36,13 +37,15 @@ var testUser = {
 	password: "Password!",
 	firstName: "Jan",
 	lastName: "Bialostok",
-	email: "janbialostok@gmail.com"
+	email: "janbialostok@gmail.com",
+	cart: new models.Cart()
 };
 
 var testItem = {
 	name: "Test Item",
 	price: "$100.00",
-	description: "Some test item"
+	description: "Some test item",
+	quantity: 3
 };
 
 
@@ -249,6 +252,92 @@ describe("Cart Model", function(){
 					});	
 				});
 			});
+		});
+	});
+});
+
+
+describe("User Model", function() {
+	describe("Validation", function(){
+		var user;
+		var savedUser;
+		beforeEach(function(){
+			user = new models.User(testUser);
+		});
+		it("Should err without any data", function(done){
+			var emptyUser = new models.User();
+			emptyUser.validate(function (err){
+				expect(err.errors).to.have.property("name");
+				expect(err.errors).to.have.property("permLevel");
+				expect(err.errors).to.have.property("firstName");
+				expect(err.errors).to.have.property("lastName");
+				expect(err.errors).to.have.property("email");
+				done();
+			});
+		});
+		it("Should save with valid data", function (done){
+			user.save(function (err,returned){
+				savedUser = returned;
+				expect(err).to.equal(null);
+				expect(returned.cart[0].items.length).to.equal(0);
+				expect(returned.cart[0].status).to.equal("Open");
+				expect(typeof returned).to.equal("object");
+				done();
+			});
+		});
+		it("Should set salt and hashed password using virtual", function (done){
+			expect(savedUser.salt).to.not.equal(undefined);
+			var checkHash = crypto.pbkdf2Sync("Password!", savedUser.salt, 100, 64).toString('base64');
+			expect(savedUser.hashPassword).to.equal(checkHash);
+			done();
+		});
+		it("Should allow users to add items", function (done){
+			models.User.findOne({_id: savedUser._id}, function (err, returnedUser){
+				var item = new models.Item(testItem);
+				item.sellerID = returnedUser._id;
+				item.save(function (err, returnedItem){
+					returnedUser.items.push(returnedItem._id);
+					returnedUser.save(function (err, u) {
+						expect(u.items.length).to.equal(1);
+						expect(u.items[0]).to.equal(returnedItem._id);
+						done();
+					})
+				})
+			})
+		});
+		it("Should allow users to add a shipping address and credit card", function (done){
+			var address = new models.Address(testAddress);
+			var creditCard = new models.Credit(testCredit);
+			creditCard.billingAddress.push(address);
+			models.User.findOne({_id: savedUser._id}, function (err, returnedUser){
+				returnedUser.shippingAddress.push(address);
+				returnedUser.creditCard.push(creditCard);
+				returnedUser.save(function (err,u) {
+					expect(err).to.equal(null);
+					expect(u.creditCard[0].number).to.equal("1234567890123456");
+					expect(u.shippingAddress.length).to.equal(1);
+					done();
+				})
+			})
+		})
+		it("should allow users to add items to car", function (done){
+			models.User.findOne({_id: savedUser._id}, function (err, returnedUser){
+				var item = new models.Item(testItem);
+				item.sellerID = returnedUser._id;
+				item.save(function (err, returnedItem){
+					returnedUser.cart[0].items.push(returnedItem._id);
+					returnedUser.save(function (err, u){
+						expect(err).to.equal(null);
+						expect(u.cart[0].items.length).to.equal(1);
+						done();
+					})
+				});
+			});
+		});
+		after(function(done){
+			models.User.remove({}).exec(function (){
+				models.Item.remove({},done);
+			})
 		});
 	});
 });
