@@ -1,5 +1,11 @@
 'use strict';
 var router = require('express').Router();
-module.exports = router;
+var models = require("../../db/models/models.js");
 
-router.use('/tutorial', require('./tutorial'));
+router.get("/", function(req, res) {
+    models.items.find({}, function(err, allItems) {
+	res.json(allItems);
+    });
+});
+
+module.exports = router;

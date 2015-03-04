@@ -36,6 +36,7 @@ mongoose.connection.on('open', function() {
 		}, function (err){
 		    if (err) console.log(err);
 		    console.log("Finished With Items");
+		    console.log("Control-C to exit because I'm too lazy to implement a function to end this.");
 		});
 	    });
 	});
