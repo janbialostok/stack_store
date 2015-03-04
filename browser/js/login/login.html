@@ -2,20 +2,31 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Login to Jeans on Jeans</div>
 		<div class="panel-body">
-			<form>
+			<form name="loginForm" ng-submit="loginForm.$valid && login(user)">
 				<div class="form-group">
-					<input type="email" class="form-control" placeholder="Enter email">
+					<input type="text"
+						required
+						name="username"
+						class="form-control"
+						placeholder="Enter username"
+						ng-model="user.name">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Password">
+					<input type="password"
+						required
+						name="password"
+						class="form-control"
+						placeholder="Password"
+						ng-model="user.password">
 				</div>
 				<div class="form-group">
-					<button type="button" class="btn btn-success btn-block">Login</button>
+					<button type="submit" class="btn btn-success btn-block">Login</button>
 				</div>
 			</form>
+			<button type="button" class="btn btn-info btn-block"></span>Create an Account</button>
 			<hr>
- 				<button type="button" class="btn btn-danger btn-block"></span>Connect with Google+</button>
-				<button type="button" class="btn btn-primary btn-block"></span>Connect with Facebook</button>
+			<button type="button" class="btn btn-danger btn-block"></span>Connect with Google+</button>
+			<button type="button" class="btn btn-primary btn-block"></span>Connect with Facebook</button>
 		</div>
 	</div>
 </div>

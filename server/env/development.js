@@ -1,6 +1,6 @@
 module.exports = {
   "DATABASE_URI": "mongodb://localhost:27017/stack_store",
-  "SESSION_SECRET": "Optimus Prime is my real dad",
+  "SESSION_SECRET": "Jeans are delicious",
   "TWITTER": {
     "consumerKey": "ZVQ2NZscYX1aa6nZI81Fg8HBg",
     "consumerSecret": "FkNrAsPhXVwr1qKgV5fSMGtuTsQNoWqybHlkKFf4g6FG1n4J1V",
