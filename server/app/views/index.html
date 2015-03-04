@@ -19,6 +19,9 @@
 <body ng-app="StackStoreApp" ng-controller="MainController">
     <nav-bar user="currentUser"></nav-bar>
     <div class="container">
+        <ui-view></ui-view>
+    </div>
+    <div class="container">
       <item-banner data="items" title="What's Popular"></item-banner>
       <item-banner data="items" title="Recommended For You"></item-banner>
     </div>
