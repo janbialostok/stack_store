@@ -18,10 +18,8 @@
 </head>
 <body ng-app="StackStoreApp" ng-controller="MainController" class="full">
     <nav-bar user="currentUser"></nav-bar>
-    <side-bar></side-bar>
-    <div class="container" style="margin-left: 15% !important;width: 85% !important;background-color: none !important;">
-      <item-banner data="items" title="What's Popular"></item-banner>
-      <item-banner data="items" title="Recommended For You"></item-banner>
+    <div class="container">
+        <ui-view></ui-view>
     </div>
 </body>
 </html>

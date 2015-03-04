@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
@@ -106,4 +106,8 @@ module.exports = {
     Cart: mongoose.model('Cart', cartSchema),
     User: mongoose.model('User', userSchema),
     Item: mongoose.model('Item', itemSchema)
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> origin/master
