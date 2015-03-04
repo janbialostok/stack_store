@@ -1,3 +1,4 @@
+'user strict';
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
@@ -18,13 +19,6 @@ var ccNumValidator = validate({ validator: "isLength",
 				arguments: [16, 16],
 				message: "CC number is not 16 digits"});
 
-var creditSchema = new Schema({
-    number: { type: String, required: true, unique: true, validate: ccNumValidator },
-    expirationMonth: { type: Number, required: true, min: 1, max: 12 },
-    expirationYear: { type: Number, required: true, min: 1000, max: 9999 },
-    ccv: { type: String, required: true, validate: ccvValidator },
-    billingAddress: { type: [addressSchema], required: true }
-});
 
 var addressSchema = new Schema({
     address1: { type: String, required: true },
@@ -36,6 +30,13 @@ var addressSchema = new Schema({
     phone: { type: String, required: true }
 });
 
+var creditSchema = new Schema({
+    number: { type: String, required: true, unique: true, validate: ccNumValidator },
+    expirationMonth: { type: Number, required: true, min: 1, max: 12 },
+    expirationYear: { type: Number, required: true, min: 1000, max: 9999 },
+    ccv: { type: String, required: true, validate: ccvValidator },
+    billingAddress: { type: [addressSchema], required: true }
+});
 var reviewValidator = validate({ validator: "isLength",
 				arguments: [25],
 				message: "Reviews must be at least 25 characters"});
@@ -105,4 +106,4 @@ module.exports = {
     Cart: mongoose.model('Cart', cartSchema),
     User: mongoose.model('User', userSchema),
     Item: mongoose.model('Item', itemSchema)
-}
+};

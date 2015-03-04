@@ -1,0 +1,56 @@
+side-bar {
+  width:200px;
+  position:absolute; 
+  background-color: #e7e7e7;
+  margin-left: 0%;
+  border-radius: 5px;
+  color: black;
+  opacity: 0.5;
+  aside li:hover {
+    background-color: #e7e7e7;
+  }
+  aside { 
+          margin-bottom: 100%;
+        }
+  aside ul {
+    list-style: none;
+    padding: 0%;
+    margin: 0%;
+    border-radius: 5px; 
+    li {
+      padding-left: 1%;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: larger;
+      border-radius: 5px; 
+      ul {
+        padding-left: 5%;
+        border-radius: 5px; 
+        li {
+          font-size: large;
+          font-weight: 500;
+          border-radius: 5px; 
+        }
+          li:hover { background-color: #315481; }
+        ul {
+          padding-left: 5%;
+          border-radius: 5px; 
+          li {
+            font-size: medium;
+            font-weight: 200;
+            border-radius: 5px; 
+          }
+            li:hover { background-color: #e7e7e7; }
+        }
+      }
+    }
+  }
+}
+
+.full {
+  background: url(http://www.fullhdwpp.com/wp-content/uploads/Denim_Seal_www.FullHDWpp.com_.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
