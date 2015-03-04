@@ -70,39 +70,11 @@ app.factory('SideBarFactory', function(){
 			tops: {
 				long_sleve: {
 					text: "Long Sleve",
-					qValue: "male long sleve",
-					sizes: {
-						small: {
-							text: "Small",
-							qValue: "male long sleve small"
-						},
-						medium: {
-							text: "Medium",
-							qValue: "male long sleve medium"
-						},
-						large: {
-							text: "Large",
-							qValue: "male long sleve large"
-						}
-					}
+					qValue: "male long sleve"
 				},
 				short_sleve: {
 					text: "Short Sleve",
-					qValue: "male short sleve",
-					sizes: {
-						small: {
-							text: "Small",
-							qValue: "male short sleve small"
-						},
-						medium: {
-							text: "Medium",
-							qValue: "male short sleve medium"
-						},
-						large: {
-							text: "Large",
-							qValue: "male short sleve large"
-						}
-					}
+					qValue: "male short sleve"
 				}
 			},
 			bottoms: {
