@@ -32,11 +32,13 @@ app.directive('itemBanner', function($window) {
 
 	    $(window).resize(function() {
 		updateBanner();
-		scope.$digest();
+		scope.$apply();
 	    });
 
 	    scope.extra = [];
 	    scope.active = [];
+	    scope.activeItems = true;
+	    scope.extraItems = false;
 	    updateBanner();
 	}
     };
