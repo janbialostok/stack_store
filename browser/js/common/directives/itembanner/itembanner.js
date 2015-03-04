@@ -12,13 +12,13 @@ app.directive('itemBanner', function($window) {
 	link: function(scope, elem, attr) {
 	    function updateBanner() {
 		var width = window.innerWidth;
-
+		
 		if (width > 1200) splitData(4);
 		else if (width > 992) splitData(3);
 		else if (width > 768) splitData(2);
 		else splitData(1);
 	    }
-
+	    
 	    function splitData(stepSize) {
 		var index = 0;
 		scope.extra = [];
@@ -33,12 +33,11 @@ app.directive('itemBanner', function($window) {
 	    $(window).resize(function() {
 		updateBanner();
 		scope.$apply();
+		scope.$broadcast("Resized");
 	    });
 
 	    scope.extra = [];
 	    scope.active = [];
-	    scope.activeItems = true;
-	    scope.extraItems = false;
 	    updateBanner();
 	}
     };

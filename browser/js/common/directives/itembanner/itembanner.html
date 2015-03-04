@@ -2,12 +2,12 @@
 	<h2>{{ title }}</h2>
 	<div class="carousel slide" id="{{ name }}">
 		<div class="carousel-inner">
-			<div class="item" ng-class="{ true: 'active' }[activeItems]">
+			<div class="item active">
 				<div class="row">
 					<item ng-repeat="item in active" data="item"></item>
 				</div>
 			</div>
-			<div class="item" ng-class="{ true: 'active' }[extraItems]" ng-repeat="anotherRow in extra">
+			<div class="item" ng-repeat="anotherRow in extra">
 				<div class="row">
 					<item ng-repeat="item in anotherRow" data="item"></item>
 				</div>
