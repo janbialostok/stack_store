@@ -1,3 +1,4 @@
+"use strict";
 app.directive("catMenu", function(SideBarFactory){
 	return {
 	restrict: 'E',

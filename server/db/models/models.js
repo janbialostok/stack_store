@@ -106,8 +106,4 @@ module.exports = {
     Cart: mongoose.model('Cart', cartSchema),
     User: mongoose.model('User', userSchema),
     Item: mongoose.model('Item', itemSchema)
-<<<<<<< HEAD
 };
-=======
-}
->>>>>>> origin/master
