@@ -1,11 +1,11 @@
 module.exports = {
   "DATABASE_URI": "mongodb://localhost:27017/stack_store",
   "SESSION_SECRET": "Jeans are delicious",
-  "TWITTER": {
-    "consumerKey": "ZVQ2NZscYX1aa6nZI81Fg8HBg",
-    "consumerSecret": "FkNrAsPhXVwr1qKgV5fSMGtuTsQNoWqybHlkKFf4g6FG1n4J1V",
-    "callbackUrl": "http://127.0.0.1:1337/auth/twitter/callback"
-  },
+  // "TWITTER": {
+  //   "consumerKey": "ZVQ2NZscYX1aa6nZI81Fg8HBg",
+  //   "consumerSecret": "FkNrAsPhXVwr1qKgV5fSMGtuTsQNoWqybHlkKFf4g6FG1n4J1V",
+  //   "callbackUrl": "http://127.0.0.1:1337/auth/twitter/callback"
+  // },
   "FACEBOOK": {
     "clientID": "336560806541655",
     "clientSecret": "2f117d2a289fd321e411fdb568d263f2",
