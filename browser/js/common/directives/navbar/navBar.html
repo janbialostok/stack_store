@@ -38,9 +38,9 @@
 				<li>
 					<a href="../navbar">Cart <span class="badge">{{ user.cart.num }}</span></a>
 				</li>
-				<li ng-show="user.permissionLevel == 'unauth'"><a href="../navbar/">Login</a></li>
+				<li ng-show="user.permissionLevel == 'unauth'"><a ui-sref="login">Login</a></li>
 				<li class="dropdown" ng-show="user.permissionLevel !== 'unauth'">
-					<a class="dropdown-toggle" href="/login" data-toggle="dropdown" role="button" aria-expanded="false">
+					<a class="dropdown-toggle" href="" data-toggle="dropdown" role="button" aria-expanded="false">
 						{{ user.username }}<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
