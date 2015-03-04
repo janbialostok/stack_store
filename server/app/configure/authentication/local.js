@@ -9,9 +9,9 @@ module.exports = function (app) {
 
     // When passport.authenticate('local') is used, this function will receive
     // the email and password to run the actual authentication logic.
-    var strategyFn = function (name, password, done) {
+    var strategyFn = function (username, password, done) {
         debugger;
-        UserModel.findOne({ name: name }, function (err, user) {
+        UserModel.findOne({ name: username }, function (err, user) {
             if (err) return done(err);
             // user.correctPassword is a method from our UserModel schema.
             if (!user || !user.correctPassword(password)) return done(null, false);
@@ -20,7 +20,7 @@ module.exports = function (app) {
         });
     };
 
-    passport.use(new LocalStrategy({ nameField: 'name', passwordField: 'password' }, strategyFn));
+    passport.use(new LocalStrategy({ usernameField: 'name', passwordField: 'password' }, strategyFn));
 
     // A POST /login route is created to handle login.
     app.post('/auth/login', function (req, res, next) {
