@@ -1,7 +1,7 @@
 'use strict'
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var reviewSchema = require("./review.js")
+var Review = require("./review.js");
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -17,7 +17,7 @@ var itemSchema = new Schema({
     price: { type: Currency, required: true},
     description: String,
     image: String,
-    reviews: [reviewSchema],
+    reviews: [Review.schema],
     sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     tags: [String],
     quantity: {type: Number, required: true},

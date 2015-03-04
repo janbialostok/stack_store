@@ -1,7 +1,7 @@
 'use strict'
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var addressSchema = require("./address.js")
+var Address = require("./address.js")
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -22,8 +22,7 @@ var creditSchema = new Schema({
     expirationMonth: { type: Number, required: true, min: 1, max: 12 },
     expirationYear: { type: Number, required: true, min: 1000, max: 9999 },
     ccv: { type: String, required: true, validate: ccvValidator },
-    billingAddress: { type: [addressSchema], required: true }
+    billingAddress: { type: [Address.schema], required: true }
 });
 
-module.exports = creditSchema;
-// module.exports = mongoose.model('Credit', creditSchema);
+module.exports = mongoose.model('Credit', creditSchema);

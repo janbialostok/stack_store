@@ -15,5 +15,4 @@ var cartSchema = new Schema({
     status: { type: String, required: true, default: 'Open' }
 });
 
-module.exports = cartSchema;
-// module.exports = mongoose.model('Cart', cartSchema);
+module.exports = mongoose.model('Cart', cartSchema);

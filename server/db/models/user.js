@@ -2,9 +2,9 @@
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var addressSchema = require("./address.js");
-var creditSchema = require("./creditCard.js");
-var cartSchema = require("./cart.js")
+var Address = require("./address.js");
+var Credit = require("./creditCard.js");
+var Cart = require("./cart.js")
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -27,9 +27,9 @@ var userSchema = new Schema({
     image: String,
     email: { type: String, required: true, unique: true, validate: emailValidator },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-    shippingAddress: [addressSchema],
-    creditCard: [creditSchema],
-    cart: [cartSchema],
+    shippingAddress: [Address.schema],
+    creditCard: [Credit.schema],
+    cart: [Cart.schema],
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
 
