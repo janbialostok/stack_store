@@ -1,6 +1,6 @@
 <div class="col-xs-12">
 	<h2>{{ title }}</h2>
-	<div class="carousel slide" id="myCarousel">
+	<div class="carousel slide" id="{{ name }}">
 		<div class="carousel-inner">
 			<div class="item active">
 				<div class="row">
@@ -13,8 +13,7 @@
 				</div>
 			</div>
 		</div>
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev"><</a>
-		<a class="right carousel-control" href="#myCarousel" data-slide="next">></a>
-
+		<a class="left carousel-control" href="#{{ name }}" data-slide="prev"><</a>
+		<a class="right carousel-control" href="#{{ name }}" data-slide="next">></a>
 	</div>
 </div>

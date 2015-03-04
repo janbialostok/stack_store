@@ -8,6 +8,7 @@ app.directive('item', function() {
 	    data: '='
 	},
 	link: function(scope, elem, attr) {	    
+
 	    var repeat = function(num) {
 		var newArr = [];
 
