@@ -2,7 +2,6 @@
 var router = require('express').Router();
 var Item = require('../../db/models/item.js');
 var User = require('../../db/models/user.js');
-module.exports = router;
 
 router.use('/tutorial', require('./tutorial'));
 
@@ -19,3 +18,11 @@ router.get('/user/id', function(req, res){
 		else res.status(404).end();
 	});
 });
+
+router.get("/", function(req, res) {
+    Item.find({}, function(err, allItems) {
+	res.json(allItems);
+    });
+});
+
+module.exports = router;
