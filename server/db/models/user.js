@@ -27,7 +27,7 @@ var userSchema = new Schema({
     image: String,
     email: { type: String, required: true, unique: true, validate: emailValidator },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-    shippingAddress: [Address.schema],
+    address: [Address.schema],
     creditCard: [Credit.schema],
     cart: [Cart.schema],
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
