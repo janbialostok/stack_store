@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('LoginCtrl', function($scope, loginFactory, $state, $window, CurrentFactory) {
+app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
 	$scope.unAuthorized = false;
 
 	$scope.login = function(user) {

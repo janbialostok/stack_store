@@ -2,13 +2,16 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Login to Jeans on Jeans</div>
 		<div class="panel-body">
+			<p ng-show="unAuthorized" class="text-center error-indicator">
+				Incorrect username and password combination
+			</p>
 			<form name="loginForm" ng-submit="loginForm.$valid && login(user)">
 				<div class="form-group">
 					<input type="text"
 						required
 						name="username"
 						class="form-control"
-						placeholder="Enter username"
+						placeholder="Enter Username"
 						ng-model="user.username">
 				</div>
 				<div class="form-group">
@@ -33,7 +36,4 @@
 	</div>
 </div>
 <div class="col-md-4 col-md-offset-4">
-	<p ng-show="unAuthorized" style="color: red;" class="text-center">
-		Incorrect login
-	</p>
 </div>
