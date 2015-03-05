@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
 var Address = require("./address.js");
 var Credit = require("./creditCard.js");
-var Cart = require("./cart.js")
+var Cart = require("./cart.js");
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -55,5 +55,5 @@ userSchema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.hashPassword;
 });
 
-module.exports = mongoose.model('User', userSchema);
-// mongoose.model('User', userSchema);
+// module.exports = mongoose.model('User', userSchema);
+mongoose.model('User', userSchema);

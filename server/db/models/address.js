@@ -17,6 +17,6 @@ var addressSchema = new Schema({
     phone: { type: String, required: true }
 });
 
-module.exports = mongoose.model('Address', addressSchema);
+mongoose.model('Address', addressSchema);
 
 //module.exports = mongoose.model('Address', addressSchema);

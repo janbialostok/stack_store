@@ -18,4 +18,5 @@ var cartSchema = new Schema({
     shippingAddress: [Address.schema]
 });
 
-module.exports = mongoose.model('Cart', cartSchema);
+mongoose.model("Cart", cartSchema);
+// module.exports = mongoose.model('Cart', cartSchema);
