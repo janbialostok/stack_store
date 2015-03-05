@@ -6,26 +6,28 @@ app.config(function($stateProvider) {
 		controller: 'LoginCtrl',
 		templateUrl: 'js/login/login.html'
 	});
-
-	$stateProvider.state('login.local', {
-		url: '/local',
-		templateUrl: 'js/login/local/local.html',
-		controller: 'LoginLocalCtrl'
-	});
-
-	$stateProvider.state('login.google', {
-		url: '/google',
-		templateUrl: 'js/login/google/google.html',
-		controller: 'LoginGoogleCtrl'
-	});
-
-	$stateProvider.state('login.facebook', {
-		url: '/facebook',
-		templateUrl: 'js/login/facebook/facebook.html',
-		controller: 'LoginFacebookCtrl'
-	});
 });
 
-app.controller('LoginCtrl', function($scope) {
-	$scope.loginOptions = ['local', 'google', 'facebook'];
+app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
+	$scope.unAuthorized = false;
+
+	$scope.login = function(user) {
+		loginFactory.localLogin(user).then(function(response) {
+			if (response.status === 200) {
+				$scope.current.user = response.data.user;
+				$state.go('home');
+			} else {
+				$state.unAuthorized = true;
+				// show error
+			}
+		});
+	};
+
+	$scope.googleLogin = function() {
+		$window.location.href = '/auth/google';
+	};
+
+	$scope.facebookLogin = function() {
+		$window.location.href = '/auth/facebook';
+	};
 });

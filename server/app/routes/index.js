@@ -12,3 +12,4 @@ router.use("/user", require("./user.js"));
 // });
 
 module.exports = router;
+

@@ -25,11 +25,19 @@ module.exports = function (app) {
                 done(null, user);
             } else {
                 UserModel.create({
+                    name: 'facebook_' + profile.displayName,
                     facebook: {
                         id: profile.id
-                    }
+                    },
+                    authType: 'facebook',
+                    permLevel: 'Registered User',
+                    firstName: profile.name.givenName ,
+                    lastName: profile.name.familyName,
+                    email: "temp@email.com"
                 }).then(function (user) {
                     done(null, user);
+                }, function (err) {
+                    console.log(err);
                 });
             }
 
@@ -44,7 +52,7 @@ module.exports = function (app) {
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/login' }),
         function (req, res) {
-            res.redirect('/user');
+            res.redirect('/');
         });
 
 };
