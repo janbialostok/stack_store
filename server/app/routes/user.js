@@ -13,9 +13,13 @@ router.route('/find/:id')
 			}
 			else next(err);
 		});
-	}).get(function (req, res){
+	})
+	
+	.get(function (req, res){
 		res.json(req.user);
-	}).put(function (req, res){
+	})
+
+	.put(function (req, res){
 		for (var key in req.body){
 			if (req.body.hasOwnProperty(key)){
 				if (key === "address" || key === "creditCard" || key === "orders"){
@@ -28,7 +32,9 @@ router.route('/find/:id')
 			if (!err) res.status(200).end();
 			else res.status(400).end();
 		});
-	}).delete(function (req, res){
+	})
+
+	.delete(function (req, res){
 		User.remove({ _id: req.user._id }, function (err){
 			if (!err) res.status(200).send("User Deleted");
 			else res.status(400).end();
