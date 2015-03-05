@@ -38,10 +38,10 @@
 				<li>
 					<a href="../navbar">Cart <span class="badge">{{ user.cart.num }}</span></a>
 				</li>
-				<li ng-show="user.permissionLevel == 'unauth'"><a ui-sref="login">Login</a></li>
-				<li class="dropdown" ng-show="user.permissionLevel !== 'unauth'">
+				<li ng-show="user == {} || user.permLevel == Unauthorized"><a ui-sref="login">Login</a></li>
+				<li class="dropdown" ng-show="user != {} && user.permLevel != Unauthorized">
 					<a class="dropdown-toggle" href="" data-toggle="dropdown" role="button" aria-expanded="false">
-						{{ user.username }}<span class="caret"></span>
+						{{ user.name }}<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">Action</a></li>

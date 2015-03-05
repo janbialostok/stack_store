@@ -4,7 +4,7 @@ app.factory('loginFactory', function($http) {
 	var factory = {};
 
 	factory.localLogin = function(user) {
-		return $http.post('/auth/login', { user: user });
+		return $http.post('/auth/login', user);
 	}
 
 	return factory;
