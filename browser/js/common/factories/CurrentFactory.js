@@ -11,11 +11,12 @@ app.factory('CurrentFactory', function($http) {
 	};
 
 	factory.updateCurrentUser = function() {
-		factory.getCurrentUser().then(function(user) {
-			factory.current.user = user;
-		}).catch(function(err) {
-			factory.current.user = {};
-		});
+		this.getCurrentUser();
+		// .then(function(user) {
+		// 	factory.current.user = user;
+		// }).catch(function(err) {
+		// 	factory.current.user = {};
+		// });
 	};
 
 	factory.current = {

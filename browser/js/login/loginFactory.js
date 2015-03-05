@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('loginFactory', function($http) {
+app.factory('loginFactory', function($http, CurrentFactory) {
 	var factory = {};
 
 	factory.localLogin = function(user) {
@@ -8,7 +8,9 @@ app.factory('loginFactory', function($http) {
 	};
 	
 	factory.logout = function() {
-		return $http.get('/logout');
+		return $http.get('/logout').then(function() {
+			CurrentFactory.current.user = {};
+		});
 	};
 
 	return factory;

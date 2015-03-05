@@ -10,7 +10,6 @@ app.directive('navBar', function(loginFactory, $state, CurrentFactory) {
 
 			scope.logout = function() {
 				loginFactory.logout().then(function() {
-					scope.navcurrent.user = {};
 					$state.go('home');
 				});
 			};
