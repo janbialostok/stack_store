@@ -24,6 +24,10 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
 	};
 
 	$scope.googleLogin = function() {
-		$window.location.href = "/auth/google";
+		$window.location.href = '/auth/google';
+	};
+
+	$scope.facebookLogin = function() {
+		$window.location.href = '/auth/facebook';
 	};
 });
