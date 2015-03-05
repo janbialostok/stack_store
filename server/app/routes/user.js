@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var User = mongoose.model("User", User);
 
 
-userRouter.route('/find/:id')
+router.route('/find/:id')
 	.all(function (req, res, next){
 		User.findOne({ _id: req.params.id }, function (err, user){
 			if (!err) {
@@ -13,11 +13,9 @@ userRouter.route('/find/:id')
 			}
 			else next(err);
 		});
-	});
-	.get(function (req, res){
+	}).get(function (req, res){
 		res.json(req.user);
-	});
-	.put(function (req, res){
+	}).put(function (req, res){
 		for (var key in req.body){
 			if (req.body.hasOwnProperty(key)){
 				if (key === "address" || key === "creditCard" || key === "orders"){
@@ -30,15 +28,14 @@ userRouter.route('/find/:id')
 			if (!err) res.status(200).end();
 			else res.status(400).end();
 		});
-	});
-	.delete(function (req, res){
+	}).delete(function (req, res){
 		User.remove({ _id: req.user._id }, function (err){
 			if (!err) res.status(200).send("User Deleted");
 			else res.status(400).end();
 		});
 	});
 
-userRouter.post('/signup', function (req, res, next){
+router.post('/signup', function (req, res, next){
 	var user = new User(req.body);
 	user.save(function (err, savedUser){
 		if (!err) res.json(savedUser);
@@ -46,7 +43,7 @@ userRouter.post('/signup', function (req, res, next){
 	});
 });
 
-userRouter.get('/:userid/items/:itemid', function (req, res, next){
+router.get('/:userid/items/:itemid', function (req, res, next){
 	User.findById(req.params.userid).populate("items").exec(function (err, user){
 		if (!err) res.json(user.items);
 		else next(err);
