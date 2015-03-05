@@ -6,7 +6,7 @@
 				Incorrect username and password combination
 			</p>
 			<form name="loginForm" ng-submit="loginForm.$valid && login(user)">
-				<div class="form-group">
+				<div class="form-group" ng-class="{'has-error': unAuthorized}">
 					<input type="text"
 						required
 						name="username"
@@ -14,7 +14,7 @@
 						placeholder="Enter Username"
 						ng-model="user.username">
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-class="{'has-error': unAuthorized}">
 					<input type="password"
 						required
 						name="password"
