@@ -17,7 +17,7 @@ var itemSchema = new Schema({
     price: { type: Currency, required: true},
     description: String,
     image: String,
-    reviews: [Review.schema],
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     sellerID: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     tags: [String],
     quantity: {type: Number, required: true},
