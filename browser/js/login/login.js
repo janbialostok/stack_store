@@ -8,12 +8,12 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('LoginCtrl', function($scope, loginFactory, $state) {
+app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
 	$scope.unAuthorized = false;
 
 	$scope.login = function(user) {
 		loginFactory.localLogin(user).then(function(response) {
-			if (response.status == 200) {
+			if (response.status === 200) {
 				$scope.current.user = response.data.user;
 				$state.go('home');
 			} else {
@@ -21,6 +21,9 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state) {
 				// show error
 			}
 		});
-	}
+	};
 
+	$scope.googleLogin = function() {
+		$window.location.href = "/auth/google";
+	};
 });
