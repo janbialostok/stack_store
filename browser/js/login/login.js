@@ -14,5 +14,4 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state) {
 			$state.go('home');
 		});
 	}
-
 });

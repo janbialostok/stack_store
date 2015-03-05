@@ -55,5 +55,5 @@ userSchema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.hashPassword;
 });
 
-// module.exports = mongoose.model('User', userSchema);
-mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
+// mongoose.model('User', userSchema);
