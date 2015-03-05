@@ -16,12 +16,14 @@ var emailValidator = validate({ validator: "isEmail", arguments: [this], message
 
 var userSchema = new Schema({
     name: { type: String, required: true, unique: true },
-    key: { type: String, unique: true },
-    token: { type: String, unique: true },
+    facebook: { id: String },
+    google: { id: String },
+    // key: { type: String, unique: true },
+    // token: { type: String, unique: true },
     authType: { type: String, required: true, default: "local" },
     permLevel: { type: String, required: true },
-    hashPassword: { type: String, required: true },
-    salt: { type: String, required: true },
+    hashPassword: { type: String },
+    salt: { type: String },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     image: String,
@@ -33,9 +35,25 @@ var userSchema = new Schema({
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
 
+var generateSalt = function () {
+    return crypto.randomBytes(16).toString('base64');
+};
+
+var encryptPassword = function (plainText, salt) {
+    var hash = crypto.createHash('sha1');
+    hash.update(plainText);
+    hash.update(salt);
+    return hash.digest('hex');
+};
+
 userSchema.virtual('password').set(function (password){
-    this.salt = crypto.randomBytes(16).toString('base64');
-    this.hashPassword = crypto.pbkdf2Sync(password, this.salt, 100, 64).toString('base64');
+    this.salt = generateSalt();
+    this.hashPassword = encryptPassword(password, this.salt);
+});
+
+userSchema.method('correctPassword', function (candidatePassword) {
+    return encryptPassword(candidatePassword, this.salt) === this.hashPassword;
 });
 
 module.exports = mongoose.model('User', userSchema);
+// mongoose.model('User', userSchema);

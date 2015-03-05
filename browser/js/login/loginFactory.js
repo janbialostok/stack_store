@@ -5,11 +5,11 @@ app.factory('loginFactory', function($http) {
 
 	factory.localLogin = function(user) {
 		return $http.post('/auth/login', user);
-	}
-
+	};
+	
 	factory.logout = function() {
 		return $http.get('/logout');
-	}
+	};
 
 	return factory;
 });
