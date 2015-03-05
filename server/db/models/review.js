@@ -19,4 +19,5 @@ var reviewSchema = new Schema({
     productId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Item' }
 });
 
-module.exports = mongoose.model('Review', reviewSchema);
+mongoose.model("Review", reviewSchema);
+// module.exports = mongoose.model('Review', reviewSchema);

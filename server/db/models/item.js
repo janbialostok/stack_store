@@ -32,4 +32,5 @@ itemSchema.virtual('avgReview').get(function (){
     return Math.round(sum/this.reviews.length, -2);
 });
 
-module.exports = mongoose.model('Item', itemSchema);
+mongoose.model("Item", itemSchema);
+// module.exports = mongoose.model('Item', itemSchema);
