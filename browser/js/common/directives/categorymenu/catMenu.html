@@ -1,0 +1,7 @@
+<div class='col-lg-4' ng-repeat="category in categories">
+	<li><a href="#">{{category.text}}</a></li>
+	<li class="dropdown-header"><a href="#">Tops</a></li>
+	<li ng-repeat="top in category.topTypes">{{top.text}}</li>
+	<li class="dropdown-header"><a href="#">Pants</a></li>
+	<li ng-repeat="bottom in category.bottomTypes">{{bottom.text}}</li>
+</div>
