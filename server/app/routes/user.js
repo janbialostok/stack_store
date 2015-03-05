@@ -1,7 +1,9 @@
 "use strict";
-var userRouter = require("express").Router();
-var User = require("../../db/models/user.js");
+var router = require("express").Router();
+var mongoose = require("mongoose");
+var User = mongoose.model("User", User);
 
+<<<<<<< HEAD
 // userRouter.get("/id", function(req, res) {
 //     User.findOne({ _id: req.query.userId }, function(err, user) {
 // 	if (!err) res.json(user);
@@ -58,4 +60,4 @@ userRouter.get('/:userid/items/:itemid', function (req, res, next){
 	});
 });
 
-module.exports = userRouter;
+module.exports = router;

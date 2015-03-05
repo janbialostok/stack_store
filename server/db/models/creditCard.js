@@ -25,4 +25,5 @@ var creditSchema = new Schema({
     billingAddress: { type: [Address.schema], required: true }
 });
 
-module.exports = mongoose.model('Credit', creditSchema);
+mongoose.model("Credit", creditSchema);
+// module.exports = mongoose.model('Credit', creditSchema);
