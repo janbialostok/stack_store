@@ -10,6 +10,10 @@
   }
 }
 
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';

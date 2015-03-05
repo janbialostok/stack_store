@@ -1,4 +1,8 @@
 'use strict';
+angular.module("ui-carousel", ["ui.bootstrap"]);
+// angular.module("ui-carousel").controller("CarouselControl", function($scope) {
+//     $scope.myInterval = false; 
+// });
 
 app.directive('itemBanner', function($window) {
     return {

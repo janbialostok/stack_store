@@ -1,19 +1,35 @@
 <div class="col-xs-12">
-	<h2 style="color: white !important">{{ title }}</h2>
-	<div class="carousel slide" id="{{ name }}">
-		<div class="carousel-inner">
-			<div class="item active">
-				<div class="row">
-					<item ng-repeat="item in active" data="item"></item>
-				</div>
-			</div>
-			<div class="item" ng-repeat="anotherRow in extra">
-				<div class="row">
-					<item ng-repeat="item in anotherRow" data="item"></item>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" data-target="#{{ name }}" data-slide="prev" style="cursor: pointer;"><</a>
-		<a class="right carousel-control" data-target="#{{ name }}" data-slide="next" style="cursor: pointer;">></a>
-	</div>
+  <h2 style="color: white !important">{{ title }}</h2>
+  <carousel interval="false" id="{{ name }}">
+    <slide ng-repeat="slide in slides" active="slide.active">
+      <div class="row">
+	<item ng-repeat="item in itemRow" data="itemRow"></item>
+      </div>
+    </div>
+    <div class="item" ng-repeat="anotherRow in extra">
+      <div class="row">
+	<item ng-repeat="item in anotherRow" data="item"></item>
+      </div>
+    </div>
+  </carousel>
 </div>
+
+<!-- <div class="col-xs-12"> -->
+<!-- 	<h2 style="color: white !important">{{ title }}</h2> -->
+<!-- 	<div class="carousel slide" id="{{ name }}"> -->
+<!-- 		<div class="carousel-inner"> -->
+<!-- 			<div class="item active"> -->
+<!-- 				<div class="row"> -->
+<!-- 					<item ng-repeat="item in active" data="item"></item> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="item" ng-repeat="anotherRow in extra"> -->
+<!-- 				<div class="row"> -->
+<!-- 					<item ng-repeat="item in anotherRow" data="item"></item> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<a class="left carousel-control" data-target="#{{ name }}" data-slide="prev" style="cursor: pointer;"><</a> -->
+<!-- 		<a class="right carousel-control" data-target="#{{ name }}" data-slide="next" style="cursor: pointer;">></a> -->
+<!-- 	</div> -->
+<!-- </div> -->
