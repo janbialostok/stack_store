@@ -13,7 +13,6 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state, $window, Curr
 
 	$scope.login = function(user) {
 		loginFactory.localLogin(user).then(function(user) {
-			console.log(CurrentFactory.current.user);
 			$state.go('home');
 		});
 	};
