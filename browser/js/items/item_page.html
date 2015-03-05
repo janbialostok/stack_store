@@ -25,10 +25,10 @@
 						<p>Available Quantity: {{product.quantity}}</p>
 					</div>
 					<div class="col-lg-6">
-						<form>
+						<form name="addToCartForm" ng-submit="addToCartForm.$valid && addToCart(item)">
 							<div class="form-group">
 								<label for="quantity">Quantity</label>
-								<input type="number" name="quantity" class="form-control" min="0" max="{{product.quantity}}">
+								<input type="number" name="quantity" class="form-control" min="0" max="{{product.quantity}}" ng-model="item.quantity" required>
 							</div>
 							<button class="btn btn_primary" type="submit">Add to Cart</button>
 						</form>

@@ -12,6 +12,7 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, SingleItemFact
 	SingleItemFactory.getItem($stateParams.productId).then(function (data){
 		console.log(data);
 		$scope.product = {
+			productId: data._id,
 			imgSrc: data.image,
 			productName: data.name,
 			price: data.price,
@@ -27,4 +28,5 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, SingleItemFact
 			$scope.product.sellerName = username;
 		});
 	});
+	$scope.item;
 });
