@@ -9,7 +9,7 @@
 						name="username"
 						class="form-control"
 						placeholder="Enter username"
-						ng-model="user.name">
+						ng-model="user.username">
 				</div>
 				<div class="form-group">
 					<input type="password"
@@ -29,4 +29,9 @@
 			<button type="button" class="btn btn-primary btn-block"></span>Connect with Facebook</button>
 		</div>
 	</div>
+</div>
+<div class="col-md-4 col-md-offset-4">
+	<p ng-show="unAuthorized" style="color: red;" class="text-center">
+		Incorrect login
+	</p>
 </div>

@@ -23,7 +23,6 @@ module.exports = function (app) {
 
     // A POST /login route is created to handle login.
     app.post('/auth/login', function (req, res, next) {
-
         var authCb = function (err, user) {
             if (err) return next(err);
 
