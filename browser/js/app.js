@@ -5,45 +5,6 @@ app.controller('MainController', function ($scope) {
     $scope.current = {
         user: {}
     };
-
-    $scope.items = [
-        {
-            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-            name: 'Blue Jeans',
-            price: 1,
-	    rating: 3.2
-        },
-        {
-            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-            name: 'Blue Jeans',
-            price: 2, 
-	    rating: 3.5           
-        },
-        {
-            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-            name: 'Blue Jeans',
-            price: 3,
-	    rating: 1            
-        },
-        {
-            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-            name: 'Blue Jeans',
-            price: 4,
-	    rating: 5            
-        },
-        {
-            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-            name: 'Blue Jeans',
-            price: 5,
-	    rating: 4            
-        },
-        {
-            img: 'http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$',
-            name: 'Blue Jeans',
-            price: 6,
-	    rating: 3            
-        }
-    ];
 });
 
 
@@ -52,4 +13,9 @@ app.config(function ($urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
     $urlRouterProvider.otherwise('/');
+});
+
+app.run(function(CurrentFactory) {
+    // Check session and update current user
+    CurrentFactory.updateCurrentUser();
 });

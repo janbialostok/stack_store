@@ -1,5 +1,5 @@
 <!-- Static navbar -->
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-default navbar-static-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -32,16 +32,14 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="../navbar">Cart <span class="badge">{{ navcurrent.user.cart.num }}</span></a>
+					<a href="" ng-click="test()">Cart <span class="badge">{{ cartNum }}</span></a>
 				</li>
-				<li ng-show="navcurrent.user == {} || navcurrent.user.permLevel == Unauthorized"><a ui-sref="login">Login</a></li>
-				<li class="dropdown" ng-show="navcurrent.user != {} && navcurrent.user.permLevel != Unauthorized">
+				<li ng-show="current.user == {} || current.user.permLevel == Unauthorized"><a ui-sref="login">Login</a></li>
+				<li class="dropdown" ng-show="current.user != {} && current.user.permLevel != Unauthorized">
 					<a class="dropdown-toggle" href="" data-toggle="dropdown" role="button" aria-expanded="false">
-						{{ navcurrent.user.name }}<span class="caret"></span>
+						{{ current.user.name }}<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">asdfsf</a></li>
-						<li><a href="#">Another action</a></li>
 						<li><a href="" ng-click="logout()">Logout</a></li>
 					</ul>
 				</li>

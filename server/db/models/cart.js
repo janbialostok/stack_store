@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
@@ -18,4 +18,5 @@ var cartSchema = new Schema({
     shippingAddress: [Address.schema]
 });
 
-module.exports = mongoose.model('Cart', cartSchema);
+mongoose.model("Cart", cartSchema);
+// module.exports = mongoose.model('Cart', cartSchema);

@@ -19,7 +19,7 @@ app.directive('item', function() {
 		return newArr;
 	    };
 
-	    scope.productId = "54f78e9d2c639609a74c22ac";
+	    scope.productId = "54f78148929f00bb6de86190";
 	    scope.fullStars = repeat(Math.floor(scope.data.rating));
 	    scope.emptyStars = repeat(Math.floor(5-scope.data.rating));
 	    scope.hasHalfStar = scope.fullStars.length + scope.emptyStars.length !== 5;
