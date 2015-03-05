@@ -1,1 +1,27 @@
-<img ng-src="{{product.imgSrc}}"/>
+<section id="single_item" class="container">
+	<div class="row">
+		<div class="col-lg-5">
+			<img class="img-responsive" ng-src="{{product.imgSrc}}"/>
+		</div>
+		<div class="col-lg-7">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>{{product.productName}}</h3>
+					<p>Sold By: <a href="#">{{product.sellerName}}</a></p>
+					<button ng-repeat="tag in product.tags">{{tag}}</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12" ng-show="product.showDescription">
+					<h4>Product Description</h4>
+					<p>{{product.description}}</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>{{product.description}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

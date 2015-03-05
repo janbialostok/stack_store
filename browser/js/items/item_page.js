@@ -46,6 +46,8 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, SingleItemFact
 			tags: data.tags,
 			reviews: data.reviews
 		}
+		if ($scope.product.description === "") $scope.product.showDescription = false;
+		else $scope.product.showDescription = true;
 		SingleItemFactory.getUser(data.sellerID).then(function (username){
 			$scope.product.sellerName = username;
 		});
