@@ -10,4 +10,11 @@ router.get("/id", function(req, res) {
     });
 });
 
+router.get("/findAll", function(req, res) {
+    Item.find({}, function(err, allItems) {
+		if (!err) res.json(allItems);
+		else res.status(404).end();
+    });
+});
+
 module.exports = router;
