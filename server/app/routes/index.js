@@ -3,8 +3,6 @@ var router = require('express').Router();
 var Item = require('../../db/models/item.js');
 var User = require('../../db/models/user.js');
 
-router.use('/tutorial', require('./tutorial'));
-
 router.get('/item/id', function(req, res){
 	Item.findOne({ _id: req.query.productId }, function(err, item){
 		if (!err) res.json(item);
