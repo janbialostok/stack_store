@@ -68,7 +68,7 @@
         this.getLoggedInUser = function () {
 
             if (this.isAuthenticated()) {
-                return $q.when({ user: Session.user });
+                return $q.when(Session.user);
             }
 
             return $http.get('/session').then(onSuccessfulLogin).catch(function () {
@@ -78,7 +78,7 @@
         };
 
         this.login = function (credentials) {
-            return $http.post('/login', credentials).then(onSuccessfulLogin);
+            return $http.post('/auth/login', credentials).then(onSuccessfulLogin);
         };
 
         this.logout = function () {
