@@ -12,7 +12,6 @@ app.controller('HomeCtrl', function($scope, GetDataFactory) {
     $scope.allItems;
 
     GetDataFactory.getAllStoreData().then(function(data) {
-	$scope.allItems = data;
-	console.log(data);
+		$scope.allItems = data;
     });
 });
