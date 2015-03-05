@@ -1,10 +1,12 @@
 #single_item {
 	color: white;
-	div .col-lg-12 {
+	.padding_ten {
 		padding-left: 10%;
 	}
-	.col-lg-5 img {
+	.item_img {
 		border-radius: 10px;
+		max-width: 100%;
+		height: auto;
 	}
 	.tag_btn:after {
 		content: "  ";
