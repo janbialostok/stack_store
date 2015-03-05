@@ -1,26 +1,17 @@
 'use strict';
 
-app.factory('CurrentFactory', function($http) {
+app.factory('CurrentFactory', function($http, AuthService) {
 	var factory = {};
 
-	factory.getCurrentUser = function() {
-		$http.get('/session')
-		.then(function(response) {
-			return response.data.user;
+	factory.updateCurrentUser = function() {
+		return AuthService.getLoggedInUser().then(function(data) {
+			factory.current.user = data;
+			return data;
 		});
 	};
 
-	factory.updateCurrentUser = function() {
-		this.getCurrentUser();
-		// .then(function(user) {
-		// 	factory.current.user = user;
-		// }).catch(function(err) {
-		// 	factory.current.user = {};
-		// });
-	};
-
 	factory.current = {
-		user: {}
+		user: null
 	};
 
 

@@ -32,7 +32,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="" ng-click="test()">Cart <span class="badge">{{ current.user.cart.num }}</span></a>
+					<a href="" ng-click="test()">Cart <span class="badge">{{ cartNum }}</span></a>
 				</li>
 				<li ng-show="current.user == {} || current.user.permLevel == Unauthorized"><a ui-sref="login">Login</a></li>
 				<li class="dropdown" ng-show="current.user != {} && current.user.permLevel != Unauthorized">
@@ -40,8 +40,6 @@
 						{{ current.user.name }}<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">asdfsf</a></li>
-						<li><a href="#">Another action</a></li>
 						<li><a href="" ng-click="logout()">Logout</a></li>
 					</ul>
 				</li>

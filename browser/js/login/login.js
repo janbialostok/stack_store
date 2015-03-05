@@ -8,18 +8,13 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
+app.controller('LoginCtrl', function($scope, loginFactory, $state, $window, CurrentFactory) {
 	$scope.unAuthorized = false;
 
 	$scope.login = function(user) {
-		loginFactory.localLogin(user).then(function(response) {
-			if (response.status === 200) {
-				$scope.current.user = response.data.user;
-				$state.go('home');
-			} else {
-				$state.unAuthorized = true;
-				// show error
-			}
+		loginFactory.localLogin(user).then(function(user) {
+			console.log(CurrentFactory.current.user);
+			$state.go('home');
 		});
 	};
 
