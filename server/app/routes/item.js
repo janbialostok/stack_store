@@ -3,15 +3,37 @@ var router = require("express").Router();
 var mongoose = require("mongoose");
 var Item = mongoose.model("Item", Item);
 
-router.get('/find', function (req, res, next) {
+router.get('/findAll', function (req, res, next) {
     Item.find({}, function(err, items) {
 		if (!err) res.json(items);
 		else next(err);
     });
 });
 
-router.route('/find/:id')
-	.all(function (req, res, next){
+router.post('/create', function (req, res, next){
+	var item = new Item(req.body);
+	item.save(function (err, newItem){
+		if (!err) res.json(newItem);
+		else next(err);
+	});
+});
+
+router.get('/:itemid/user/:userid', function (req, res, next){
+	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
+		if (!err) res.json(user);
+		else next(err);
+	});
+});
+
+router.get('/:itemid/reviews', function (req, res, next){
+	Item.findById(req.params.itemid).populate("reviews").exec(function (err, reviews){
+		if (!err) res.json(reviews);
+		else next(err);
+	});
+});
+
+router.route('/:id')
+	.use(function (req, res, next){
 		Item.findOne({ _id: req.params.id }, function (err, item){
 			if (!err) {
 				req.item = item;
@@ -42,19 +64,5 @@ router.route('/find/:id')
 		});
 	});
 
-router.post('/create', function (req, res, next){
-	var item = new Item(req.body);
-	item.save(function (err, newItem){
-		if (!err) res.json(newItem);
-		else next(err);
-	});
-});
-
-router.get('/:itemid/user/:userid', function (req, res, next){
-	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
-		if (!err) res.json(user);
-		else next(err);
-	});
-});
 
 module.exports = router;
