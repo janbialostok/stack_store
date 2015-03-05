@@ -3,4 +3,20 @@
 	div .col-lg-12 {
 		padding-left: 10%;
 	}
+	.col-lg-5 img {
+		border-radius: 10px;
+	}
+	.tag_btn:after {
+		content: "  ";
+	}
+	.product_panel {
+		margin: 5% 10% auto 10%;
+		background-color: #e7e7e7;
+		color: black;
+		border-radius: 10px;
+		opacity: 0.8;
+		.col-lg-6 {
+			padding: 5%;
+		}
+	}
 }
