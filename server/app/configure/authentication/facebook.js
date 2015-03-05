@@ -24,9 +24,8 @@ module.exports = function (app) {
             if (user) {
                 done(null, user);
             } else {
-                console.log(profile);
                 UserModel.create({
-                    name: profile.displayName,
+                    name: 'facebook_' + profile.displayName,
                     facebook: {
                         id: profile.id
                     },
