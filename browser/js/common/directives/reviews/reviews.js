@@ -8,9 +8,7 @@ app.directive('reviewPanel', function (ReviewFactory, CurrentFactory){
 			scope.submitReview = function (review, itemid){
 				review.itemId = itemid;
 				review.userId = scope.currentUser._id;
-				ReviewFactory.submitReview(review).then(function (res){
-					console.log(res);
-				});	
+				ReviewFactory.submitReview(review);
 			};
 		}
 	};
@@ -22,8 +20,6 @@ app.directive('review', function (){
 		templateUrl: 'js/common/directives/reviews/reviews.html',
 		scope: {
 			review: '='
-		},
-		link: function (scope, elem, attr){
 		}
 	};
 });
