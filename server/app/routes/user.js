@@ -64,14 +64,6 @@ router.route('/:id')
 	});
 
 
-router.post('/signup', function (req, res, next){
-	var user = new User(req.body);
-	user.save(function (err, savedUser){
-		if (!err) res.json(savedUser);
-		else next(err);
-	});
-});
-
 router.get('/:userid/items/:itemid', function (req, res, next){
 	User.findById(req.params.userid).populate("items").exec(function (err, user){
 		if (!err) res.json(user.items);
