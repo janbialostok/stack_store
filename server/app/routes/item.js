@@ -1,7 +1,8 @@
 "use strict";
 var router = require("express").Router();
 var mongoose = require("mongoose");
-var Item = mongoose.model("Item", Item);
+var m = require("mongoose-subpopulate");
+var Item = mongoose.model("Item");
 
 router.get('/findAll', function (req, res, next) {
     Item.find({}, function(err, items) {
@@ -19,7 +20,6 @@ router.post('/create', function (req, res, next){
 });
 
 router.get('/:itemid/user/:userid', function (req, res, next){
-	console.log(req.params.itemid, req.params.userid);
 	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
 		if (!err) res.json(user);
 		else next(err);

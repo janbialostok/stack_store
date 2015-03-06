@@ -9,11 +9,14 @@ router.post('/create', function (req, res, next){
 	review.save(function (err, newReview){
 		if (err) next(err);
 		else {
-			Item.findOne({ _id: req.body.itemid }, function (err, item){
+			Item.findOne({ _id: req.body.productId }, function (err, item){
 				if (err) res.status(400).end();
 				else {
 					item.reviews.push(newReview._id);
-					res.status(200).end();
+					item.save(function (err, returned){
+						if (!err) res.status(200).end();
+						else res.status(400).end();
+					});
 				}
 			});
 		}

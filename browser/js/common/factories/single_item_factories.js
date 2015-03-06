@@ -17,7 +17,12 @@ app.factory("SingleItemFactory", function($http){
 			});
 		},
 		submitReview: function (review){
-			return $http.post('/api/review/create').then(function (res){
+			return $http.post('/api/review/create', review).then(function (res){
+				return res.data;
+			});
+		},
+		getReviewUser: function (userId){
+			return $http.get('/api/user/' + userId).then(function (res){
 				return res.data;
 			});
 		}

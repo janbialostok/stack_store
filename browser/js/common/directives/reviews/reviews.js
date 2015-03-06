@@ -1,4 +1,5 @@
-app.directive('reviewPanel', function (){
+'use strict';
+app.directive('reviewPanel', function (SingleItemFactory){
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/reviews/reviewPanel.html',
@@ -7,13 +8,15 @@ app.directive('reviewPanel', function (){
 				if (!review.rating) review.rating = 1;
 				review.userId = userid;
 				review.productId = itemid;
-				console.log(review);
+				SingleItemFactory.submitReview(review).then(function (res){
+					console.log(res);
+				});	
 			}
 		}
 	}
 });
 
-app.directive('review', function(){
+app.directive('review', function(SingleItemFactory){
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/reviews/reviews.html',
@@ -21,7 +24,9 @@ app.directive('review', function(){
 			review: '='
 		},
 		link: function (scope, elem, attr){
-
+			SingleItemFactory.getReviewUser(scope.review.userId).then(function (res){
+				scope.username = res.name;
+			});
 		}
 	}
 });
