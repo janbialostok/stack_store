@@ -8,8 +8,8 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('HomeCtrl', function($scope, GetDataFactory) {
-    GetDataFactory.getAllStoreData().then(function(data) {
+app.controller('HomeCtrl', function($scope, ItemFactory) {
+    ItemFactory.getAllItems().then(function(data) {
 		$scope.allItems = data;
     });
 });

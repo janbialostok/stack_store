@@ -40,6 +40,7 @@ router.get('/:itemid/reviews', function (req, res, next){
 });
 
 router.use('/:id', function (req, res, next){
+	console.log(req.params.id);
 	Item.findOne({ _id: req.params.id }, function (err, item){
 		if (!err) {
 			req.item = item;

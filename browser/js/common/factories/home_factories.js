@@ -4,7 +4,7 @@ app.factory("GetDataFactory", function($http) {
 	getAllStoreData: function() {
 	    return $http.get("/").then(function(data) {
 		return data;
-	    });   
+	    });
 	}	
     };	    
 });

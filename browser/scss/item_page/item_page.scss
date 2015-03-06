@@ -12,7 +12,7 @@
 		content: "  ";
 	}
 	.product_panel {
-		margin: 5% 10% auto 10%;
+		margin: 2.5% 10% 2.5% 10%;
 		background-color: #e7e7e7;
 		color: black;
 		border-radius: 10px;
@@ -20,5 +20,17 @@
 		.col-lg-6 {
 			padding: 5%;
 		}
+	}
+	.inStock {
+		color: green;
+	}
+	.soldOut {
+		color: red;
+	}
+	review-panel article {
+		background-color: #FAFAFA;
+		outline-color: black;
+		border-radius: 5px;
+		margin-bottom: 2.5%;
 	}
 }
