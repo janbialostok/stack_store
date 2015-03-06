@@ -20,10 +20,19 @@ router.post('/addToCart/user/:userid/item/:itemid', function (req, res, next){
 });
 
 router.delete('/user/:userid/item/:itemid', function (req, res, next){
-	User.findbyId(req.params.userid, function (err, user) {
+	User.findById(req.params.userid, function (err, user) {
 		if (!err) {
 			user.cart.items.pull({id: req.params.itemid});
 		} 
+		else next(err);
+	});
+});
+
+router.delete('/user/:userid', function (req, res, next){
+	User.findById(req.params.userid, function (err, user){
+		if (!err) {
+			user.cart = null;
+		}
 		else next(err);
 	});
 });
