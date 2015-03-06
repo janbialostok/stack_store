@@ -64,4 +64,12 @@ router.route('/:id')
 	});
 
 
+router.get('/:userid/items/:itemid', function (req, res, next){
+	User.findById(req.params.userid).populate("items").exec(function (err, user){
+		if (!err) res.json(user.items);
+		else next(err);
+	});
+});
+
+
 module.exports = router;
