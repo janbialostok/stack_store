@@ -1,10 +1,19 @@
 <span ng-show="currentUser">
-	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview)">
+	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview, item._id, item.sellerID)">
 		<div class="form-group">
-			<textarea class="form-control" name="review" ng-model="newReview.text" placeholder="Leave a review..." required></textarea>
+			<textarea class="form-control" name="review" ng-model="newReview.comment" placeholder="Leave a review..." ng-minLength="25" required></textarea>
+		</div>
+		<div class="form-group">
+			<label for="rating">Rating:</label>
+			<label>1 <input type="radio" name="rating" ng-model="newReview.rating" value="1"></label>
+			<label>2 <input type="radio" name="rating" ng-model="newReview.rating" value="2"></label>
+			<label>3 <input type="radio" name="rating" ng-model="newReview.rating" value="3"></label>
+			<label>4 <input type="radio" name="rating" ng-model="newReview.rating" value="4"></label>
+			<label>5 <input type="radio" name="rating" ng-model="newReview.rating" value="5"></label>
 		</div>
 		<button type="submit" class="btn btn_primary">Submit</button>
 	</form>
+	<pre>{{reviewCreateForm}}</pre>
 	<hr/>
 </span>
 <reviews ng-show="item.reviews" review="review" ng-repeat="review in reviews"></reviews>

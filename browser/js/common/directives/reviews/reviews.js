@@ -3,7 +3,12 @@ app.directive('reviewPanel', function (){
 		restrict: 'E',
 		templateUrl: 'js/common/directives/reviews/reviewPanel.html',
 		link: function (scope, elem, attr){
-
+			scope.submitReview = function (review, itemid, userid){
+				if (!review.rating) review.rating = 1;
+				review.userId = userid;
+				review.productId = itemid;
+				console.log(review);
+			}
 		}
 	}
 });
@@ -16,7 +21,7 @@ app.directive('review', function(){
 			review: '='
 		},
 		link: function (scope, elem, attr){
-			
+
 		}
 	}
 });
