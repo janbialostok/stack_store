@@ -24,7 +24,6 @@ app.directive('navBar', function(loginFactory, $state, CurrentFactory, ItemFacto
 
 			scope.searchFor = function(str) {
 				scope.searchStr.val = null;
-				console.log('hi');
 				if (!str || str === '') return;
 
 				$state.go('search', {searchString: str});
