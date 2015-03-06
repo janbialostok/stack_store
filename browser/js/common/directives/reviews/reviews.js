@@ -1,14 +1,14 @@
 'use strict';
-app.directive('reviewPanel', function (SingleItemFactory){
+app.directive('reviewPanel', function (ReviewFactory, CurrentFactory){
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/reviews/reviewPanel.html',
 		link: function (scope, elem, attr){
-			scope.submitReview = function (review, itemid, userid){
-				if (!review.rating) review.rating = 1;
-				review.userId = userid;
+			scope.currentUser = CurrentFactory.current.user;
+			scope.submitReview = function (review, itemid){
 				review.productId = itemid;
-				SingleItemFactory.submitReview(review).then(function (res){
+				review.userId = scope.currentUser._id;
+				ReviewFactory.submitReview(review).then(function (res){
 					console.log(res);
 				});	
 			}
@@ -16,7 +16,7 @@ app.directive('reviewPanel', function (SingleItemFactory){
 	}
 });
 
-app.directive('review', function(SingleItemFactory){
+app.directive('review', function (ItemFactory){
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/reviews/reviews.html',
@@ -24,9 +24,9 @@ app.directive('review', function(SingleItemFactory){
 			review: '='
 		},
 		link: function (scope, elem, attr){
-			SingleItemFactory.getReviewUser(scope.review.userId).then(function (res){
-				scope.username = res.name;
-			});
+			// ItemFactory.getReviewUser(scope.review.userId).then(function (res){
+			// 	scope.username = res.name;
+			// });
 		}
 	}
 });
