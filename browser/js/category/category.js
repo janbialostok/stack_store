@@ -8,6 +8,10 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('CategoryCtrl', function($scope, $stateParams) {
+app.controller('CategoryCtrl', function($scope, $stateParams, ItemFactory) {
 	$scope.categoryTags = $stateParams.tags;
+
+	ItemFactory.getByCategory($scope.categoryTags).then(function(items) {
+		$scope.items = items;
+	});
 });

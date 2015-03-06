@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var Review = require("./review.js");
+var Review = mongoose.model('Review');
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -14,7 +14,7 @@ var Currency = mongoose.Types.Currency;
 
 var itemSchema = new Schema({
     name: { type: String, required: true },
-    price: { type: Currency, required: true},
+    price: { type: Number, required: true},
     description: String,
     image: String,
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
@@ -34,13 +34,13 @@ itemSchema.virtual('avgReview').get(function (){
 
 itemSchema.statics.findByCategory = function(tags, cb) {
     var tagArr = tags.split(' ');
+    tagArr.shift();
     var queryObj = {
         $and: tagArr.map(function(tag) {
-            { tags: tag }
+            return { tags: tag };
         })
     };
-
-    return this.find(queryObj, cb);
+    return this.find(queryObj, cb); 
 };
 
 
