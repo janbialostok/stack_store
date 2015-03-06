@@ -14,8 +14,11 @@ app.factory('loginFactory', function($http, CurrentFactory, AuthService) {
 	};
 
 	factory.createUser = function (user) {
-		user.authType = 'Registered User';
-		return $http.post('/api/user/signup',user)
+		user.authType = 'local';
+		user.permLevel = 'Registered User';
+		return $http.post('/api/user/signup', user).then(function (response){
+			return response.data;
+		});
 	}
 
 	return factory;

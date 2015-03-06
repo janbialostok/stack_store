@@ -24,9 +24,9 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state, $window, Curr
 	};
 
 	$scope.createUser = function(user) {
-		loginFactory.createUser(user).then(function(user){
-			console.log(user);
-			$state.go('login');
+		loginFactory.createUser(user).then(function(createdUser){
+			loginFactory.localLogin({username: user.name , password: user.password});
+			$state.go('home');
 		})
 	};
 
