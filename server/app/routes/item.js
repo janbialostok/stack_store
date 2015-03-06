@@ -19,6 +19,7 @@ router.post('/create', function (req, res, next){
 });
 
 router.get('/:itemid/user/:userid', function (req, res, next){
+	console.log(req.params.itemid, req.params.userid);
 	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
 		if (!err) res.json(user);
 		else next(err);
@@ -33,6 +34,7 @@ router.get('/:itemid/reviews', function (req, res, next){
 });
 
 router.use('/:id', function (req, res, next){
+	console.log(req.params.id);
 	Item.findOne({ _id: req.params.id }, function (err, item){
 		if (!err) {
 			req.item = item;

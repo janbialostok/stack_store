@@ -1,0 +1,12 @@
+<span ng-show="currentUser">
+	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview)">
+		<div class="form-group">
+			<textarea class="form-control" name="review" ng-model="newReview.text" placeholder="Leave a review..." required></textarea>
+		</div>
+		<button type="submit" class="btn btn_primary">Submit</button>
+	</form>
+	<hr/>
+</span>
+<reviews ng-show="item.reviews" review="review" ng-repeat="review in reviews"></reviews>
+<h4 ng-show"!item.reviews">There are currently no reviews of this product.</h4>
+

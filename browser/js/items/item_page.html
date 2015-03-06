@@ -22,7 +22,10 @@
 					<div class="col-lg-6">
 						<p>Price: {{item.price | currency:"$":2}}</p>
 						<p>Size: {{item.size}}</p>
-						<p>Available Quantity: {{item.quantity}}</p>
+						<span ng-class="{ inStock: item.quantity, soldOut: !item.quantity }">
+							<p ng-show="item.quantity">In Stock</p>
+							<p ng-show="!item.quantity">Sold Out</p>
+						</span>
 					</div>
 					<div class="col-lg-6">
 						<form name="addToCartForm" ng-submit="addToCartForm.$valid && addToCart(itemAdd)">
@@ -33,6 +36,11 @@
 							<button class="btn btn_primary" type="submit">Add to Cart</button>
 						</form>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-10 product_panel">
+					<review-panel class="container"></review-panel>
 				</div>
 			</div>
 		</div>
