@@ -11,9 +11,9 @@ app.directive('reviewPanel', function (ReviewFactory, CurrentFactory){
 				ReviewFactory.submitReview(review).then(function (res){
 					console.log(res);
 				});	
-			}
+			};
 		}
-	}
+	};
 });
 
 app.directive('review', function (ItemFactory){
@@ -28,5 +28,5 @@ app.directive('review', function (ItemFactory){
 			// 	scope.username = res.name;
 			// });
 		}
-	}
+	};
 });
