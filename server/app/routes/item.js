@@ -32,16 +32,17 @@ router.get('/:itemid/reviews', function (req, res, next){
 	});
 });
 
+router.use('/:id', function (req, res, next){
+	Item.findOne({ _id: req.params.id }, function (err, item){
+		if (!err) {
+			req.item = item;
+			next();
+		}
+		else next(err);
+	});
+});
+
 router.route('/:id')
-	.use(function (req, res, next){
-		Item.findOne({ _id: req.params.id }, function (err, item){
-			if (!err) {
-				req.item = item;
-				next();
-			}
-			else next(err);
-		});
-	})
 	.get(function (req, res){
 		res.json(req.item);
 	})

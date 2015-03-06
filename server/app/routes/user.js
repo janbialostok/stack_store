@@ -26,17 +26,17 @@ router.get('/:id/reviews', function (req, res, next){
 	});
 });
 
+router.use('/:id', function (req, res, next){
+	User.findOne({ _id: req.params.id }, function (err, user){
+		if (!err) {
+			req.user = user;
+			next();
+		}
+		else next(err);
+	});
+});
+
 router.route('/:id')
-	.use(function (req, res, next){
-		User.findOne({ _id: req.params.id }, function (err, user){
-			if (!err) {
-				req.user = user;
-				next();
-			}
-			else next(err);
-		});
-	})
-	
 	.get(function (req, res){
 		res.json(req.user);
 	})
