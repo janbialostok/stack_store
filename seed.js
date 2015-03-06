@@ -13,13 +13,27 @@ var userData = [
 ];
 
 var itemData = [
-    {name: "Blue Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "male pants", "male slim"], quantity: 10, size: "34 x 32"},
-    {name: "Red Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "male pants", "male slim"], quantity: 10, size: "34 x 32"},
-    {name: "White Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "male pants", "male slim"], quantity: 10, size: "34 x 32"},
-    {name: "Blue Jeans", price: "$50", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "male pants", "male slim"], quantity: 10, size: "34 x 32"},
-    {name: "Blue Jeans", price: "$50", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "male pants", "male slim"], quantity: 10, size: "34 x 32"},
-    {name: "Blue Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "male pants", "male slim"], quantity: 10, size: "34 x 32"},
-    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "female pants", "female slim"], quantity: 6, size: "27"}
+    {name: "Blue Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "tops", "long_sleeve"], quantity: 10, size: "34 x 32"},
+    {name: "Red Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "tops", "short_sleeve"], quantity: 10, size: "34 x 32"},
+    {name: "White Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "skinny"], quantity: 10, size: "34 x 32"},
+    {name: "White Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "slim"], quantity: 10, size: "34 x 32"},
+    {name: "Blue Jeans", price: "$50", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "straight"], quantity: 10, size: "34 x 32"},
+    {name: "Blue Jeans", price: "$50", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "boot"], quantity: 10, size: "34 x 32"},
+    {name: "Blue Jeans", price: "$30", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "relaxed"], quantity: 10, size: "34 x 32"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "tops", "long_sleeve"], quantity: 6, size: "27"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "tops", "short_sleeve"], quantity: 6, size: "27"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "bottoms", "skinny"], quantity: 6, size: "27"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "bottoms", "slim"], quantity: 6, size: "27"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "bottoms", "straigh"], quantity: 6, size: "27"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "bottoms", "boot"], quantity: 6, size: "27"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["female", "bottoms", "relaxed"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "tops", "long_sleeve"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "tops", "short_sleeve"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "bottoms", "skinny"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "bottoms", "slim"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "bottoms", "straight"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "bottoms", "boot"], quantity: 6, size: "24"},
+    {name: "Black Jeans", price: "$40", description: "", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["children", "bottoms", "relaxed"], quantity: 6, size: "24"}
 ];
 
 mongoose.connection.on('open', function() {
