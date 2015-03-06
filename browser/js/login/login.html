@@ -2,16 +2,19 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Login to Jeans on Jeans</div>
 		<div class="panel-body">
+			<p ng-show="unAuthorized" class="text-center error-indicator">
+				Incorrect username and password combination
+			</p>
 			<form name="loginForm" ng-submit="loginForm.$valid && login(user)">
-				<div class="form-group">
+				<div class="form-group" ng-class="{'has-error': unAuthorized}">
 					<input type="text"
 						required
 						name="username"
 						class="form-control"
-						placeholder="Enter username"
+						placeholder="Enter Username"
 						ng-model="user.username">
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-class="{'has-error': unAuthorized}">
 					<input type="password"
 						required
 						name="password"
@@ -23,7 +26,7 @@
 					<button type="submit" class="btn btn-success btn-block">Login</button>
 				</div>
 			</form>
-			<button type="button" class="btn btn-info btn-block"></span>Create an Account</button>
+			<button type="button" class="btn btn-info btn-block" ui-sref="createUserAccount"></span>Create an Account</button>
 
 			<hr>
 			
@@ -33,7 +36,4 @@
 	</div>
 </div>
 <div class="col-md-4 col-md-offset-4">
-	<p ng-show="unAuthorized" style="color: red;" class="text-center">
-		Incorrect login
-	</p>
 </div>
