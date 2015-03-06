@@ -22,3 +22,5 @@ router.post('/addToCart/user/:userid/item/:itemid', function (req, res, next){
 // router.delete('/deleteFromCart/user/:userid/item/:itemid', function (req, res, next){
 // 	User.findbyId(req.params.userid, function (err))
 // })
+
+module.exports = router;
