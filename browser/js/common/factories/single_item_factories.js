@@ -19,5 +19,5 @@ app.factory("SingleItemFactory", function($http){
 				});
 			}
 		}
-	}
+	};
 });
