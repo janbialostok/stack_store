@@ -2,16 +2,16 @@ var async = require('async');
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/stack_store").connection;
 
+require('./server/db/models/review.js');
 require('./server/db/models/address.js');
 require('./server/db/models/creditCard.js');
-require('./server/db/models/cart.js');
-require('./server/db/models/review.js');
 require('./server/db/models/item.js');
+require('./server/db/models/cart.js');
 require('./server/db/models/user.js');
 
 var Item = mongoose.model("Item");
-var User = mongoose.model("User");
 var Address = mongoose.model("Address");
+var User = mongoose.model("User");
 
 var userData = [
     {name: "Admin", permLevel: "Super User", password: "password", firstName: "Joe", lastName: "Johnson", email: "joe123@gmail.com", address: [new Address({address1: "5 Hanover Square" ,address2: "Floor 25", city: "New York", stateProv: "NY", postalCode: "10004", country: "US", phone: "(212) 555-5555"})]},
