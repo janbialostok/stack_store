@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('navBar', function(loginFactory, $state, CurrentFactory) {
+app.directive('navBar', function(loginFactory, $state, CurrentFactory, ItemFactory) {
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/navbar/navBar.html',
@@ -20,6 +20,14 @@ app.directive('navBar', function(loginFactory, $state, CurrentFactory) {
 				loginFactory.logout().then(function() {
 					$state.go('home');
 				});
+			};
+
+			scope.searchFor = function(str) {
+				scope.searchStr.val = null;
+				console.log('hi');
+				if (!str || str === '') return;
+
+				$state.go('search', {searchString: str});
 			};
 		}
 	};

@@ -20,12 +20,12 @@
 						</div>
 					</ul>
 				</li>
-				<form class="navbar-form navbar-right">
+				<form class="navbar-form navbar-right" ng-submit="searchFor(searchStr.val)">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-						<input type="text" class="form-control" placeholder="Search..." ng-model="search.string">
+						<input name="searchStr" type="text" class="form-control" placeholder="Search..." ng-model="searchStr.val">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go</button>
+							<button class="btn btn-default" type="submit">Go</button>
 						</span>
 					</div>
 				</form>
