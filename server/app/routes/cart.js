@@ -19,8 +19,14 @@ router.post('/addToCart/user/:userid/item/:itemid', function (req, res, next){
 	});
 });
 
-// router.delete('/deleteFromCart/user/:userid/item/:itemid', function (req, res, next){
-// 	User.findbyId(req.params.userid, function (err))
-// })
+router.delete('/user/:userid/item/:itemid', function (req, res, next){
+	User.findbyId(req.params.userid, function (err, user) {
+		if (!err) {
+			user.cart.items.pull({id: req.params.itemid});
+		} 
+		else next(err);
+	});
+});
+
 
 module.exports = router;

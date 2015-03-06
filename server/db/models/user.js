@@ -59,6 +59,7 @@ userSchema.method('cartToOrder', function (cart) {
     var self = this;
     Cart.create(this.cart).exec(function (err, savedCart){
         self.orders.push(savedCart._id);
+        self.cart = null;
     });
 });
 
