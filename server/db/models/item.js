@@ -32,5 +32,17 @@ itemSchema.virtual('avgReview').get(function (){
     return Math.round(sum/this.reviews.length, -2);
 });
 
+itemSchema.statics.findByCategory = function(tags, cb) {
+    var tagArr = tags.split(' ');
+    var queryObj = {
+        $and: tagArr.map(function(tag) {
+            { tags: tag }
+        })
+    };
+
+    return this.find(queryObj, cb);
+};
+
+
 mongoose.model("Item", itemSchema);
 // module.exports = mongoose.model('Item', itemSchema);

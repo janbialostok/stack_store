@@ -10,6 +10,10 @@ router.get('/findAll', function (req, res, next) {
     });
 });
 
+router.get('/findBy/category/:categoryTags', function(req,res, next) {
+	
+});
+
 router.post('/create', function (req, res, next){
 	var item = new Item(req.body);
 	item.save(function (err, newItem){

@@ -3,18 +3,19 @@
 app.factory('CategoryFactory', function() {
 	var factory = {};
 
-	var Node = function(name) {
+	var Node = function(name, parentPath) {
 		this.name = name;
+		this.tags = parentPath + ' ' + name;
 		this.children = [];
 	};
 
 	var objToArrLike = function(obj) {
-		var recurseOnNode = function(node, obj) {
+		var recurseOnNode = function(node, obj, parentPath) {
 			for (var key in obj) {
-				var child = new Node(key);
+				var child = new Node(key, parentPath);
 
 				if (typeof obj[key] === 'object') {
-					recurseOnNode(child, obj[key]);
+					recurseOnNode(child, obj[key], child.tags);
 				}
 				node.children.push(child);
 			}
@@ -22,9 +23,9 @@ app.factory('CategoryFactory', function() {
 
 		var arr = [];
 		for (var key in obj) {
-			var node = new Node(key);
+			var node = new Node(key, '');
 			if (typeof obj[key] === 'object') {
-				recurseOnNode(node, obj[key]);
+				recurseOnNode(node, obj[key], node.tags);
 			}
 			arr.push(node);
 		}
