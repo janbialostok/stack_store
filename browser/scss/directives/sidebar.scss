@@ -1,55 +1,71 @@
-side-bar {
-  width:200px;
-  position:absolute; 
+.sidebar {
   background-color: #e7e7e7;
-  margin-left: 0%;
-  color: black;
-  opacity: 0.5;
-  padding-left: 0% !important;
-  padding-right: 0% !important;
-  aside li:hover {
-    background-color: #e7e7e7;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+category-menu {
+  ul {
+    padding-left: 10px;
   }
-  aside { 
-    margin-bottom: 100%;
-  }
-  aside ul {
+
+  li {
     list-style: none;
-    padding: 0%;
-    margin: 0%;
-    border-radius: 5px; 
-    li {
-      padding-left: 1%;
-      font-weight: 900;
-      cursor: pointer;
-      font-size: larger;
-      border-radius: 5px; 
-      ul {
-        padding-left: 5%;
-        border-radius: 5px; 
-        li {
-          font-size: large;
-          font-weight: 500;
-          border-radius: 5px; 
-        }
-        li:hover {
-	  background-color: #315481;
-	  color: #FFFFFF;
-	}
-        ul {
-          padding-left: 5%;
-          border-radius: 5px; 
-          li {
-            font-size: medium;
-            font-weight: 200;
-            border-radius: 5px; 
-          }
-          li:hover {
-	    background-color: #e7e7e7;
-	    color: #000000;
-	  }
-        }
-      }
-    }
   }
 }
+
+// side-bar {
+//   width:200px;
+//   position:absolute; 
+//   background-color: #e7e7e7;
+//   margin-left: 0%;
+//   color: black;
+//   opacity: 0.5;
+//   padding-left: 0% !important;
+//   padding-right: 0% !important;
+//   aside li:hover {
+//     background-color: #e7e7e7;
+//   }
+//   aside { 
+//     margin-bottom: 100%;
+//   }
+//   aside ul {
+//     list-style: none;
+//     padding: 0%;
+//     margin: 0%;
+//     border-radius: 5px; 
+//     li {
+//       padding-left: 1%;
+//       font-weight: 900;
+//       cursor: pointer;
+//       font-size: larger;
+//       border-radius: 5px; 
+//       ul {
+//         padding-left: 5%;
+//         border-radius: 5px; 
+//         li {
+//           font-size: large;
+//           font-weight: 500;
+//           border-radius: 5px; 
+//         }
+//         li:hover {
+// 	  background-color: #315481;
+// 	  color: #FFFFFF;
+// 	}
+//         ul {
+//           padding-left: 5%;
+//           border-radius: 5px; 
+//           li {
+//             font-size: medium;
+//             font-weight: 200;
+//             border-radius: 5px; 
+//           }
+//           li:hover {
+// 	    background-color: #e7e7e7;
+// 	    color: #000000;
+// 	  }
+//         }
+//       }
+//     }
+//   }
+// }
