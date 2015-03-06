@@ -2,13 +2,20 @@ var async = require('async');
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/stack_store");
 
-var Item = require('./server/db/models/item.js');
-var User = require('./server/db/models/user.js');
-var Address = require('./server/db/models/address.js');
+require('./server/db/models/item.js');
+require('./server/db/models/user.js');
+require('./server/db/models/address.js');
+require('./server/db/models/creditCard.js');
+require('./server/db/models/review.js');
+require('./server/db/models/cart.js');
+
+var Item = mongoose.model('Item');
+var User = mongoose.model('User');
+var Address = mongoose.model('Address');
 
 var userData = [
-    {name: "Admin", permLevel: "Super User", password: "password", firstName: "Joe", lastName: "Johnson", email: "joe123@gmail.com", shippingAddress: [new Address({address1: "5 Hanover Square" ,address2: "Floor 25", city: "New York", stateProv: "NY", postalCode: "10004", country: "US", phone: "(212) 555-5555"})]},
-    {name: "Joe Johnson", permLevel: "Registered User", password: "password", firstName: "Joe", lastName: "Johnson", email: "joe123@gmail.com", shippingAddress: [new Address({address1: "614 East Lee St." ,address2: "Apt. 2", city: "Tucson", stateProv: "AZ", postalCode: "85719", country: "US", phone: "(503) 555-5555"})]},
+    {name: "Admin", permLevel: "Super User", password: "password", firstName: "Joe", lastName: "Johnson", email: "joe123@gmail.com", address: [new Address({address1: "5 Hanover Square" ,address2: "Floor 25", city: "New York", stateProv: "NY", postalCode: "10004", country: "US", phone: "(212) 555-5555"})]},
+    {name: "Joe Johnson", permLevel: "Registered User", password: "password", firstName: "Joe", lastName: "Johnson", email: "joe123@gmail.com", address: [new Address({address1: "614 East Lee St." ,address2: "Apt. 2", city: "Tucson", stateProv: "AZ", postalCode: "85719", country: "US", phone: "(503) 555-5555"})]},
     {name: "Lilly Baker", permLevel: "Registered User", password: "password", firstName: "Lilly", lastName: "Baker", email: "lilly123@gmail.com"}
 ];
 

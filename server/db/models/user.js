@@ -55,5 +55,9 @@ userSchema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.hashPassword;
 });
 
+userSchema.method('cartToOrder', function () {
+    this.orders.push(this.cart._id);
+})
+
 // module.exports = mongoose.model('User', userSchema);
 mongoose.model('User', userSchema);
