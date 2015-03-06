@@ -2,9 +2,13 @@ var async = require('async');
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/stack_store");
 
-var Item = require('./server/db/models/item.js');
-var User = require('./server/db/models/user.js');
-var Address = require('./server/db/models/address.js');
+require('./server/db/models/address.js');
+require('./server/db/models/item.js');
+require('./server/db/models/user.js');
+
+var Address = mongoose.model('Address');
+var Item = mongoose.model('Item');
+var User = mongoose.model('User');
 
 var userData = [
     {name: "Admin", permLevel: "Super User", password: "password", firstName: "Joe", lastName: "Johnson", email: "joe123@gmail.com", shippingAddress: [new Address({address1: "5 Hanover Square" ,address2: "Floor 25", city: "New York", stateProv: "NY", postalCode: "10004", country: "US", phone: "(212) 555-5555"})]},

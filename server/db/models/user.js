@@ -55,5 +55,12 @@ userSchema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.hashPassword;
 });
 
+userSchema.method('cartToOrder', function (cart) {
+    var self = this;
+    Cart.create(this.cart).exec(function (err, savedCart){
+        self.orders.push(savedCart._id);
+    });
+});
+
 // module.exports = mongoose.model('User', userSchema);
 mongoose.model('User', userSchema);
