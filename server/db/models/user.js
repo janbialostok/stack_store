@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var Address = require("./address.js");
-var Credit = require("./creditCard.js");
-var Cart = require("./cart.js");
+var Address = mongoose.model('Address');
+var Credit = mongoose.model('Credit');
+var Cart = mongoose.model('Cart');
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;

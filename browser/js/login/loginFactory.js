@@ -19,7 +19,7 @@ app.factory('loginFactory', function($http, CurrentFactory, AuthService) {
 		return $http.post('/api/user/signup', user).then(function (response){
 			return response.data;
 		});
-	}
+	};
 
 	return factory;
 });

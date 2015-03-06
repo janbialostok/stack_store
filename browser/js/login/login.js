@@ -32,7 +32,7 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
 		loginFactory.createUser(user).then(function(createdUser){
 			loginFactory.localLogin({username: user.name , password: user.password});
 			$state.go('home');
-		})
+		});
 	};
 
 	$scope.googleLogin = function() {
