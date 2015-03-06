@@ -1,5 +1,5 @@
 <span ng-show="currentUser">
-	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview, item._id, item.sellerID)">
+	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview, item._id, currentUser._id)">
 		<div class="form-group">
 			<textarea class="form-control" name="review" ng-model="newReview.comment" placeholder="Leave a review..." ng-minLength="25" required></textarea>
 		</div>
