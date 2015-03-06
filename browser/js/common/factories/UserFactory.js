@@ -2,7 +2,7 @@
 
 app.factory('UserFactory', function($http) {
 	var factory = {};
-	factory.getReviewUser = function (userId){
+	factory.getUserById = function (userId){
 		return $http.get('/api/user/' + userId).then(function (res){
 			return res.data;
 		});

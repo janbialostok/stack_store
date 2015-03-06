@@ -19,7 +19,7 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 		return ReviewFactory.getReviewsForItem($stateParams.productId);
 	}).then(function(reviews) {
 		reviews.forEach(function(review) {
-			UserFactory.getReviewUser(review.userId).then(function(user) {
+			UserFactory.getUserById(review.userId).then(function(user) {
 				review.username = user.name;
 			});
 		});

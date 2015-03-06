@@ -29,9 +29,13 @@
 		border-radius: 5px;
 		margin-bottom: 2.5%;
 	}
-	.img_description {
-		padding-left: 2.5%;
-		margin: 2.5% auto 2.5% auto;
+	.review_panel {
+		background-color: #e7e7e7;
+		color: black;
+		border-radius: 10px;
+		opacity: 0.8;
+		margin-top: 5%;
+		margin-bottom: 5%;
 	}
 }
 
@@ -43,6 +47,9 @@
 	.padding_ten {
 		padding-left: 2%;
 	}
+	.review_panel {
+		width: 97.5%;
+	}
 }
 
 @media all and (min-width: 1195px){
@@ -51,5 +58,8 @@
 	}
 	.padding_ten {
 		padding-left: 10%;
+	}
+	.review_panel {
+		width: 95%;
 	}
 }
