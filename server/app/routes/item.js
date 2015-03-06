@@ -1,13 +1,20 @@
 "use strict";
 var router = require("express").Router();
 var mongoose = require("mongoose");
-var Item = mongoose.model("Item", Item);
+var Item = mongoose.model("Item");
 
 router.get('/findAll', function (req, res, next) {
     Item.find({}, function(err, items) {
 		if (!err) res.json(items);
 		else next(err);
     });
+});
+
+router.get('/findBy/category/:categoryTags', function(req, res, next) {
+	Item.findByCategory(req.params.categoryTags, function(err, items) {
+		if (err) return next(err);
+		res.json(items);
+	});
 });
 
 router.post('/create', function (req, res, next){

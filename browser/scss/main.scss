@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+body {
+  color: white;
+}
+
 @mixin clearfix {
   &:after {
     content: "";
