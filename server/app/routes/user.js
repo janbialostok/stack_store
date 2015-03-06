@@ -42,7 +42,9 @@ router.route('/find/:id')
 	});
 
 router.post('/signup', function (req, res, next){
+	console.log(req.body);
 	var user = new User(req.body);
+	console.log(user);
 	user.save(function (err, savedUser){
 		if (!err) res.json(savedUser);
 		else next(err);

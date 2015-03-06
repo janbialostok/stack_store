@@ -24,7 +24,10 @@ app.controller('LoginCtrl', function($scope, loginFactory, $state, $window, Curr
 	};
 
 	$scope.createUser = function(user) {
-
+		loginFactory.createUser(user).then(function(user){
+			console.log(user);
+			$state.go('login');
+		})
 	};
 
 	$scope.googleLogin = function() {
