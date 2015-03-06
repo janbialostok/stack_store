@@ -1,46 +1,16 @@
 'use strict';
 
-app.directive('sideBar', function(SideBarFactory){
+app.directive('sideBar', function(CategoryFactory){
     return {
-	restrict: 'E',
-	templateUrl: 'js/common/directives/sidebar/sidebar.html',
-	link: function($scope, elem, attr){
-	    $scope.sidebars = [
-			{ 
-			    text: SideBarFactory.male.text,
-			    qValue: SideBarFactory.male.text,
-			    topTypes: [],
-			    bottomTypes: []
-			},
-			{
-			    text: SideBarFactory.female.text,
-			    qValue: SideBarFactory.female.text,
-			    topTypes: [],
-			    bottomTypes: []
-			},
-			{
-			    text: SideBarFactory.children.text,
-			    qValue: SideBarFactory.children.text,
-			    topTypes: [],
-			    bottomTypes: []
-			}
-	    ];
-	    for (var key in SideBarFactory.male.tops){
-		$scope.sidebars[0].topTypes.push(SideBarFactory.male.tops[key]);
-		$scope.sidebars[1].topTypes.push(SideBarFactory.female.tops[key]);
-		$scope.sidebars[2].topTypes.push(SideBarFactory.children.tops[key]);
-	    };
-	    for (var key in SideBarFactory.male.bottoms){
-		$scope.sidebars[0].bottomTypes.push(SideBarFactory.male.bottoms[key]);
-		$scope.sidebars[1].bottomTypes.push(SideBarFactory.female.bottoms[key]);
-		$scope.sidebars[2].bottomTypes.push(SideBarFactory.children.bottoms[key]);
-    	};
-	},
-	scope: {
-		sidebar: "="
-	}
-    };
+		restrict: 'E',
+		templateUrl: 'js/common/directives/sidebar/sidebar.html',
+		link: function($scope, elem, attr){
+			$scope.categories = CategoryFactory.categories_asArrLike;
+		}
+	};
 });
+
+
 
 app.directive('menuList', function(){
     return {

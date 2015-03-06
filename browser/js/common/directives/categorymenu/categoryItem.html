@@ -1,0 +1,6 @@
+<div>{{ item.name }}</div>
+<ul ng-if="hasChildren">
+	<li ng-repeat="child in children">
+		<category-item item="child"></category-item>
+	</li>
+</ul>
