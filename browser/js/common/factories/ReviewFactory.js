@@ -7,5 +7,10 @@ app.factory('ReviewFactory', function ($http){
 			return res.data;
 		});
 	};
+	factory.getReviewsForItem = function (productId){
+		return $http.get('/api/item/' + productId + '/reviews').then(function (res){
+			return res.data.reviews;
+		});
+	};
 	return factory;
 });

@@ -6,7 +6,7 @@ app.directive('reviewPanel', function (ReviewFactory, CurrentFactory){
 		link: function (scope, elem, attr){
 			scope.currentUser = CurrentFactory.current.user;
 			scope.submitReview = function (review, itemid){
-				review.productId = itemid;
+				review.itemId = itemid;
 				review.userId = scope.currentUser._id;
 				ReviewFactory.submitReview(review).then(function (res){
 					console.log(res);
@@ -16,7 +16,7 @@ app.directive('reviewPanel', function (ReviewFactory, CurrentFactory){
 	};
 });
 
-app.directive('review', function (ItemFactory){
+app.directive('review', function (){
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/reviews/reviews.html',
@@ -24,9 +24,6 @@ app.directive('review', function (ItemFactory){
 			review: '='
 		},
 		link: function (scope, elem, attr){
-			// ItemFactory.getReviewUser(scope.review.userId).then(function (res){
-			// 	scope.username = res.name;
-			// });
 		}
 	};
 });

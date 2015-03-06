@@ -1,8 +1,5 @@
 #single_item {
 	color: white;
-	.padding_ten {
-		padding-left: 10%;
-	}
 	.item_img {
 		border-radius: 10px;
 		max-width: 100%;
@@ -12,7 +9,6 @@
 		content: "  ";
 	}
 	.product_panel {
-		margin: 2.5% 10% 2.5% 10%;
 		background-color: #e7e7e7;
 		color: black;
 		border-radius: 10px;
@@ -32,5 +28,28 @@
 		outline-color: black;
 		border-radius: 5px;
 		margin-bottom: 2.5%;
+	}
+	.img_description {
+		padding-left: 2.5%;
+		margin: 2.5% auto 2.5% auto;
+	}
+}
+
+@media all and (max-width: 1195px){
+	.product_panel {
+		margin: 2.5% 2% 2.5% 2%;
+		width: 96%;
+	}
+	.padding_ten {
+		padding-left: 2%;
+	}
+}
+
+@media all and (min-width: 1195px){
+	.product_panel {
+		margin: 2.5% 10% 2.5% 10%;
+	}
+	.padding_ten {
+		padding-left: 10%;
 	}
 }
