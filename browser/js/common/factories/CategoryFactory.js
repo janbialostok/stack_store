@@ -62,7 +62,7 @@ app.factory('CategoryFactory', function() {
 		},
 		children: {
 			tops: {
-				long_sleeve: "children tops long sleeve",
+				long_sleeve: "children tops long_sleeve",
 				short_sleeve: "children tops short_sleeve"
 			},
 			bottoms: {
