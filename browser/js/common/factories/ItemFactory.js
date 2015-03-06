@@ -34,5 +34,4 @@ app.factory('ItemFactory', function($http) {
 			return res.data;
 		});
 	};
-	return factory;
 });

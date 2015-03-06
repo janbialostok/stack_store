@@ -12,7 +12,13 @@ var Schema = mongoose.Schema;
 
 var cartSchema = new Schema({
 	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-    items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+    items: [{ 
+    	item: {
+	    	type: mongoose.Schema.Types.ObjectId, 
+	    	ref: 'Item' 
+	    },
+	    quantity: {type: Number, default: 1, min: 1}
+    }],
     status: { type: String, required: true, default: 'Open' },
     billingAddress: [Address.schema],
     shippingAddress: [Address.schema]
