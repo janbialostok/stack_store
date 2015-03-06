@@ -56,7 +56,7 @@ router.route('/:id')
 	.put(function (req, res){
 		for (var key in req.body){
 			if (req.body.hasOwnPropertyKey(key)){
-				if (key == 'reviews') req.item.reviews.push(req.body.reviews);
+				if (key === 'reviews') req.item.reviews.push(req.body.reviews);
 				else req.item[key] = req.item[key];
 			}
 		}

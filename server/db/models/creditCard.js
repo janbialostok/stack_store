@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var Address = require("./address.js")
+var Address = mongoose.model('Address');
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;

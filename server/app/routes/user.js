@@ -1,8 +1,8 @@
 "use strict";
 var router = require("express").Router();
 var mongoose = require("mongoose");
-var User = mongoose.model("User", User);
-var Review = mongoose.model("Review", Review);
+var User = mongoose.model("User");
+var Review = mongoose.model("Review");
 
 router.post('/signup', function (req, res, next){
 	var user = new User(req.body);
