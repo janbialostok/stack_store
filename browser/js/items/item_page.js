@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
 app.controller('ItemCtrl', function($scope, $state, $stateParams, SingleItemFactory) {
 	SingleItemFactory.getItem($stateParams.productId).then(function (data){
 		$scope.item = data;
-		$scope.showDescription = $scope.item.description != "";
+		$scope.showDescription = $scope.item.description !== "";
 		SingleItemFactory.getUser(data.sellerID).then(function (username){
 			$scope.item.sellerName = username;
 		});
