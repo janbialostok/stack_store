@@ -9,3 +9,4 @@ app.factory('ItemFactory', function($http) {
 	}
 	return factory;
 });
+

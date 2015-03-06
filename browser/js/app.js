@@ -2,9 +2,8 @@
 var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt']);
 
 app.controller('MainController', function ($scope) {
-    $scope.current = {
-        user: {}
-    };
+
+
 });
 
 

@@ -10,9 +10,19 @@
   }
 }
 
+.full {
+  background: url(http://www.fullhdwpp.com/wp-content/uploads/Denim_Seal_www.FullHDWpp.com_.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
 @import 'item_page/item_page';
 @import 'bootstrap/panel';
+@import 'login/main';
