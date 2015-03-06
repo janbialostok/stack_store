@@ -17,7 +17,7 @@ app.directive("categoryMenu", function(CategoryFactory){
 app.directive("categoryItem", function($compile){
 	return {
 		restrict: 'E',
-		template: '<li stop-propagation >{{ item.name }}</li>',
+		templateUrl: 'js/common/directives/categorymenu/categoryItem.html',
 		scope: {
 			item: '='
 		},
@@ -40,8 +40,7 @@ app.directive('categoryCollection', function() {
 		scope: {
 			collection: '='
 		},
-		template: '<ul><category-item ng-repeat="item in collection" item="item">'
-				+ '</category-item></ul>'
+		templateUrl: 'js/common/directives/categorymenu/categoryCollection.html'
 	};
 });
 

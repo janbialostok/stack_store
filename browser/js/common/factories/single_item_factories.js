@@ -26,5 +26,5 @@ app.factory("SingleItemFactory", function($http){
 				return res.data;
 			});
 		}
-	}
+	};
 });
