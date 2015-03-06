@@ -43,6 +43,15 @@ itemSchema.statics.findByCategory = function(tags, cb) {
     return this.find(queryObj, cb); 
 };
 
+itemSchema.statics.findByPartialName = function(searchStr, cb) {
+    return this.find({
+        name: {
+            $regex: searchStr,
+            $options: 'i'
+        } 
+    }, cb);
+}
+
 
 mongoose.model("Item", itemSchema);
 // module.exports = mongoose.model('Item', itemSchema);
