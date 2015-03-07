@@ -1,36 +1,11 @@
-navbar {
-  display: block;
-  background: #a1a1a1;
-
-  fullstack-logo {
-    padding-top: 10px;
-    margin-right: 20px;
-    width: 30px;
+nav-bar {
+  .nav-category-menu {
+    width: 500px;
   }
 
-  a {
-    color: white;
-    &:hover {
-      color: white;
+  .dropdown-menu {
+    a:hover {
+      background-color: #CDCDCD;
     }
   }
-
-  .nav > li > a {
-    cursor: pointer;
-    &.active {
-      color: #f30046;
-    }
-    &:hover {
-      transition: color 0.2s;
-    }
-    &:focus {
-      color: #f30046;
-      background: transparent;
-    }
-  }
-
 }
-
-.nav-category-menu {
-  width: 500px;
-} 

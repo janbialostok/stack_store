@@ -42,15 +42,19 @@
 						Revert Changes
 					</button>
 				</div>
-				<div class="col-xs-6 no-right-padding">
-					<button type="submit"
-						class="btn btn-info btn-block"
-						ng-class="{disabled: userSettingForm.$pristine}">
-						Submit Changes
-					</button>
+				<div class="form-group">
+					<div class="col-xs-6 no-right-padding">
+						<button type="submit"
+							class="btn btn-info btn-block"
+							ng-class="{disabled: userSettingForm.$pristine}">
+							Submit Changes
+						</button>
+					</div>
 				</div>
+				<p class="text-center success-indicator" ng-show="changeSuccess">
+					Changes successfully made!
+				</p>
 			</form>
 		</div>
 	</div>
-	<pre>{{ userSettingForm.email.$valid | json }}</pre>
 </div>

@@ -8,16 +8,24 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('SettingCtrl', function($scope, CurrentFactory) {
-	$scope.user = CurrentFactory.current.user;
+app.controller('SettingCtrl', function($scope, CurrentFactory, UserFactory, $timeout) {
 	$scope.changedUser = CurrentFactory.cloneCurrentUser();
+	$scope.changeSuccess = false;
 
 	$scope.revertChanges = function() {
 		$scope.changedUser = CurrentFactory.cloneCurrentUser();
 		$scope.userSettingForm.$setPristine();
 	};
 
-	$scope.submitChanges(changedUser) {
-		
-	}
+	$scope.submitChanges = function(changedUser) {
+		UserFactory.updateUser(changedUser)
+		.then(function(user) {
+			CurrentFactory.current.user = user;
+			$scope.userSettingForm.$setPristine();
+			$scope.changeSuccess = true;
+			$timeout(function() {
+				$scope.changeSuccess = false;
+			}, 1000)
+		});
+	};
 });
