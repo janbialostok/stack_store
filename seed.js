@@ -2,7 +2,6 @@ var async = require('async');
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/stack_store").connection;
 
-
 require('./server/db/models/review.js');
 require('./server/db/models/address.js');
 require('./server/db/models/creditCard.js');
