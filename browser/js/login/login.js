@@ -16,15 +16,13 @@ app.config(function($stateProvider) {
 
 app.controller('LoginCtrl', function($scope, loginFactory, $state, $window) {
 	$scope.unAuthorized = false;
-	$scope.unAuthorizedForm = false;
 
 	$scope.login = function(user) {
-		$scope.unAuthorizedForm = false;
+		$scope.unAuthorized = false;
 		loginFactory.localLogin(user).then(function(user) {
 			$state.go('home');
 		}).catch(function(err) {
 			$scope.unAuthorized = true;
-			$scope.unAuthorizedForm = true;
 		});
 	};
 
