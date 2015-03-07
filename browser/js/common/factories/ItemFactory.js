@@ -34,4 +34,10 @@ app.factory('ItemFactory', function($http) {
 			return res.data;
 		});
 	};
+	factory.sendItemToCart = function (userId, productId, quantity) {
+		console.log('we"re sending this:', productId, quantity);
+		return $http.post('/api/cart/user/' + userId + '/item/' + productId, quantity).then(function (res){
+			return res.data;
+		})
+	};
 });
