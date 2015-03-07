@@ -11,7 +11,7 @@ db.on('error', console.error.bind(console, 'mongodb connection error: '));
 var Schema = mongoose.Schema;
 
 var cartSchema = new Schema({
-	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     items: [{ 
     	itemId: {
 	    	type: mongoose.Schema.Types.ObjectId, 
@@ -24,9 +24,11 @@ var cartSchema = new Schema({
     shippingAddress: [Address.schema]
 });
 
-// cartSchema.method('addItem', function (item){
-//     this.update({},{$push : {items: {itemId: item.itemId, quantity: item.quantity}}});
-// });
+cartSchema.statics.addItem = function (cartId, itemObj){
+    this.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function (err, cart){
+        console.log("Item added", cart);
+    });
+}
 
 mongoose.model("Cart", cartSchema);
 // module.exports = mongoose.model('Cart', cartSchema);
