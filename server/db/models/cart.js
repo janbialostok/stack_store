@@ -25,7 +25,9 @@ var cartSchema = new Schema({
 });
 
 cartSchema.statics.addItem = function (cartId, itemObj){
-	this.findByIdAndUpdate(cartId, {$push: {items: itemObj}});
+	this.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
+		console.log(data);
+	});
 };
 
 mongoose.model("Cart", cartSchema);

@@ -64,7 +64,6 @@ userSchema.method('cartToOrder', function (cart) {
 
 userSchema.statics.addItemToCart = function (itemObj, userId){
     this.findById(userId, function(err, user) {
-        console.log("Returned user", user);
         var cartId = user.cart;
         if (!cartId) {
             Cart.create({userId: userId}).then(function(newCart) {
@@ -75,9 +74,9 @@ userSchema.statics.addItemToCart = function (itemObj, userId){
                 });
             });
         }
-        else console.log("Yes cart"); Cart.addItem(cartId, itemObj);
+        else Cart.addItem(cartId, itemObj);
     });
-}
+};
 
 // module.exports = mongoose.model('User', userSchema);
 mongoose.model('User', userSchema);
