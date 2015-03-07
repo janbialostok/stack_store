@@ -17,6 +17,11 @@ app.factory('UserFactory', function($http) {
 			return res.data;
 		});
 	};
+	factory.makeUnauthorizedUser = function() {
+		return $http.post('/api/user/signupGuest').then(function(res) {
+			return res.data;
+		});
+	};
 	
 	return factory;
 });

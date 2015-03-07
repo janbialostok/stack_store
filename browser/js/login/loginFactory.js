@@ -13,7 +13,7 @@ app.factory('loginFactory', function($http, CurrentFactory, AuthService) {
 			.then(CurrentFactory.updateCurrentUser);
 	};
 
-	factory.createUser = function (user) {
+	factory.createGuestUser = function (user) {
 		user.authType = 'local';
 		user.permLevel = 'Registered User';
 		return $http.post('/api/user/signup', user).then(function (response){

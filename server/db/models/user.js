@@ -5,6 +5,7 @@ var validate = require("mongoose-validator");
 var Address = mongoose.model('Address');
 var Credit = mongoose.model('Credit');
 var Cart = mongoose.model('Cart');
+var Promise = require('bluebird');
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -14,6 +15,10 @@ var Schema = mongoose.Schema;
 
 var emailValidator = validate({ validator: "isEmail", arguments: [this], message: "Please enter a valid email address"});
 
+var validatePermLevel = function(value) {
+    return /Guest|Registered User|Super User/.test(value);
+};
+
 var userSchema = new Schema({
     name: { type: String, required: true, unique: true },
     facebook: { id: String },
@@ -21,19 +26,20 @@ var userSchema = new Schema({
     // key: { type: String, unique: true },
     // token: { type: String, unique: true },
     authType: { type: String, required: true, default: "local" },
-    permLevel: { type: String, required: true },
+    permLevel: { type: String, required: true, validate: validatePermLevel },
     hashPassword: { type: String },
     salt: { type: String },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     image: String,
-    email: { type: String, required: true, unique: true, validate: emailValidator },
+    email: { type: String, required: true, validate: emailValidator },
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
     address: [Address.schema],
     creditCard: [Credit.schema],
     cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
+
 
 var generateSalt = function () {
     return crypto.randomBytes(16).toString('base64');
@@ -76,6 +82,32 @@ userSchema.statics.addItemToCart = function (itemObj, userId){
         }
         else Cart.addItem(cartId, itemObj);
     });
+};
+
+userSchema.statics.saveGuestUser = function() {
+    var Self = this;
+    return (function saveGuestUser() {
+        var user = new Self({
+            name: crypto.randomBytes(16).toString('base64'),
+            password: 'asdf',
+            authType: 'local',
+            permLevel: 'Guest',
+            firstName: 'Guest',
+            lastName: 'User',
+            email: 'temp@email.com' 
+        });
+
+        return new Promise(function(resolve, reject) {
+            Self.findOne({name: user.name}).exec(function(err, foundUser) {
+                if (foundUser || err) return saveGuestUser();
+                else {
+                    user.save(function(err, savedUser) {
+                        resolve(savedUser);
+                    });
+                }
+            });
+        });
+    })();
 };
 
 // module.exports = mongoose.model('User', userSchema);

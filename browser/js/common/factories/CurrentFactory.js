@@ -6,10 +6,16 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 	factory.updateCurrentUser = function() {
 		return AuthService.getLoggedInUser().then(function(data) {
 			if (data) {
-				return CartFactory.getCartSize(data.cart).then(function(size) {
-					data.cartSize = size;
+				console.log(data.cart);
+				if (data.cart) {
+					return CartFactory.getCartSize(data.cart).then(function(size) {
+						data.cartSize = size;
+						return data;
+					});
+				} else {
+					data.cartSize = 0;
 					return data;
-				});
+				}
 			} else return data;
 		}).then(function(data) {
 			factory.current.user = data;
