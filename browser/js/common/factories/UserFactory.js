@@ -16,6 +16,7 @@ app.factory('UserFactory', function($http) {
 		return $http.put('/api/user/' + user._id, user).then(function(res) {
 			return res.data;
 		});
-	}
+	};
+	
 	return factory;
 });
