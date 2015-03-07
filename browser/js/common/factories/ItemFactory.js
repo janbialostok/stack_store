@@ -34,5 +34,12 @@ app.factory('ItemFactory', function($http) {
 			return res.data;
 		});
 	};
+	factory.getBySearchString = function(searchStr) {
+		return $http.get('/api/item/findBy/search/' + searchStr)
+			.then(function(res) {
+				return res.data;
+			});
+	};
+
 	return factory;
 });

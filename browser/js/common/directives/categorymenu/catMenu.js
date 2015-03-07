@@ -5,10 +5,9 @@ app.directive("categoryMenu", function(CategoryFactory){
 		restrict: 'E',
 		templateUrl: 'js/common/directives/categorymenu/catMenu.html',
 		scope: {
-			horiz: '='
+			horiz: '=?'
 		},
 		link: function(scope, elem, attr){
-			scope.horiz = true;
 			scope.categories = CategoryFactory.categories_asArrLike;
 		}
 	};
