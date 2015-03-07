@@ -12,5 +12,10 @@ app.factory('UserFactory', function($http) {
 			return res.data.sellerID;
 		});
 	};
+	factory.updateUser = function(user) {
+		return $http.put('/api/user/' + user._id, user).then(function(res) {
+			return res.data;
+		});
+	}
 	return factory;
 });
