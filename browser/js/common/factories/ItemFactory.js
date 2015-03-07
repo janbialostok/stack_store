@@ -18,6 +18,7 @@ app.factory('ItemFactory', function($http) {
 			return res.data;
 		});
 	};
+
 	factory.getUser = function (productId, userId){
 		return $http.get('/api/item/' + productId + '/user/' + userId).then(function (res){
 			return res.data.sellerID;
@@ -34,6 +35,7 @@ app.factory('ItemFactory', function($http) {
 			return res.data;
 		});
 	};
+
 	factory.getBySearchString = function(searchStr) {
 		return $http.get('/api/item/findBy/search/' + searchStr)
 			.then(function(res) {

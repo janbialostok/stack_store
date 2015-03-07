@@ -9,7 +9,7 @@ router.post('/create', function (req, res, next){
 	review.save(function (err, newReview){
 		if (err) next(err);
 		else {
-			Item.findOne({ _id: req.body.productId }, function (err, item){
+			Item.findOne({ _id: req.body.itemId }, function (err, item){
 				if (err) res.status(400).end();
 				else {
 					item.reviews.push(newReview._id);
