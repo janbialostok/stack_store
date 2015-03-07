@@ -34,10 +34,8 @@ app.factory('ItemFactory', function($http) {
 			return res.data;
 		});
 	};
-	factory.sendItemToCart = function (userId, productId, quantity) {
-		console.log('we"re sending this productId and quantity:', productId, quantity);
-		console.log("and this user id:", userId)
-		return $http.post('/api/cart/user/' + userId + '/item/' + productId, {quantity: quantity}).then(function (res){
+	factory.sendItemToCart = function (item) {
+		return $http.post('/api/cart/add/', item).then(function (res){
 			return res.data;
 		})
 	};

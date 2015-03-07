@@ -44,12 +44,13 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, C
 
 
 	$scope.addToCart = function(itemAdd) {
-		console.log("Current factory user", CurrentFactory.current.user);
-		var userId = CurrentFactory.current.user._id;
-		var productId = $stateParams.productId;
-		var itemQuantity = itemAdd.quantity;
-		ItemFactory.sendItemToCart(userId, productId, itemQuantity).then(function (data){
-			console.log("Added To Cart");
+		var item = {
+		 	userId : CurrentFactory.current.user._id,
+		 	itemId : $stateParams.productId,
+		 	quantity : itemAdd.quantity
+		};
+		ItemFactory.sendItemToCart(item).then(function (data){
+			console.log(data.cart);
 		});
 	};
 	

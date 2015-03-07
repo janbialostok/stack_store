@@ -5,39 +5,36 @@ var User = mongoose.model("User", User);
 var Item = mongoose.model("Item", Item);
 var Cart = mongoose.model("Cart", Cart);
 
-router.post('/user/:userid/item/:itemid', function (req, res, next){
-
-	var quantity = req.body;
-	console.log(req.body);
-
-	User.findById(req.params.userid, function (err, user){
+router.post('/add', function (req, res, next){
+	User.findById(req.body.userId, function (err, user) {
 		if (!err) {
-			console.log(user);
+			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
 			if (user.cart.length == 0) {
-				user.cart = new Cart(
-					{ user: req.params.userid , 
-					  items: [{item: req.params.itemid , quantity: quantity}] 
-					});
-				console.log("Cart", user.cart);
-				user.save();
-			} else {
+				var cart = { user: req.body.userId, items: [item]};
+				user.cart = new Cart(cart);
 				console.log(user.cart);
-				user.cart.items.forEach( function (itemObject, index) {
-					if (req.params.itemid == itemObject.item){
-						user.cart.items[index].quantity =+ quantity;
-						user.save();
-						return;
-					};
+				user.save( function (err,returned){
+					res.json(returned);
 				});
-				user.cart.items.push({item: req.params.itemid , quantity: quantity});
-				user.save();
+			} else {
+				// for (var i=0; i < userCart.items.length; i++) {
+				// 	if (req.body.itemId.toString() == userCart.items[i].itemId.toString()){
+				// 		userCart.items[i].quantity += req.body.quantity;
+				// 		user.save(function (err,returned){
+				// 			res.json(returned);
+				// 			return;
+				// 		});
+				// 	};
+				// };
+				console.log("hi");
+				user.cart.update({},{$push : {items: {itemId: item.itemId, quantity: item.quantity}}});
 			} 
 		} else next(err);
 	});
 });
 
 router.delete('/user/:userid/item/:itemid', function (req, res, next){
-	User.findbyId(req.params.userid, function (err, user) {
+	User.findById(req.params.userid, function (err, user) {
 		if (!err) {
 			user.cart.items.pull({id: req.params.itemid});
 		} 

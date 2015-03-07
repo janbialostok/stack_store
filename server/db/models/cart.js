@@ -13,7 +13,7 @@ var Schema = mongoose.Schema;
 var cartSchema = new Schema({
 	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     items: [{ 
-    	item: {
+    	itemId: {
 	    	type: mongoose.Schema.Types.ObjectId, 
 	    	ref: 'Item' 
 	    },
@@ -22,6 +22,10 @@ var cartSchema = new Schema({
     status: { type: String, required: true, default: 'Open' },
     billingAddress: [Address.schema],
     shippingAddress: [Address.schema]
+});
+
+cartSchema.method('addItem', function (item){
+    this.update({},{$push : {items: {itemId: item.itemId, quantity: item.quantity}}});
 });
 
 mongoose.model("Cart", cartSchema);
