@@ -44,14 +44,11 @@ router.route('/:id')
 	.put(function (req, res){
 		for (var key in req.body){
 			if (req.body.hasOwnProperty(key)){
-				if (key === "address" || key === "creditCard" || key === "orders"){
-					req.user[key].push(req.body[key]);
-				}
-				else req.user[key] = req.body[key];
+				req.user[key] = req.body[key];
 			}
 		}
 		req.user.save(function (err, user){
-			if (!err) res.status(200).end();
+			if (!err) res.json(user);
 			else res.status(400).end();
 		});
 	})

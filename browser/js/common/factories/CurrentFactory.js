@@ -14,6 +14,13 @@ app.factory('CurrentFactory', function($http, AuthService) {
 		user: null
 	};
 
+	factory.cloneCurrentUser = function() {
+		var obj = {};
+		for (var key in factory.current.user) {
+			obj[key] = factory.current.user[key];
+		}
+		return obj;
+	}
 
 	return factory;
 });
