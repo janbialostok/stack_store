@@ -15,6 +15,16 @@ router.put('/add', function (req, res, next){
 	});
 });
 
+router.get('/:userId', function (req, res, next){
+	User.findById(req.params.userId)
+		.populate('cart')
+		.exec( function (err, user){
+		if (!err) {
+			res.json(user.cart);
+		} else next(err);
+	})
+})
+
 router.delete('/user/:userid/item/:itemid', function (req, res, next){
 	User.findById(req.params.userid, function (err, user) {
 		if (!err) {

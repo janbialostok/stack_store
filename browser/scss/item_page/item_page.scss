@@ -8,15 +8,6 @@
 	.tag_btn:after {
 		content: "  ";
 	}
-	.product_panel {
-		background-color: #e7e7e7;
-		color: black;
-		border-radius: 10px;
-		opacity: 0.8;
-		.col-lg-6 {
-			padding: 5%;
-		}
-	}
 	.inStock {
 		color: green;
 	}
@@ -36,6 +27,31 @@
 		opacity: 0.8;
 		margin-top: 5%;
 		margin-bottom: 5%;
+	}
+}
+
+.product_panel {
+	background-color: #e7e7e7;
+	color: black;
+	border-radius: 10px;
+	opacity: 0.8;
+	.col-lg-6 {
+		padding: 5%;
+	}
+	img {
+		max-width: 50%;
+		height: auto;
+	}
+}
+
+.info_holder{
+	
+}
+
+#cart_item {
+	.product_panel {
+		margin: 2.5% 0% 2.5% 0%;
+		width: 97.5%;
 	}
 }
 
