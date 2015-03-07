@@ -1,32 +1,51 @@
-<div class="col-md-4 col-md-offset-4">
+<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
 	<div class="panel panel-default">
 		<div class="panel-heading">Update User Settings</div>
 		<div class="panel-body">
 			<form name="userSettingForm">
-				<div class="form-group">
+				<div class="form-group"
+					ng-class="{'has-warning': userSettingForm.firstName.$dirty}">
 					<label for="firstName">First Name</label>
 					<input type="text"
+						id="firstName"
 						name="firstName"
 						class="form-control"
-						ng-model="user.firstName">
+						ng-model="changedUser.firstName">
 				</div>
-				<div class="form-group">
+				<div class="form-group"
+					ng-class="{'has-warning': userSettingForm.lastName.$dirty}">
 					<label for="lastName">Last Name</label>
 					<input type="text"
+						id="lastName"
 						name="lastName"
 						class="form-control"
-						ng-model="user.lastName">
+						ng-model="changedUser.lastName">
 				</div>
-				<div class="form-group">
+				<div class="form-group"
+					ng-class="{'has-warning': userSettingForm.email.$dirty}">
 					<label for="email">Email Address</label>
 					<input type="text"
+						id="email"
 						name="email"
 						class="form-control"
-						ng-model="user.email">
+						ng-model="changedUser.email">
 				</div>
-				<button type="submit" class="btn btn-info btn-block">Submit Changes</button>
+				<div class="col-xs-6 no-left-padding">
+					<button class="btn btn-default btn-block"
+						ng-class="{disabled: userSettingForm.$pristine}"
+						ng-click="revertChanges()">
+						Revert Changes
+					</button>
+				</div>
+				<div class="col-xs-6 no-right-padding">
+					<button type="submit"
+						class="btn btn-info btn-block"
+						ng-class="{disabled: userSettingForm.$pristine}">
+						Submit Changes
+					</button>
+				</div>
 			</form>
 		</div>
 	</div>
-	{{ userSettingForm }}
+	<!-- <pre>{{ userSettingForm | json }}</pre> -->
 </div>

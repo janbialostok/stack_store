@@ -10,4 +10,10 @@ app.config(function($stateProvider) {
 
 app.controller('SettingCtrl', function($scope, CurrentFactory) {
 	$scope.user = CurrentFactory.current.user;
+	$scope.changedUser = CurrentFactory.cloneCurrentUser();
+
+	$scope.revertChanges = function() {
+		$scope.changedUser = CurrentFactory.cloneCurrentUser();
+		$scope.userSettingForm.$setPristine();
+	};
 });
