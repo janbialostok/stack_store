@@ -3,57 +3,60 @@
 		<div class="panel-heading">Update User Settings</div>
 		<div class="panel-body">
 			<form name="userSettingForm"
+				class="form-horizontal"
 				ng-submit="userSettingForm.$valid && submitChanges(changedUser)">
-				<div class="form-group"
-					ng-class="{'has-warning': userSettingForm.firstName.$dirty}">
-					<label for="firstName">First Name</label>
-					<input type="text"
-						required
-						id="firstName"
-						name="firstName"
-						class="form-control"
-						ng-model="changedUser.firstName">
-				</div>
-				<div class="form-group"
-					ng-class="{'has-warning': userSettingForm.lastName.$dirty}">
-					<label for="lastName">Last Name</label>
-					<input type="text"
-						required
-						id="lastName"
-						name="lastName"
-						class="form-control"
-						ng-model="changedUser.lastName">
-				</div>
-				<div class="form-group"
-					ng-class="{'has-warning': userSettingForm.email.$dirty, 'has-error': userSettingForm.email.$invalid}">
-					<label for="email">Email Address</label>
-					<input type="text"
-						required
-						id="email"
-						name="email"
-						class="form-control"
-						ng-pattern="/\w+@\w+\.\w+/"
-						ng-model="changedUser.email">
-				</div>
-				<div class="col-xs-6 no-left-padding">
-					<button class="btn btn-default btn-block"
-						ng-class="{disabled: userSettingForm.$pristine}"
-						ng-click="revertChanges()">
-						Revert Changes
-					</button>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-6 no-right-padding">
-						<button type="submit"
-							class="btn btn-info btn-block"
-							ng-class="{disabled: userSettingForm.$pristine}">
-							Submit Changes
-						</button>
+				<div class="col-xs-12">
+					<div class="form-group"
+						ng-class="{'has-warning': userSettingForm.firstName.$dirty}">
+						<label for="firstName">First Name</label>
+						<input type="text"
+							required
+							id="firstName"
+							name="firstName"
+							class="form-control"
+							ng-model="changedUser.firstName">
+					</div>
+					<div class="form-group"
+						ng-class="{'has-warning': userSettingForm.lastName.$dirty}">
+						<label for="lastName">Last Name</label>
+						<input type="text"
+							required
+							id="lastName"
+							name="lastName"
+							class="form-control"
+							ng-model="changedUser.lastName">
+					</div>
+					<div class="form-group"
+						ng-class="{'has-warning': userSettingForm.email.$dirty, 'has-error': userSettingForm.email.$invalid}">
+						<label for="email">Email Address</label>
+						<input type="text"
+							required
+							id="email"
+							name="email"
+							class="form-control"
+							ng-pattern="/\w+@\w+\.\w+/"
+							ng-model="changedUser.email">
+					</div>
+					<div class="form-group">
+						<div class="col-xs-6 no-left-padding">
+							<button class="btn btn-default btn-block"
+								ng-class="{disabled: userSettingForm.$pristine}"
+								ng-click="revertChanges()">
+								Revert Changes
+							</button>
+						</div>
+						<div class="col-xs-6 no-right-padding">
+							<button type="submit"
+								class="btn btn-info btn-block"
+								ng-class="{disabled: userSettingForm.$pristine}">
+								Submit Changes
+							</button>
+						</div>
+					</div>
+					<div class="text-center success-indicator" ng-show="changeSuccess">
+						Changes successfully made!
 					</div>
 				</div>
-				<p class="text-center success-indicator" ng-show="changeSuccess">
-					Changes successfully made!
-				</p>
 			</form>
 		</div>
 	</div>

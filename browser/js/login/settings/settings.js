@@ -20,6 +20,7 @@ app.controller('SettingCtrl', function($scope, CurrentFactory, UserFactory, $tim
 	$scope.submitChanges = function(changedUser) {
 		UserFactory.updateUser(changedUser)
 		.then(function(user) {
+			console.log(user);
 			CurrentFactory.current.user = user;
 			$scope.userSettingForm.$setPristine();
 			$scope.changeSuccess = true;

@@ -48,7 +48,7 @@ router.route('/:id')
 			}
 		}
 		req.user.save(function (err, user){
-			if (!err) res.status(200).end();
+			if (!err) res.json(user);
 			else res.status(400).end();
 		});
 	})
