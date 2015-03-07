@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, ReviewFactory, UserFactory) {
+app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, ReviewFactory, UserFactory, CurrentFactory, CartFactory) {
 	ItemFactory.getItem($stateParams.productId).then(function (data){
 		$scope.item = data;
 		$scope.showDescription = $scope.item.description !== "";
@@ -25,4 +25,16 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 		});
 		$scope.item.reviews = reviews;
 	});
+
+	$scope.addToCart = function(itemAdd) {
+		var item = {
+			userId : CurrentFactory.current.user._id,
+		 	itemId : $stateParams.productId,
+		 	quantity : itemAdd.quantity
+		};
+		CartFactory.sendItemToCart(item).then(function (data){
+			// update current user
+		});
+	};
+	
 });

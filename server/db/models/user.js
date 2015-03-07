@@ -31,7 +31,7 @@ var userSchema = new Schema({
     items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
     address: [Address.schema],
     creditCard: [Credit.schema],
-    cart: [Cart.schema],
+    cart: { type: mongoose.Schema.Types.ObjectId, ref: 'Cart' },
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }]
 });
 
@@ -61,6 +61,22 @@ userSchema.method('cartToOrder', function (cart) {
         self.orders.push(savedCart._id);
     });
 });
+
+userSchema.statics.addItemToCart = function (itemObj, userId){
+    this.findById(userId, function(err, user) {
+        var cartId = user.cart;
+        if (!cartId) {
+            Cart.create({userId: userId}).then(function(newCart) {
+                console.log("No cart", newCart);
+                user.cart = newCart._id;
+                user.save(function (err, returned){
+                    Cart.addItem(newCart._id, itemObj);
+                });
+            });
+        }
+        else Cart.addItem(cartId, itemObj);
+    });
+};
 
 // module.exports = mongoose.model('User', userSchema);
 mongoose.model('User', userSchema);
