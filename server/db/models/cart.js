@@ -24,9 +24,9 @@ var cartSchema = new Schema({
     shippingAddress: [Address.schema]
 });
 
-cartSchema.method('addItem', function (item){
-    this.update({},{$push : {items: {itemId: item.itemId, quantity: item.quantity}}});
-});
+// cartSchema.method('addItem', function (item){
+//     this.update({},{$push : {items: {itemId: item.itemId, quantity: item.quantity}}});
+// });
 
 mongoose.model("Cart", cartSchema);
 // module.exports = mongoose.model('Cart', cartSchema);

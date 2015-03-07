@@ -2,5 +2,8 @@
 	<category-menu horiz="false"></category-menu>
 </div>
 <div class="col-xs-10">
-	<item-container itemarray="allItems"></item-container>
+	<items-with-title
+		title="Search Results For: {{ searchString }}"
+		items="searchResults">
+	</items-with-title>
 </div>

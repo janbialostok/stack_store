@@ -17,6 +17,13 @@ router.get('/findBy/category/:categoryTags', function(req, res, next) {
 	});
 });
 
+router.get('/findBy/search/:searchString', function(req, res, next) {
+	Item.findByPartialName(req.params.searchString, function(err, items) {
+		if (err) return next(err);
+		res.json(items);
+	});
+});
+
 router.post('/create', function (req, res, next){
 	var item = new Item(req.body);
 	item.save(function (err, newItem){
@@ -40,7 +47,6 @@ router.get('/:itemid/reviews', function (req, res, next){
 });
 
 router.use('/:id', function (req, res, next){
-	console.log(req.params.id);
 	Item.findOne({ _id: req.params.id }, function (err, item){
 		if (!err) {
 			req.item = item;
