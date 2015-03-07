@@ -16,4 +16,8 @@ app.controller('SettingCtrl', function($scope, CurrentFactory) {
 		$scope.changedUser = CurrentFactory.cloneCurrentUser();
 		$scope.userSettingForm.$setPristine();
 	};
+
+	$scope.submitChanges(changedUser) {
+		
+	}
 });
