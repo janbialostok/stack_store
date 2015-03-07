@@ -27,6 +27,7 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 	});
 
 	$scope.addToCart = function(itemAdd) {
+		
 		var item = {
 			userId : CurrentFactory.current.user._id,
 		 	itemId : $stateParams.productId,

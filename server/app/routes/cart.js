@@ -24,5 +24,15 @@ router.delete('/user/:userid/item/:itemid', function (req, res, next){
 	});
 });
 
+router.get('/:cartId/size', function(req, res, next) {
+	Cart.findById(req.params.cartId, function(err, cart) {
+		if (err) return next(err);
+
+		res.send({
+			size: cart.size()
+		});
+	});
+});
+
 
 module.exports = router;

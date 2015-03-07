@@ -1,10 +1,17 @@
 'use strict';
 
-app.factory('CurrentFactory', function($http, AuthService) {
+app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 	var factory = {};
 
 	factory.updateCurrentUser = function() {
 		return AuthService.getLoggedInUser().then(function(data) {
+			if (data) {
+				return CartFactory.getCartSize(data.cart).then(function(size) {
+					data.cartSize = size;
+					return data;
+				});
+			} else return data;
+		}).then(function(data) {
 			factory.current.user = data;
 			return data;
 		});
@@ -20,7 +27,7 @@ app.factory('CurrentFactory', function($http, AuthService) {
 			obj[key] = factory.current.user[key];
 		}
 		return obj;
-	}
+	};
 
 	return factory;
 });

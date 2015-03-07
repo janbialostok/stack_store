@@ -7,6 +7,11 @@ app.factory('CartFactory', function($http) {
 			return res.data;
 		});
 	};
+	factory.getCartSize = function(cartId) {
+		return $http.get('/api/cart/' + cartId + '/size/').then(function(res) {
+			return res.data.size;
+		});
+	};
 
 	return factory;
 });

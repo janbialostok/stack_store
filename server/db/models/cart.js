@@ -24,6 +24,12 @@ var cartSchema = new Schema({
 	shippingAddress: [Address.schema]
 });
 
+cartSchema.methods.size = function() {
+	return this.items.reduce(function(prev, cur) {
+		return prev + cur.quantity;
+	}, 0);
+};
+
 cartSchema.statics.addItem = function (cartId, itemObj){
 	this.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
 		console.log(data);
