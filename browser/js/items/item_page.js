@@ -44,7 +44,8 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, C
 
 
 	$scope.addToCart = function(itemAdd) {
-		var userId = CurrentFactory.current.user.id;
+		console.log("Current factory user", CurrentFactory.current.user);
+		var userId = CurrentFactory.current.user._id;
 		var productId = $stateParams.productId;
 		var itemQuantity = itemAdd.quantity;
 		ItemFactory.sendItemToCart(userId, productId, itemQuantity).then(function (data){
