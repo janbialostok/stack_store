@@ -24,11 +24,6 @@ app.factory('ItemFactory', function($http) {
 				return res.data;
 			});
 	};
-	factory.sendItemToCart = function (item) {
-		return $http.post('/api/cart/add/', item).then(function (res){
-			return res.data;
-		})
-	};
 
 	return factory;
 });

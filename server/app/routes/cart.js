@@ -5,7 +5,7 @@ var User = mongoose.model("User", User);
 var Item = mongoose.model("Item", Item);
 var Cart = mongoose.model("Cart", Cart);
 
-router.post('/add', function (req, res, next){
+router.put('/add', function (req, res, next){
 	User.findById(req.body.userId, function (err, user) {
 		if (!err) {
 			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
