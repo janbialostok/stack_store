@@ -5,18 +5,17 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 
 	factory.updateCurrentUser = function() {
 		return AuthService.getLoggedInUser().then(function(user) {
-			if (user) {
-				if (user.cart) {
-					return CartFactory.getCartSize(user.cart).then(function(size) {
-						user.cartSize = size;
-						return user;
-					});
-				} else {
-					user.cart = '';
-					user.cartSize = 0;
+			if (!user) user = {};
+			if (user.cart) {
+				return CartFactory.getCartSize(user.cart).then(function(size) {
+					user.cartSize = size;
 					return user;
-				}
-			} else return user;
+				});
+			} else {
+				user.cart = '';
+				user.cartSize = 0;
+				return user;
+			}
 		}).then(function(user) {
 			factory.current.user = user;
 			return user;

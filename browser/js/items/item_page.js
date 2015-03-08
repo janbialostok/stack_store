@@ -38,7 +38,7 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 			});	
 		}
 
-		if (!CurrentFactory.current.user) {
+		if (!CurrentFactory.current.user._id) {
 			UserFactory.makeUnauthorizedUser().then(addItemThenClear);
 		} else addItemThenClear();
 	};
