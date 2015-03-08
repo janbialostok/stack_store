@@ -39,9 +39,7 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 		}
 
 		if (!CurrentFactory.current.user) {
-			UserFactory.makeUnauthorizedUser().then(function(user) {
-				return loginFactory.localLogin({username: user.name, password: 'asdf'});
-			}).then(addItemThenClear);
+			UserFactory.makeUnauthorizedUser().then(addItemThenClear);
 		} else addItemThenClear();
 	};
 });

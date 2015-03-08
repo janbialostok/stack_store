@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('UserFactory', function($http) {
+app.factory('UserFactory', function($http, loginFactory) {
 	var factory = {};
 	factory.getUserById = function (userId){
 		return $http.get('/api/user/' + userId).then(function (res){
@@ -20,6 +20,8 @@ app.factory('UserFactory', function($http) {
 	factory.makeUnauthorizedUser = function() {
 		return $http.post('/api/user/signupGuest').then(function(res) {
 			return res.data;
+		}).then(function(user) {
+			return loginFactory.localLogin({username: user.name, password: 'temp'});
 		});
 	};
 	

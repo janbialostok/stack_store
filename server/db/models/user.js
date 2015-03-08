@@ -95,7 +95,7 @@ userSchema.statics.saveGuestUser = function() {
     return (function saveGuestUser() {
         var user = new Self({
             name: crypto.randomBytes(16).toString('base64'),
-            password: 'asdf',
+            password: 'temp',
             authType: 'local',
             permLevel: 'Guest',
             firstName: 'Guest',
