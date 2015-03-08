@@ -13,7 +13,6 @@ app.factory('CartFactory', function($http) {
 		 	itemId : itemId,
 		 	quantity : itemQuantity
 		};
-
 		return this.sendItemToCart(item);
 	};
 	factory.getCartSize = function(cartId) {

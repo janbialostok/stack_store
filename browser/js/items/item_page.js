@@ -34,7 +34,6 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 			).then(function(user) {
 				CurrentFactory.current.user.cart = user.cart;
 				itemAdd.quantity = null;
-				console.log('current user after cart added', user);
 				CurrentFactory.updateCurrentUser();
 			});	
 		}
@@ -44,7 +43,5 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 				return loginFactory.localLogin({username: user.name, password: 'asdf'});
 			}).then(addItemThenClear);
 		} else addItemThenClear();
-
 	};
-	
 });

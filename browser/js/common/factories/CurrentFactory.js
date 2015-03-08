@@ -6,8 +6,6 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 	factory.updateCurrentUser = function() {
 		return AuthService.getLoggedInUser().then(function(user) {
 			if (user) {
-				console.log('user on session:', user);
-				console.log('cart of user:', user.cart);
 				if (user.cart) {
 					return CartFactory.getCartSize(user.cart).then(function(size) {
 						user.cartSize = size;
