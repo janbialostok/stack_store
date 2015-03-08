@@ -69,18 +69,24 @@ userSchema.method('cartToOrder', function (cart) {
 });
 
 userSchema.statics.addItemToCart = function (itemObj, userId){
-    this.findById(userId, function(err, user) {
-        var cartId = user.cart;
-        if (!cartId) {
-            Cart.create({userId: userId}).then(function(newCart) {
-                console.log("No cart", newCart);
-                user.cart = newCart._id;
-                user.save(function (err, returned){
-                    Cart.addItem(newCart._id, itemObj);
+    var self = this;
+    return new Promise(function(resolve, reject) {
+        self.findById(userId, function(err, user) {
+            var cartId = user.cart;
+            if (!cartId) {
+                Cart.create({userId: userId}).then(function(newCart) {
+                    user.cart = newCart._id;
+                    user.save(function (err, returned){
+                        Cart.addItem(newCart._id, itemObj).then(function() {
+                            resolve(user);
+                        });
+                    });
                 });
+            }
+            else Cart.addItem(cartId, itemObj).then(function() {
+                resolve(user);
             });
-        }
-        else Cart.addItem(cartId, itemObj);
+        });
     });
 };
 
@@ -98,8 +104,8 @@ userSchema.statics.saveGuestUser = function() {
         });
 
         return new Promise(function(resolve, reject) {
-            Self.findOne({name: user.name}).exec(function(err, foundUser) {
-                if (foundUser || err) return saveGuestUser();
+            Self.findOne({name: user.name}, function(err, foundUser) {
+                if (foundUser || err) resolve(saveGuestUser());
                 else {
                     user.save(function(err, savedUser) {
                         resolve(savedUser);

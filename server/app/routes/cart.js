@@ -9,8 +9,11 @@ router.put('/add', function (req, res, next){
 	User.findById(req.body.userId, function (err, user) {
 		if (!err) {
 			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
-			User.addItemToCart(item, user._id);
-			res.json(user);
+			// should switch addItemToCart to a method
+			User.addItemToCart(item, user._id).then(function(user) {
+				console.log('user saved with cart', user);
+				res.json(user);
+			});
 		} else next(err);
 	});
 });

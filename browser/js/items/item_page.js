@@ -12,10 +12,9 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 	ItemFactory.getItem($stateParams.productId).then(function (data){
 		$scope.item = data;
 		$scope.showDescription = $scope.item.description !== "";
-		return UserFactory.getSellerId(data._id, data.sellerID);
+		return UserFactory.getUserById(data.sellerID);
 	}).then(function (user){
 		$scope.item.sellerName = user.name;
-	}).then(function() {
 		return ReviewFactory.getReviewsForItem($stateParams.productId);
 	}).then(function(reviews) {
 		reviews.forEach(function(review) {
@@ -27,15 +26,15 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 	});
 
 	$scope.addToCart = function(itemAdd) {
-		function addToCart() {
-			console.log('current user:', CurrentFactory.current.user)
-			var item = {
-				userId : CurrentFactory.current.user._id,
-			 	itemId : $stateParams.productId,
-			 	quantity : itemAdd.quantity
-			};
-			CartFactory.sendItemToCart(item).then(function() {
+		function addItemThenClear() {
+			CartFactory.addItemToCart(
+				itemAdd.quantity,
+				$stateParams.productId,
+				CurrentFactory.current.user._id
+			).then(function(user) {
+				CurrentFactory.current.user.cart = user.cart;
 				itemAdd.quantity = null;
+				console.log('current user after cart added', user);
 				CurrentFactory.updateCurrentUser();
 			});	
 		}
@@ -43,8 +42,8 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, R
 		if (!CurrentFactory.current.user) {
 			UserFactory.makeUnauthorizedUser().then(function(user) {
 				return loginFactory.localLogin({username: user.name, password: 'asdf'});
-			}).then(addToCart);
-		} else addToCart();
+			}).then(addItemThenClear);
+		} else addItemThenClear();
 
 	};
 	

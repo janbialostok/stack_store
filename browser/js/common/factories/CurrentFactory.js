@@ -4,22 +4,24 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 	var factory = {};
 
 	factory.updateCurrentUser = function() {
-		return AuthService.getLoggedInUser().then(function(data) {
-			if (data) {
-				console.log(data.cart);
-				if (data.cart) {
-					return CartFactory.getCartSize(data.cart).then(function(size) {
-						data.cartSize = size;
-						return data;
+		return AuthService.getLoggedInUser().then(function(user) {
+			if (user) {
+				console.log('user on session:', user);
+				console.log('cart of user:', user.cart);
+				if (user.cart) {
+					return CartFactory.getCartSize(user.cart).then(function(size) {
+						user.cartSize = size;
+						return user;
 					});
 				} else {
-					data.cartSize = 0;
-					return data;
+					user.cart = '';
+					user.cartSize = 0;
+					return user;
 				}
-			} else return data;
-		}).then(function(data) {
-			factory.current.user = data;
-			return data;
+			} else return user;
+		}).then(function(user) {
+			factory.current.user = user;
+			return user;
 		});
 	};
 
