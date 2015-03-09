@@ -18,7 +18,6 @@ router.get('/findBy/category/:categoryTags', function(req, res, next) {
 });
 
 router.get("/findBy/user/:userId", function(req, res, next) {
-    console.log(req.params.userId);
     Item.findBySellerId(req.params.userId, function(err, items) {
 	if (err) return next(err);
 	res.json(items);

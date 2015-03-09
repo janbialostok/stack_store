@@ -2,7 +2,7 @@
 
 app.config(function($stateProvider) {
     $stateProvider.state("user", {
-	url: "/user/:id",
+	url: "/user/:id/allitems",
 	controller: "UserCtrl",
 	templateUrl: "js/user/user.html"
     });
