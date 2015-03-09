@@ -20,7 +20,7 @@ var userData = [
 ];
 
 var itemData = [
-    {name: "Blue Jeans", price: "80", description: "This long sleeve top is for a man.", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "tops", "long_sleeve"], quantity: 10, size: "34 x 32"},
+    {name: "Blue Jeans", price: "80", description: "This long sleeve top is for a man.", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "tops", "long_sleeve"], quantity: 0, size: "34 x 32"},
     {name: "Red Jeans", price: "80", description: "This short sleeve top is for a man.", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "tops", "short_sleeve"], quantity: 10, size: "34 x 32"},
     {name: "White Jeans", price: "30", description: "These skinny jeans are for a man.", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "skinny"], quantity: 10, size: "34 x 32"},
     {name: "White Jeans", price: "30", description: "These slim jeans are for a man.", image: "http://anf.scene7.com/is/image/anf/anf_70793_01_prod1?$productMagnify-anf$", sellerID: "", tags:["male", "bottoms", "slim"], quantity: 10, size: "34 x 32"},
