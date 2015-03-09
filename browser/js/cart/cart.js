@@ -34,7 +34,7 @@ app.controller('CartCtrl', function($scope, $state, $q, CurrentFactory, UserFact
 					else {
 						CartFactory.updateCart($scope.cart._id, item).then(function (updated){
 							console.log(updated);
-							//$scope.cart = updated;
+							CurrentFactory.updateCartSize(user);
 						});
 					}
 				};
@@ -42,6 +42,7 @@ app.controller('CartCtrl', function($scope, $state, $q, CurrentFactory, UserFact
 					CartFactory.deleteItem($scope.cart._id, item).then(function (updated){
 						console.log(updated);
 						$scope.cart.items.splice(updated.index, 1);
+						CurrentFactory.updateCartSize(user);
 					});
 				};
 			});

@@ -9,8 +9,9 @@ router.put('/add', function (req, res, next){
 	User.findById(req.body.userId, function (err, user) {
 		if (!err) {
 			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
-			User.addItemToCart(item, user._id);
-			res.json(user);
+			User.addItemToCart(item, user._id).then(function(user) {
+				res.json(user);
+			});
 		} else next(err);
 	});
 });
@@ -19,6 +20,29 @@ router.get('/:userId', function (req, res, next){
 	User.findById(req.params.userId)
 		.populate('cart')
 		.exec( function (err, user){
+			if (!err){
+				res.json(user.cart);
+			}
+			else {
+				next(err);
+			}
+		});
+	});
+
+router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
+	User.findById(req.params.userId).exec()
+	.then(function(user) {
+		if (user.cart) return user;
+		else return user.createCart();
+	}).then(function(user) {
+		return user.mergeCartWith(req.params.cartId);
+	}).then(function(newUser) {
+		res.json(newUser);
+	});
+});
+
+router.delete('/user/:userid/item/:itemid', function (req, res, next){
+	User.findById(req.params.userid, function (err, user) {
 		if (!err) {
 			res.json(user.cart);
 		} else next(err);
@@ -70,6 +94,13 @@ router.delete('/delete/:cartid/item/:itemid', function (req, res, next){
 				res.json(responseObj);
 			}
 		});
+	});
+});
+
+router.get('/:cartId/size', function(req, res, next) {
+	Cart.findById(req.params.cartId, function(err, cart) {
+		if (err) return next(err);
+		res.send({ size: cart.size() });
 	});
 });
 

@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt']);
+var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt', 'ngCookies']);
 
 app.controller('MainController', function ($scope) {
 
@@ -16,5 +16,6 @@ app.config(function ($urlRouterProvider, $locationProvider) {
 
 app.run(function(CurrentFactory) {
     // Check session and update current user
-    CurrentFactory.updateCurrentUser();
+    CurrentFactory.updateCurrentUser().then(function(user) {
+    });
 });

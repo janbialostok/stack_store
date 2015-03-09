@@ -50,7 +50,7 @@ itemSchema.statics.findByPartialName = function(searchStr, cb) {
             $options: 'i'
         } 
     }, cb);
-}
+};
 
 
 mongoose.model("Item", itemSchema);
