@@ -24,6 +24,7 @@ app.directive('itemBanner', function($window) {
 		var currentIndex = 0;
 		
 		if ($scope.data) {
+		    console.log($scope.data);
 		    while (currentIndex < 21) {
 			var itemRow = [];
 			
