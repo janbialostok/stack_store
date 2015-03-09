@@ -1,14 +1,14 @@
 'use strict';
 
-app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q) {
+app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q, $cookies) {
 	var factory = {};
 
 	factory.current = {
 		user: null,
-		tempCartId: ''
 	};
 
 	factory.updateCurrentUser = function() {
+		console.log($cookies.tempCartId);
 		return AuthService.getLoggedInUser().then(function(user) {
 			if (!user) user = {};
 			if (user.cart) {
@@ -16,7 +16,7 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q) {
 			} else {
 				user.cart = '';
 				user.cartSize = 0;
-				if (factory.current.tempCartId !== '') return factory.updateCartSize(user);
+				if ($cookies.tempCartId) return factory.updateCartSize(user);
 				else return user;
 			}
 		}).then(function(user) {
@@ -35,16 +35,15 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q) {
 	};
 
 	factory.manageCart = function(user) {
-		console.log('manageCart:', user);
-		var tempCartId = factory.current.tempCartId;
+		var tempCartId = $cookies.tempCartId;
 		return $q(function(resolve, reject) {
 			if (user.permLevel === 'Guest') {
-				factory.current.tempCartId = user.cart;
+				$cookies.tempCartId = user.cart;
 				resolve(user);
-			} else if (user && tempCartId !== '') {
+			} else if (user && tempCartId) {
 				CartFactory.mergeCartTo(user._id, tempCartId)
 				.then(function(user) {
-					factory.current.tempCartId = '';
+					delete $cookies.tempCartId;
 					resolve(user);
 				});
 			} else resolve(user);
