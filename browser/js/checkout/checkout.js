@@ -23,10 +23,12 @@ app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, User
 		return $q.all(promises);
 	}).then(function (items) {
 		$scope.cart.items = items;
+		$scope.total = 0;
 		items.forEach(function (item, index){
 			UserFactory.getUserById(item.sellerID).then(function (returnedSeller){
 				$scope.cart.items[index].quantity = itemQuantity[index];
 				$scope.cart.items[index].sellerName = returnedSeller.name;
+				$scope.total += item.quantity*item.price;
 			});
 		});
 	});

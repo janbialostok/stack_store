@@ -1,14 +1,102 @@
+<table class="table table-bordered">
+	<tbody class="invoice">
+		<tr>
+			<th>#</th>
+			<th>Image</th>
+			<th>Description</th>
+			<th>Total</th>
+		</tr>
+		<tr ng-repeat="item in cart.items">
+			<td style="width:10%">
+				{{$index+1}}
+			</td>
+			<td style="width:20%">
+				<img class="img-responsive" ng-src="{{item.image}}"/>
+			</td>
+			<td style="width:50%">
+				<p>{{item.name}}</p>
+				<p>{{item.price | currency:"$":2}} x {{item.quantity}}</p>
+			</td>
+			<td style="width:20%">
+				<p>{{item.price * item.quantity | currency:"$":2}}</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align:right">
+				Subtotal: {{total | currency:"$":2}}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align:center">
+				<div class="panel panel-default">
+					<div class="panel-heading">Shipping Address</div>
+					<div class="panel-body">
+						<form name="shippingAddress" ng-submit="shippingAddress.$valid && saveAddress(user)">
+							<div class="form-group">
+								<input type="text"
+									required
+									name="address1"
+									class="form-control"
+									placeholder="Address Line 1"
+									ng-modmel="address.address1">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="address2"
+									class="form-control"
+									placeholder="Address Line 2"
+									ng-modmel="address.address2">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="city"
+									class="form-control"
+									placeholder="City"
+									ng-modmel="address.city">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="stateProv"
+									class="form-control"
+									placeholder="State or Province"
+									ng-modmel="address.stateProv">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="postalCode"
+									class="form-control"
+									placeholder="Postal Code"
+									ng-modmel="address.postalCode">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="country"
+									class="form-control"
+									placeholder="Country"
+									ng-modmel="address.country">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="phone"
+									class="form-control"
+									placeholder="Phone"
+									ng-modmel="address.phone">
+							</div>
+						</form>
+					</div>
+				</div>
+			</td>
+			<td>
+				<label>Save Address: <input type="checkbox" ng-click="saveAddress"></label><br/>
+				<label>Use Shipping Address as Billing Address: <input type="checkbox" ng-click="saveAddress"></label> 
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-	<td>
-		{{$index}}
-	</td>
-	<td>
-		<img class="img-responsive" ng-src="{{item.image}}"/>
-	</td>
-	<td>
-		<p>{{item.name}}</p>
-		<p>{{item.price | currency:"$":2}} x {{item.quantity}}</p>
-	</td>
-	<td>
-		<p>item x quantity</p>
-	</td>

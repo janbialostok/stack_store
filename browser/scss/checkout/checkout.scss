@@ -11,8 +11,13 @@
 
 .invoice {
 	color: black;
-
 	img {
 		height: auto;
+		width: 80%;
 	}
+	background: url(http://geekfree.net/wp-content/uploads/2014/09/natural-paper-background-texture-hd-5a0b.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
