@@ -1,10 +1,11 @@
 <div class="col-xs-12">
-<h2 style="color: white !important">{{ title }}</h2>
-<ul rn-carousel rn-carousel-controls id="{{ name }}" class="image">
-  <li ng-repeat="rowOfItems in allSlides">
-    <item ng-repeat="item in rowOfItems" data="rowOfItems" class="layer"></item>
-  </li>
-</ul>
+  <h2 style="color: white !important">{{ title }}</h2>
+  <ul rn-carousel rn-carousel-controls id="{{ name }}" class="image">
+    <li ng-repeat="rowOfItems in allSlides" class="row">
+      <item ng-repeat="item in rowOfItems" data="item" class="layer"></item>
+    </li>
+  </ul>
+</div>
 
 <!-- <div class="col-xs-12"> -->
 <!--   <h2 style="color: white !important">{{ title }}</h2> -->

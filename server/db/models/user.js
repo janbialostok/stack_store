@@ -68,24 +68,55 @@ userSchema.method('cartToOrder', function (cart) {
     });
 });
 
+userSchema.methods.createCart = function() {
+    var self = this;
+    return Cart.create({userId: self._id}).then(function(cart) {
+        self.cart = cart._id;
+        return new Promise(function(resolve, reject) {
+            self.save(function(err, savedUser) {
+                if (err) reject(err);
+                resolve(savedUser);
+            });
+        });
+    });
+};
+
+userSchema.methods.mergeCartWith = function(cartId) {
+    var self = this;
+    var userCart;
+    return Cart.findById(this.cart).exec()
+        .then(function(foundCart) {
+            userCart = foundCart;
+            return Cart.findById(cartId).exec();
+        }).then(function(mergingCart) {
+            return userCart.mergeCartWith(mergingCart);
+        }).then(function() {
+            return self;
+        });
+};
+
+
 userSchema.statics.addItemToCart = function (itemObj, userId){
     var self = this;
     return new Promise(function(resolve, reject) {
-        self.findById(userId, function(err, user) {
-            var cartId = user.cart;
-            if (!cartId) {
-                Cart.create({userId: userId}).then(function(newCart) {
-                    user.cart = newCart._id;
-                    user.save(function (err, returned){
-                        Cart.addItem(newCart._id, itemObj).then(function() {
-                            resolve(user);
-                        });
-                    });
+        var user = {};
+        var cartId;
+        self.findById(userId).exec()
+        .then(function(foundUser) {
+            user = foundUser;
+            return user.cart;
+        }).then(function(cartId) {
+            if (cartId) {
+                Cart.addItemById(cartId, itemObj).then(function() {
+                    resolve(user);
+                });
+            } else {
+                user.createCart().then(function() {
+                    return Cart.addItemById(user.cart, itemObj);
+                }).then(function() {
+                    resolve(user);
                 });
             }
-            else Cart.addItem(cartId, itemObj).then(function() {
-                resolve(user);
-            });
         });
     });
 };

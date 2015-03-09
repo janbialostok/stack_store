@@ -50,8 +50,11 @@ itemSchema.statics.findByPartialName = function(searchStr, cb) {
             $options: 'i'
         } 
     }, cb);
-}
+};
 
+itemSchema.statics.findBySellerId = function(seller, cb) {
+    return this.find({ sellerID: seller}, cb);
+}
 
 mongoose.model("Item", itemSchema);
 // module.exports = mongoose.model('Item', itemSchema);
