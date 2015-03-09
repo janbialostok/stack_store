@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt']);
+var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt', 'angular-carousel']);
 
 app.controller('MainController', function ($scope) {
 
