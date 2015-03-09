@@ -21,6 +21,19 @@ router.post('/signupGuest', function (req, res, next){
 	});
 });
 
+router.get('/findAll', function(req, res, next) {
+	var params = {};
+	if (req.query) {
+		Object.keys(req.query).forEach(function(key) {
+			params[key] = req.query[key];
+		});
+	}
+
+	User.find(params, function(err, users) {
+		res.json(users);
+	});
+});
+
 router.get('/:userid/items/:itemid', function (req, res, next){
 	User.findById(req.params.userid).populate("items").exec(function (err, user){
 		if (!err) res.json(user.items);

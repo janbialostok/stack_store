@@ -24,6 +24,11 @@ app.factory('UserFactory', function($http, loginFactory) {
 			return loginFactory.localLogin({username: user.name, password: 'temp'});
 		});
 	};
-	
+	factory.getAllUsers = function(options) {
+		return $http.get('/findAll', options).then(function(res) {
+			return res.data;
+		});
+	};
+
 	return factory;
 });

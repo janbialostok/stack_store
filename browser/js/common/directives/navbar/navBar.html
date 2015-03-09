@@ -41,6 +41,7 @@
 					</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="" ui-sref="userSettings">Settings</a></li>
+						<li><a ng-show="current.user.permLevel=='Super User'" href="" ui-sref="manageUsers">Manage Users</a></li>
 						<li><a href="" ng-click="logout()">Logout</a></li>
 					</ul>
 				</li>
