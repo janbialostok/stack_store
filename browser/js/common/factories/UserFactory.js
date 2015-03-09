@@ -25,7 +25,7 @@ app.factory('UserFactory', function($http, loginFactory) {
 		});
 	};
 	factory.getAllUsers = function(options) {
-		return $http.get('/findAll', options).then(function(res) {
+		return $http.get('/api/user/findAll', {params: options}).then(function(res) {
 			return res.data;
 		});
 	};

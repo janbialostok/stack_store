@@ -9,7 +9,11 @@ app.config(function($stateProvider) {
 });
 
 app.controller('ManageUserCtrl', function($scope, UserFactory) {
-	UserFactory.getAllUsers().then(function(users) {
+	UserFactory.getAllUsers({ permLevel: 'Super User' })
+	.then(function(users) {
 		$scope.users = users;
+		return UserFactory.getAllUsers({ permLevel: 'Registered User' });
+	}).then(function(users) {
+		$scope.users = $scope.users.concat(users);
 	});
 });

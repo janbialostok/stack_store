@@ -5,7 +5,7 @@ app.directive('singleManagedUser', function() {
 		restrict: 'E',
 		templateUrl: '/js/superuser/manageusers/singleuser_management/singleuser_management.html',
 		scope: {
-			userData: '='
+			userdata: '='
 		}
 	};
 });

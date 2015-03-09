@@ -23,12 +23,13 @@ router.post('/signupGuest', function (req, res, next){
 
 router.get('/findAll', function(req, res, next) {
 	var params = {};
-	if (req.query) {
-		Object.keys(req.query).forEach(function(key) {
+	if (Object.keys(req.query).length) {
+		for (var key in req.query) {
+			console.log(key)
 			params[key] = req.query[key];
-		});
+		}
 	}
-
+	console.log(Object.keys(req.query));
 	User.find(params, function(err, users) {
 		res.json(users);
 	});
