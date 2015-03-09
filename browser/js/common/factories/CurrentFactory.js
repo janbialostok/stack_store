@@ -8,7 +8,6 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q, $coo
 	};
 
 	factory.updateCurrentUser = function() {
-		console.log($cookies.tempCartId);
 		return AuthService.getLoggedInUser().then(function(user) {
 			if (!user) user = {};
 			if (user.cart) {
