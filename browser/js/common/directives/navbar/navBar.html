@@ -1,5 +1,5 @@
 <!-- Static navbar -->
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-default navbar-static-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -13,35 +13,34 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop by Category <span class="caret"></span></a>
+					<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop by Category <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<div class="container" style="width:500px !important;">
-							<cat-menu></cat-menu>
+						<div class="nav-category-menu">
+							<category-menu horiz="true"></category-menu>
 						</div>
 					</ul>
 				</li>
-				<form class="navbar-form navbar-right">
+				<form class="navbar-form navbar-right" ng-submit="searchFor(searchStr.val)">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-						<input type="text" class="form-control" placeholder="Search...">
+						<input name="searchStr" type="text" class="form-control" placeholder="Search..." ng-model="searchStr.val">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go</button>
+							<button class="btn btn-default" type="submit">Go</button>
 						</span>
 					</div>
 				</form>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="../navbar">Cart <span class="badge">{{ navcurrent.user.cart.num }}</span></a>
+					<a href="">Cart <span class="badge">{{ current.user.cartSize }}</span></a>
 				</li>
-				<li ng-show="navcurrent.user == {} || navcurrent.user.permLevel == Unauthorized"><a ui-sref="login">Login</a></li>
-				<li class="dropdown" ng-show="navcurrent.user != {} && navcurrent.user.permLevel != Unauthorized">
+				<li ng-show="!current.user.permLevel || current.user.permLevel == 'Guest'"><a ui-sref="login">Login</a></li>
+				<li class="dropdown" ng-show="current.user.permLevel && current.user.permLevel != 'Guest'">
 					<a class="dropdown-toggle" href="" data-toggle="dropdown" role="button" aria-expanded="false">
-						{{ navcurrent.user.name }}<span class="caret"></span>
+						{{ current.user.name }}<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">asdfsf</a></li>
-						<li><a href="#">Another action</a></li>
+						<li><a href="" ui-sref="userSettings">Settings</a></li>
 						<li><a href="" ng-click="logout()">Logout</a></li>
 					</ul>
 				</li>

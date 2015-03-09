@@ -1,14 +1,24 @@
 'use strict';
 
-app.factory('loginFactory', function($http) {
+app.factory('loginFactory', function($http, CurrentFactory, AuthService) {
 	var factory = {};
 
 	factory.localLogin = function(user) {
-		return $http.post('/auth/login', user);
+		return AuthService.login(user)
+			.then(CurrentFactory.updateCurrentUser);
 	};
 	
 	factory.logout = function() {
-		return $http.get('/logout');
+		return AuthService.logout()
+			.then(CurrentFactory.updateCurrentUser);
+	};
+
+	factory.createGuestUser = function (user) {
+		user.authType = 'local';
+		user.permLevel = 'Registered User';
+		return $http.post('/api/user/signup', user).then(function (response){
+			return response.data;
+		});
 	};
 
 	return factory;

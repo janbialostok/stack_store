@@ -8,23 +8,38 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('ItemCtrl', function($scope, $state, $stateParams, SingleItemFactory) {
-	SingleItemFactory.getItem($stateParams.productId).then(function (data){
-		console.log(data);
-		$scope.product = {
-			imgSrc: data.image,
-			productName: data.name,
-			price: data.price,
-			description: data.description,
-			quantity: data.quantity,
-			size: data.size,
-			tags: data.tags,
-			reviews: data.reviews
-		}
-		if ($scope.product.description === "") $scope.product.showDescription = false;
-		else $scope.product.showDescription = true;
-		SingleItemFactory.getUser(data.sellerID).then(function (username){
-			$scope.product.sellerName = username;
+app.controller('ItemCtrl', function($scope, $state, $stateParams, ItemFactory, ReviewFactory, UserFactory, CurrentFactory, CartFactory, loginFactory) {
+	ItemFactory.getItem($stateParams.productId).then(function (data){
+		$scope.item = data;
+		$scope.showDescription = $scope.item.description !== "";
+		return UserFactory.getUserById(data.sellerID);
+	}).then(function (user){
+		$scope.item.sellerName = user.name;
+		return ReviewFactory.getReviewsForItem($stateParams.productId);
+	}).then(function(reviews) {
+		reviews.forEach(function(review) {
+			UserFactory.getUserById(review.userId).then(function(user) {
+				review.username = user.name;
+			});
 		});
+		$scope.item.reviews = reviews;
 	});
+
+	$scope.addToCart = function(itemAdd) {
+		function addItemThenClear() {
+			CartFactory.addItemToCart(
+				itemAdd.quantity,
+				$stateParams.productId,
+				CurrentFactory.current.user._id
+			).then(function(user) {
+				CurrentFactory.current.user.cart = user.cart;
+				itemAdd.quantity = null;
+				CurrentFactory.updateCurrentUser();
+			});	
+		}
+
+		if (!CurrentFactory.current.user._id) {
+			UserFactory.makeUnauthorizedUser().then(addItemThenClear);
+		} else addItemThenClear();
+	};
 });
