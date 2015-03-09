@@ -11,7 +11,7 @@ router.put('/add', function (req, res, next){
 			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
 			// should switch addItemToCart to a method
 			User.addItemToCart(item, user._id).then(function(user) {
-				console.log('user saved with cart', user);
+				console.log('user after added cart', user);
 				res.json(user);
 			});
 		} else next(err);

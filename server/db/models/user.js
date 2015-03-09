@@ -71,21 +71,30 @@ userSchema.method('cartToOrder', function (cart) {
 userSchema.statics.addItemToCart = function (itemObj, userId){
     var self = this;
     return new Promise(function(resolve, reject) {
-        self.findById(userId, function(err, user) {
-            var cartId = user.cart;
-            if (!cartId) {
-                Cart.create({userId: userId}).then(function(newCart) {
+        var user = {};
+        var cartId;
+        self.findById(userId).exec()
+        .then(function(foundUser) {
+            user = foundUser;
+            return user.cart;
+        }).then(function(cartId) {
+            if (cartId) {
+                Cart.addItemById(cartId, itemObj)
+                .then(function() {
+                    resolve(user);
+                });
+            } else {
+                Cart.create({userId: userId})
+                .then(function(newCart) {
                     user.cart = newCart._id;
-                    user.save(function (err, returned){
-                        Cart.addItem(newCart._id, itemObj).then(function() {
-                            resolve(user);
+                    newCart.addItem(itemObj)
+                    .then(function() {
+                        user.save(function(err, savedUser) {
+                            resolve(savedUser);
                         });
                     });
                 });
             }
-            else Cart.addItem(cartId, itemObj).then(function() {
-                resolve(user);
-            });
         });
     });
 };

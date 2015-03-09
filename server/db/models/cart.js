@@ -31,13 +31,32 @@ cartSchema.methods.size = function() {
 	}, 0);
 };
 
-cartSchema.statics.addItem = function (cartId, itemObj){
+cartSchema.methods.addItem = function (itemObj){
 	var self = this;
 	return new Promise(function(resolve, reject) {
-		self.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
-			resolve(data);
+		var hasSet = false;
+		self.items.forEach(function(item) {
+			if (item.itemId.toString() === itemObj.itemId.toString()) {
+				item.quantity += itemObj.quantity;
+				hasSet = true;
+			}
+		});
+		if (!hasSet) self.items.push(itemObj);
+
+		return self.save(function(err, cart) {
+			if (err) reject(err);
+			else resolve(cart);
 		});
 	});
+};
+
+cartSchema.statics.addItemById = function(cartId, itemObj) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		return self.findById(cartId, function(err, cart) {
+			resolve(cart.addItem(itemObj));
+		});
+	});	
 };
 
 mongoose.model("Cart", cartSchema);
