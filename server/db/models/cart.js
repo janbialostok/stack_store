@@ -3,6 +3,7 @@ var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
 var Address = mongoose.model('Address');
+var Promise = require('bluebird');
 
 // mongoose.connect("mongodb://localhost/stack_store");
 var db = mongoose.connection;
@@ -24,9 +25,18 @@ var cartSchema = new Schema({
 	shippingAddress: [Address.schema]
 });
 
+cartSchema.methods.size = function() {
+	return this.items.reduce(function(prev, cur) {
+		return prev + cur.quantity;
+	}, 0);
+};
+
 cartSchema.statics.addItem = function (cartId, itemObj){
-	this.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
-		console.log(data);
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
+			resolve(data);
+		});
 	});
 };
 
