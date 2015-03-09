@@ -12,6 +12,15 @@ router.post('/signup', function (req, res, next){
 	});
 });
 
+router.post('/signupGuest', function (req, res, next){
+	User.saveGuestUser().then(function(user) {
+		console.log('route successful:', user);
+		res.json(user);
+	}, function(err) {
+		next(err);
+	});
+});
+
 router.get('/:userid/items/:itemid', function (req, res, next){
 	User.findById(req.params.userid).populate("items").exec(function (err, user){
 		if (!err) res.json(user.items);

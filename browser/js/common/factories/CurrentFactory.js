@@ -1,12 +1,24 @@
 'use strict';
 
-app.factory('CurrentFactory', function($http, AuthService) {
+app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 	var factory = {};
 
 	factory.updateCurrentUser = function() {
-		return AuthService.getLoggedInUser().then(function(data) {
-			factory.current.user = data;
-			return data;
+		return AuthService.getLoggedInUser().then(function(user) {
+			if (!user) user = {};
+			if (user.cart) {
+				return CartFactory.getCartSize(user.cart).then(function(size) {
+					user.cartSize = size;
+					return user;
+				});
+			} else {
+				user.cart = '';
+				user.cartSize = 0;
+				return user;
+			}
+		}).then(function(user) {
+			factory.current.user = user;
+			return user;
 		});
 	};
 
@@ -20,7 +32,7 @@ app.factory('CurrentFactory', function($http, AuthService) {
 			obj[key] = factory.current.user[key];
 		}
 		return obj;
-	}
+	};
 
 	return factory;
 });

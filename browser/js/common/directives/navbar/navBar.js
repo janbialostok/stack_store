@@ -11,8 +11,8 @@ app.directive('navBar', function(loginFactory, $state, CurrentFactory, ItemFacto
 			scope.cartNum = 0;
 
 			scope.$watch('current.user', function(user) {
-				if (user && user.hasOwnProperty('cart') && user.cart.length) {
-					scope.cartNum = user.cart[0].items.length;
+				if (user && user.hasOwnProperty('cart')) {
+					scope.cartNum = user.cartSize;
 				} else scope.cartNum = 0;
 			});
 

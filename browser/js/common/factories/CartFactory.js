@@ -7,6 +7,19 @@ app.factory('CartFactory', function($http) {
 			return res.data;
 		});
 	};
+	factory.addItemToCart = function(itemQuantity,itemId, userId) {
+		var item = {
+			userId : userId,
+		 	itemId : itemId,
+		 	quantity : itemQuantity
+		};
+		return this.sendItemToCart(item);
+	};
+	factory.getCartSize = function(cartId) {
+		return $http.get('/api/cart/' + cartId + '/size/').then(function(res) {
+			return res.data.size;
+		});
+	};
 
 	return factory;
 });
