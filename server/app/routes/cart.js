@@ -9,12 +9,22 @@ router.put('/add', function (req, res, next){
 	User.findById(req.body.userId, function (err, user) {
 		if (!err) {
 			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
-			// should switch addItemToCart to a method
 			User.addItemToCart(item, user._id).then(function(user) {
-				console.log('user saved with cart', user);
 				res.json(user);
 			});
 		} else next(err);
+	});
+});
+
+router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
+	User.findById(req.params.userId).exec()
+	.then(function(user) {
+		if (user.cart) return user;
+		else return user.createCart();
+	}).then(function(user) {
+		return user.mergeCartWith(req.params.cartId);
+	}).then(function(newUser) {
+		res.json(newUser);
 	});
 });
 
@@ -30,10 +40,7 @@ router.delete('/user/:userid/item/:itemid', function (req, res, next){
 router.get('/:cartId/size', function(req, res, next) {
 	Cart.findById(req.params.cartId, function(err, cart) {
 		if (err) return next(err);
-
-		res.send({
-			size: cart.size()
-		});
+		res.send({ size: cart.size() });
 	});
 });
 

@@ -26,7 +26,7 @@ app.controller('SettingCtrl', function($scope, CurrentFactory, UserFactory, $tim
 			$scope.changeSuccess = true;
 			$timeout(function() {
 				$scope.changeSuccess = false;
-			}, 1000)
+			}, 1000);
 		});
 	};
 });
