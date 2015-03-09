@@ -19,19 +19,18 @@ app.factory('ItemFactory', function($http) {
 		});
 	};
 
-	factory.getUser = function (productId, userId){
-		return $http.get('/api/item/' + productId + '/user/' + userId).then(function (res){
+	factory.getUser = function (itemId, userId){
+		return $http.get('/api/item/' + itemId + '/user/' + userId).then(function (res){
 			return res.data.sellerID;
 		});
 	};
-	factory.getReviews = function (productId){
-		return $http.get('/api/item/' + productId + '/reviews').then(function (res){
+	factory.getReviews = function (itemId){
+		return $http.get('/api/item/' + itemId + '/reviews').then(function (res){
 			return res.data.reviews;
 		});
 	};
 	factory.getReviewUser = function (userId){
-		console.log('we"re sending this:', userId)
-		return $http.get('/api/user/' + userId).then(function (res){
+		return $http.get('/api/review/user/' + userId).then(function (res){
 			return res.data;
 		});
 	};

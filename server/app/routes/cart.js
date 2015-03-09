@@ -16,6 +16,19 @@ router.put('/add', function (req, res, next){
 	});
 });
 
+router.get('/user/:userId', function (req, res, next){
+	User.findById(req.params.userId)
+		.populate('cart')
+		.exec( function (err, user){
+			if (!err){
+				res.json(user.cart);
+			}
+			else {
+				next(err);
+			}
+		});
+	});
+
 router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
 	User.findById(req.params.userId).exec()
 	.then(function(user) {
@@ -31,9 +44,56 @@ router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
 router.delete('/user/:userid/item/:itemid', function (req, res, next){
 	User.findById(req.params.userid, function (err, user) {
 		if (!err) {
-			user.cart.items.pull({id: req.params.itemid});
-		} 
-		else next(err);
+			res.json(user.cart);
+		} else next(err);
+	})
+})
+
+router.put('/update/:id', function (req, res){
+	Cart.findById(req.params.id, function (err, cart){
+		var items = cart.items;
+		var index;
+		items.forEach(function (item, i){
+			if (item.itemId.toString() === req.body._id.toString()){
+				item.quantity = req.body.quantity;
+				index = i;
+			}
+		});
+		cart.items = items;
+		cart.save(function (err, returned){
+			if (err) res.status(500).end();
+			else {
+				var responseObj = {
+					index: index,
+					quantity: req.body.quantity
+				};
+				res.json(responseObj);
+			}
+		});
+	});
+});
+
+router.delete('/delete/:cartid/item/:itemid', function (req, res, next){
+	Cart.findById(req.params.cartid, function (err, cart){
+		var items = cart.items;
+		var newArray = []
+		var index;
+		items.forEach(function (item, i){
+			if (item.itemId.toString() !== req.params.itemid){
+				newArray.push(item);
+			}
+			else index = i;
+		});
+		cart.items = newArray;
+		cart.save(function (err, returned){
+			if (err) res.status(500).end();
+			else {
+				var responseObj = {
+					index: index
+				};
+				res.json(responseObj);
+			}
+		});
 	});
 });
 
