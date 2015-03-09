@@ -1,20 +1,22 @@
 'use strict';
 
-app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
+app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q, $cookies) {
 	var factory = {};
+
+	factory.current = {
+		user: null,
+	};
 
 	factory.updateCurrentUser = function() {
 		return AuthService.getLoggedInUser().then(function(user) {
 			if (!user) user = {};
 			if (user.cart) {
-				return CartFactory.getCartSize(user.cart).then(function(size) {
-					user.cartSize = size;
-					return user;
-				});
+				return factory.updateCartSize(user);
 			} else {
 				user.cart = '';
 				user.cartSize = 0;
-				return user;
+				if ($cookies.tempCartId) return factory.updateCartSize(user);
+				else return user;
 			}
 		}).then(function(user) {
 			factory.current.user = user;
@@ -22,8 +24,29 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory) {
 		});
 	};
 
-	factory.current = {
-		user: null
+	factory.updateCartSize = function(user) {
+		return factory.manageCart(user).then(function(user) {
+			return CartFactory.getCartSize(user.cart);
+		}).then(function(size) {
+			user.cartSize = size;
+			return user;
+		});
+	};
+
+	factory.manageCart = function(user) {
+		var tempCartId = $cookies.tempCartId;
+		return $q(function(resolve, reject) {
+			if (user.permLevel === 'Guest') {
+				$cookies.tempCartId = user.cart;
+				resolve(user);
+			} else if (user && tempCartId) {
+				CartFactory.mergeCartTo(user._id, tempCartId)
+				.then(function(user) {
+					delete $cookies.tempCartId;
+					resolve(user);
+				});
+			} else resolve(user);
+		});
 	};
 
 	factory.cloneCurrentUser = function() {
