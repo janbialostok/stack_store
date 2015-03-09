@@ -25,9 +25,29 @@ var cartSchema = new Schema({
 });
 
 cartSchema.statics.addItem = function (cartId, itemObj){
-	this.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
-		console.log(data);
-	});
+    var self = this;
+    var hasSet = false;
+    self.findById(cartId, function (err, cart){
+        var contents = cart.items;
+        contents.forEach(function (item){
+            if (itemObj.itemId.toString() === item.itemId.toString()){
+                item.quantity += itemObj.quantity;
+                hasSet = true;
+            }   
+        });
+        if (!hasSet) {
+            self.findByIdAndUpdate(cartId, {$push: {items: itemObj}}, function(err, data) {
+                console.log("Push data", data);
+                return;
+            });
+        }
+        else {
+            self.findByIdAndUpdate(cartId, {$set: {items: contents}}, function(err, data){
+                console.log("Set data", data);
+                return;
+            });
+        }
+    });
 };
 
 mongoose.model("Cart", cartSchema);
