@@ -87,7 +87,7 @@ userSchema.methods.mergeCartWith = function(cartId) {
     return Cart.findById(this.cart).exec()
         .then(function(foundCart) {
             userCart = foundCart;
-            return Cart.findById(cartId);
+            return Cart.findById(cartId).exec();
         }).then(function(mergingCart) {
             return userCart.mergeCartWith(mergingCart);
         }).then(function() {
@@ -116,15 +116,6 @@ userSchema.statics.addItemToCart = function (itemObj, userId){
                 }).then(function() {
                     resolve(user);
                 });
-
-                // Cart.create({userId: userId}).then(function(newCart) {
-                //     user.cart = newCart._id;
-                //     newCart.addItem(itemObj).then(function() {
-                //         user.save(function(err, savedUser) {
-                //             resolve(savedUser);
-                //         });
-                //     });
-                // });
             }
         });
     });

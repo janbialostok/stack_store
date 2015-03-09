@@ -21,7 +21,6 @@ app.factory('CartFactory', function($http) {
 		});
 	};
 	factory.mergeCartTo = function(userId, cartId) {
-		console.log('merging!');
 		return $http.put('/api/cart/' + cartId + '/mergeWith/user/' + userId)
 			.then(function(res) {
 				return res.data;

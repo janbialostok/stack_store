@@ -10,14 +10,13 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q) {
 
 	factory.updateCurrentUser = function() {
 		return AuthService.getLoggedInUser().then(function(user) {
-			console.log('logged in user', user);
 			if (!user) user = {};
 			if (user.cart) {
 				return factory.updateCartSize(user);
 			} else {
 				user.cart = '';
 				user.cartSize = 0;
-				if (factory.current.tempCartId !== '') return factory.updateCartSize();
+				if (factory.current.tempCartId !== '') return factory.updateCartSize(user);
 				else return user;
 			}
 		}).then(function(user) {
@@ -36,7 +35,7 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q) {
 	};
 
 	factory.manageCart = function(user) {
-		console.log(user);
+		console.log('manageCart:', user);
 		var tempCartId = factory.current.tempCartId;
 		return $q(function(resolve, reject) {
 			if (user.permLevel === 'Guest') {

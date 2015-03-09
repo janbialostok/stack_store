@@ -17,20 +17,14 @@ router.put('/add', function (req, res, next){
 });
 
 router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
-	console.log('in');
 	User.findById(req.params.userId).exec()
 	.then(function(user) {
-		console.log('found user', user);
 		if (user.cart) return user;
 		else return user.createCart();
 	}).then(function(user) {
-		console.log('user with cart', user);
 		return user.mergeCartWith(req.params.cartId);
 	}).then(function(newUser) {
-		console.log('user with merged cart', newUser);
 		res.json(newUser);
-	}).catch(function(err) {
-		next(err);
 	});
 });
 
