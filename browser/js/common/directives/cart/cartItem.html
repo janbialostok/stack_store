@@ -4,18 +4,26 @@
 		<div class="col-lg-12 product_panel">
 			<div class="container">
 				<span class="info_holder">
-					<div class="col-lg-4">
+					<div class="col-lg-3">
 						<h3>{{item.name}}</h3>
 						<p>Sold By: <a href="#">{{item.sellerName}}</a></p>
 					</div>
-					<div class="col-lg-4">
-						<p>Price {{item.price | currency:"$:2"}}</p>
+					<div class="col-lg-3">
+						<p>Price {{item.price | currency:"$":2}}</p>
 						<p>Size: {{item.size}}</p>
-						<p>Quantity: {{item.quantity}}</p>
+						<form name="newQuantityForm" ng-submit="newQuantityForm.$valid && item.editQuantity(item)">
+							<label>Quantity: 
+								<input type="number" name="quantity" ng-model="item.quantity" min="0" required>
+							</label>
+							<button type="submit" class="btn btn-primary btn-small">Edit</button>
+						</form>
 					</div>
 				<span>
 				<div class="col-lg-4">
 					<img class="img-responsive" ng-src="{{item.image}}">
+				</div>
+				<div class="col-lg-2">
+					<button class="btn btn-danger" ng-click="item.deleteItem(item)">X</button>
 				</div>
 			</div>
 		</div>
