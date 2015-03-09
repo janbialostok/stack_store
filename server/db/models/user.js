@@ -68,6 +68,34 @@ userSchema.method('cartToOrder', function (cart) {
     });
 });
 
+userSchema.methods.createCart = function() {
+    var self = this;
+    return Cart.create({userId: self._id}).then(function(cart) {
+        self.cart = cart._id;
+        return new Promise(function(resolve, reject) {
+            self.save(function(err, savedUser) {
+                if (err) reject(err);
+                resolve(savedUser);
+            });
+        });
+    });
+};
+
+userSchema.methods.mergeCartWith = function(cartId) {
+    var self = this;
+    var userCart;
+    return Cart.findById(this.cart).exec()
+        .then(function(foundCart) {
+            userCart = foundCart;
+            return Cart.findById(cartId);
+        }).then(function(mergingCart) {
+            return userCart.mergeCartWith(mergingCart);
+        }).then(function() {
+            return self;
+        });
+};
+
+
 userSchema.statics.addItemToCart = function (itemObj, userId){
     var self = this;
     return new Promise(function(resolve, reject) {
@@ -79,21 +107,24 @@ userSchema.statics.addItemToCart = function (itemObj, userId){
             return user.cart;
         }).then(function(cartId) {
             if (cartId) {
-                Cart.addItemById(cartId, itemObj)
-                .then(function() {
+                Cart.addItemById(cartId, itemObj).then(function() {
                     resolve(user);
                 });
             } else {
-                Cart.create({userId: userId})
-                .then(function(newCart) {
-                    user.cart = newCart._id;
-                    newCart.addItem(itemObj)
-                    .then(function() {
-                        user.save(function(err, savedUser) {
-                            resolve(savedUser);
-                        });
-                    });
+                user.createCart().then(function() {
+                    return Cart.addItemById(user.cart, itemObj);
+                }).then(function() {
+                    resolve(user);
                 });
+
+                // Cart.create({userId: userId}).then(function(newCart) {
+                //     user.cart = newCart._id;
+                //     newCart.addItem(itemObj).then(function() {
+                //         user.save(function(err, savedUser) {
+                //             resolve(savedUser);
+                //         });
+                //     });
+                // });
             }
         });
     });

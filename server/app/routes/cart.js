@@ -9,12 +9,28 @@ router.put('/add', function (req, res, next){
 	User.findById(req.body.userId, function (err, user) {
 		if (!err) {
 			var item = {itemId: req.body.itemId , quantity: req.body.quantity};
-			// should switch addItemToCart to a method
 			User.addItemToCart(item, user._id).then(function(user) {
-				console.log('user after added cart', user);
 				res.json(user);
 			});
 		} else next(err);
+	});
+});
+
+router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
+	console.log('in');
+	User.findById(req.params.userId).exec()
+	.then(function(user) {
+		console.log('found user', user);
+		if (user.cart) return user;
+		else return user.createCart();
+	}).then(function(user) {
+		console.log('user with cart', user);
+		return user.mergeCartWith(req.params.cartId);
+	}).then(function(newUser) {
+		console.log('user with merged cart', newUser);
+		res.json(newUser);
+	}).catch(function(err) {
+		next(err);
 	});
 });
 
@@ -30,10 +46,7 @@ router.delete('/user/:userid/item/:itemid', function (req, res, next){
 router.get('/:cartId/size', function(req, res, next) {
 	Cart.findById(req.params.cartId, function(err, cart) {
 		if (err) return next(err);
-
-		res.send({
-			size: cart.size()
-		});
+		res.send({ size: cart.size() });
 	});
 });
 

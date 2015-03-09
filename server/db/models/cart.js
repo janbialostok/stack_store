@@ -31,6 +31,15 @@ cartSchema.methods.size = function() {
 	}, 0);
 };
 
+cartSchema.methods.mergeCartWith = function(cartObj) {
+	var addedItemPromises = [];
+	var self = this;
+	cartObj.items.forEach(function(item) {
+		addedItemPromises.push(self.addItem(item));
+	});
+	return Promise.all(addedItemPromises);
+};
+
 cartSchema.methods.addItem = function (itemObj){
 	var self = this;
 	return new Promise(function(resolve, reject) {
