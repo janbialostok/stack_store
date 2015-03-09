@@ -32,7 +32,10 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="" ui-sref="cartView">Cart <span class="badge">{{ current.user.cartSize }}</span></a>
+					<a href="" ui-sref="cartView">
+						<span class="glyphicon glyphicon-shopping-cart"></span>
+						Cart <span class="badge">{{ current.user.cartSize }}</span>
+					</a>
 				</li>
 				<li ng-show="!current.user.permLevel || current.user.permLevel == 'Guest'"><a ui-sref="login">Login</a></li>
 				<li class="dropdown" ng-show="current.user.permLevel && current.user.permLevel != 'Guest'">
@@ -41,6 +44,7 @@
 					</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="" ui-sref="userSettings">Settings</a></li>
+						<li><a ng-show="current.user.permLevel=='Super User'" href="" ui-sref="manageUsers">Manage Users</a></li>
 						<li><a href="" ng-click="logout()">Logout</a></li>
 					</ul>
 				</li>
