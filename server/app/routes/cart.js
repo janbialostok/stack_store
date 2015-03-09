@@ -16,7 +16,7 @@ router.put('/add', function (req, res, next){
 	});
 });
 
-router.get('/:userId', function (req, res, next){
+router.get('/user/:userId', function (req, res, next){
 	User.findById(req.params.userId)
 		.populate('cart')
 		.exec( function (err, user){

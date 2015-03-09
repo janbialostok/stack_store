@@ -28,9 +28,8 @@ app.factory('CartFactory', function($http) {
 			});
 	};
 
-	factory.getCart = function (userId) {
-		console.log("userId", userId);
-		return $http.get('/api/cart/' + userId).then(function (res){
+	factory.getCartByUserId = function (userId) {
+		return $http.get('/api/cart/user/' + userId).then(function (res){
 			return res.data;
 		})
 	};

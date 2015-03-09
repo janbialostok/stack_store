@@ -5,8 +5,7 @@ app.directive('cartItem', function (CurrentFactory, CartFactory){
 		restrict: 'E',
 		templateUrl: 'js/common/directives/cart/cartItem.html',
 		scope: {
-			item: '=',
-			cart: '='
+			item: '='
 		},
 		link: function(scope, elem, attr){
 

@@ -8,11 +8,11 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('CartCtrl', function($scope, $state, $q, CurrentFactory, UserFactory, CartFactory, ItemFactory) {
+app.controller('CartCtrl', function($scope, $state, $q, $timeout,CurrentFactory, UserFactory, CartFactory, ItemFactory) {
 
 	var user = CurrentFactory.current.user;
 	var itemQuantity = [];
-	CartFactory.getCart(user._id).then(function (cart){
+	CartFactory.getCartByUserId(user._id).then(function (cart){
 		$scope.cart = cart;
 		return cart;
 	}).then(function (cart) {
@@ -33,16 +33,18 @@ app.controller('CartCtrl', function($scope, $state, $q, CurrentFactory, UserFact
 					}
 					else {
 						CartFactory.updateCart($scope.cart._id, item).then(function (updated){
-							console.log(updated);
 							CurrentFactory.updateCartSize(user);
+							$scope.updatedMessage = true;
+							$timeout(function(){$scope.updatedMessage = false}, 3000);
 						});
 					}
 				};
 				$scope.cart.items[index].deleteItem = function (item){
 					CartFactory.deleteItem($scope.cart._id, item).then(function (updated){
-						console.log(updated);
 						$scope.cart.items.splice(updated.index, 1);
 						CurrentFactory.updateCartSize(user);
+						$scope.updatedMessage = true;
+						$timeout(function(){$scope.updatedMessage = false}, 3000);
 					});
 				};
 			});
