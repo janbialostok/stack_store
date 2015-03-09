@@ -9,5 +9,9 @@ app.config(function($stateProvider) {
 });
 
 app.controller("InventoryCtrl", function($scope, CurrentFactory, ItemFactory) {
-    
+    $scope.currentUser = CurrentFactory.cloneCurrentUser();
+
+    ItemFactory.getByUser($scope.currentUser._id).then(function(items) {
+	$scope.inventory = items;
+    });
 });
