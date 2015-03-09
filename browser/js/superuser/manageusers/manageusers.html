@@ -1,9 +1,9 @@
-<div class="col-md-8 col-md-offset-2">
+<div class="col-xs-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">User Management</div>
 		<div class="panel-body">
 			<p>
-				Manage user permission levels and passwords here!
+				Manage user permission levels and passwords here.
 			</p>
 		</div>
 		<table class="table table-hover table-responsive">
@@ -14,6 +14,8 @@
 				<th>Email Address</th>
 				<th>Authentication Type</th>
 				<th>Permission Level</th>
+				<th>Password Options</th>
+				<th>Permission Options</th>
 			</tr>
 			<tr ng-repeat="user in users">
 				<td> {{ user.name }} </td>
@@ -22,7 +24,31 @@
 				<td> {{ user.email }} </td>
 				<td> {{ user.authType }} </td>
 				<td> {{ user.permLevel }} </td>
+				<td>
+					<button class="btn btn-primary btn-xs"
+						ng-show="user.authType=='local'"
+						ng-class="{disabled: user.name == current.user.name}"
+						ng-click="resetPassword(user.name)"
+						type="button">Reset Password</button>
+				</td>
+				<td>
+					<button class="btn btn-warning btn-xs"
+						ng-show="user.permLevel=='Registered User'"
+						ng-class="{disabled: user.name == current.user.name}"
+						ng-click="changeUser(user.name, 'Super User')"
+						type="button">Upgrade To Super User</button>
+					<button class="btn btn-danger btn-xs"
+						ng-show="user.permLevel=='Super User'"
+						ng-class="{disabled: user.name == current.user.name}"
+						ng-click="changeUser(user.name, 'Registered User')"
+						type="button">Downgrade To Registered User</button>
+				</td>
 			</tr>
 		</table>
+		<div class="panel-body">
+			<p ng-show="showStatus" class="success-indicator">
+				Changes have been made!
+			</p>
+		</div>
 	</div>
 </div>

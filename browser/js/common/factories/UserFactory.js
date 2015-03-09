@@ -29,6 +29,22 @@ app.factory('UserFactory', function($http, loginFactory) {
 			return res.data;
 		});
 	};
-
+	factory.resetPassword = function(userId) {
+		return $http.put('/api/user/' + userId, {password: 'tempPassword'})
+		.then(function(res) {
+			return res.data;
+		});
+	};
+	factory.changeUserPermissions = function(userId, level) {
+		return $http.put('/api/user/' + userId, {permLevel: level})
+		.then(function(res) {
+			return res.data;
+		});
+	}
+	factory.getByName = function(userName) {
+		return $http.get('/api/user/findBy/name/' + userName).then(function(res) {
+			return res.data;
+		});
+	};
 	return factory;
 });
