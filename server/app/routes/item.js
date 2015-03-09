@@ -17,6 +17,13 @@ router.get('/findBy/category/:categoryTags', function(req, res, next) {
 	});
 });
 
+router.get("/findBy/user/:userId", function(req, res, next) {
+    Item.findBySellerId(req.params.userId, function(err, items) {
+	if (err) return next(err);
+	res.json(items);
+    });
+});
+
 router.get('/findBy/search/:searchString', function(req, res, next) {
 	Item.findByPartialName(req.params.searchString, function(err, items) {
 		if (err) return next(err);
