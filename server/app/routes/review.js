@@ -14,7 +14,7 @@ router.post('/create', function (req, res, next){
 				else {
 					item.reviews.push(newReview._id);
 					item.save(function (err, returned){
-						if (!err) res.status(200).end();
+						if (!err) res.json(newReview);
 						else res.status(400).end();
 					});
 				}
