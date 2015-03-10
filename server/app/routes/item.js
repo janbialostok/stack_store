@@ -1,17 +1,25 @@
 "use strict";
 var router = require("express").Router();
 var mongoose = require("mongoose");
+var Promise = require("bluebird");
 var Item = mongoose.model("Item");
 
 var hideOutOfStock = function(items) {
 	return items.filter(function(item) {
 		return item.quantity > 0;
 	});
-}
+};
 
 router.get('/findAll', function (req, res, next) {
     Item.find({}, function(err, items) {
-		if (!err) res.json(hideOutOfStock(items));
+		if (!err) {
+			Item.waitForAvgs(items).then(function(items) {
+				res.json(hideOutOfStock(items));
+			}).catch(function(err) {
+				console.log(err);
+			});	
+		}
+		
 		else next(err);
     });
 });
