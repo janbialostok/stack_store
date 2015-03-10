@@ -44,16 +44,10 @@ app.factory('ItemFactory', function($http) {
     		return res.data;
     	});
     };
-    factory.updateInventory = function(items) {
-        var updateObj = [];
-        items.forEach(function (item){
-            var obj = {
-                itemId: item._id,
-                quantity: item.quantity
-            }
-            updateObj.push(obj);
+    factory.updateInventory = function(itemId, quantity) {
+        return $http.put('/api/item/update/' + itemId + '/inventory', { quantity: quantity }).then(function (res){
+            return res.data;
         });
-        console.log(updateObj);
     }
     
     return factory;

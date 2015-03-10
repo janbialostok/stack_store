@@ -1,6 +1,7 @@
 'use strict';
 
-app.directive('checkoutItem', function (CurrentFactory, CartFactory, UserFactory, ItemFactory){
+
+app.directive('checkoutItem', function (CurrentFactory, CartFactory, UserFactory, CreditFactory, ItemFactory){
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/checkout/checkoutItem.html',
@@ -19,24 +20,29 @@ app.directive('checkoutItem', function (CurrentFactory, CartFactory, UserFactory
 				var addressList = JSON.parse(addressList);
 				scope.address = addressList;
 			};
-			scope.submitOrder = function (address){
+
+			scope.submitOrder = function (){
 				var items;
+				var billing = scope.billing;
+				var address = scope.address;
+				if (scope.sameShipping){
+					billing = address;
+				};
 				if (scope.saveAddressMarker){
 					UserFactory.saveAddressOnUser(user, address);
 				};
-				CartFactory.saveAddressOnCart(user.cart, address).then(function (cart){
+				CartFactory.saveAddressOnCart(user.cart, address, billing).then(function (cart){
 					return cart;
 				}).then(function (cart){
-					items = cart;
-					console.log(items);
+					items = cart.items;
 					return UserFactory.convertToOrder(user, cart);
 				}).then(function (user){
 					return CartFactory.clearCart(user._id);
 				}).then(function(){
 					return CurrentFactory.updateCurrentUser()
 				}).then(function(){
-					ItemFactory.updateInventory(items).then(function (res){
-						console.log(res.data);
+					items.forEach(function (item){
+						ItemFactory.updateInventory(item.itemId, item.quantity);
 					});
 				});
 			}

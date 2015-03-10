@@ -24,6 +24,16 @@ router.get('/findAll', function (req, res, next) {
     });
 });
 
+router.put('/update/:id/inventory', function (req, res, next){
+	Item.findById(req.params.id, function (err, item){
+		item.quantity -= req.body.quantity;
+		item.save(function (err, returned){
+			if (err) next(err);
+			else res.json(returned);
+		});
+	});
+});
+
 router.get('/findBy/category/:categoryTags', function(req, res, next) {
 	Item.findByCategory(req.params.categoryTags, function(err, items) {
 		if (err) return next(err);
