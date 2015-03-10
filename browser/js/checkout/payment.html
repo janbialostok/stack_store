@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">Payment</div>
   <div class="panel-body">
-    <form stripe:form="saveCustomer" action="" id="payment-form" onSubmit="return false">
+    <form stripe:form="saveCustomer" id="payment-form" ng-show="!userCharged">
       <span class="payment-errors"></span>
       <div class="form-row form-group">
         <input type="text" 
@@ -21,15 +21,15 @@
 
       <div class="form-row form-group">
         <label>
-          <span>Expiration</span>
+          <span>Expiration: </span>
           <input type="text" 
-                 size="2" 
+                 size="3" 
                  data-stripe="exp-month"
                  placeholder="MM"/>
         </label>
         <span> / </span>
         <input type="text" 
-               size="4" 
+               size="5" 
                data-stripe="exp-year"
                placeholder = "YYYY"/>
       </div>

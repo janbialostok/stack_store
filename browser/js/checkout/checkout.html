@@ -7,5 +7,14 @@
 </div>
 
 <div ng-show="user.permLevel !== 'Guest' && user.permLevel !== undefined">
-	<checkout-item></checkout-item>
+	<checkout-item ng-show="!userCharged"></checkout-item>
 </div>
+
+<table>
+  <div class="panel panel-default" ng-show="userCharged">
+    <div class="panel-heading">Confirmation</div>
+    <div class="panel-body">
+      <p>Thank you for your purchase from Jeans on Jeans.</p>
+    </div>
+  </div>
+</table>
