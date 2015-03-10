@@ -115,6 +115,7 @@ router.put('/:id/save/address', function (req, res, next){
 
 router.put('/:userid/clear', function (req, res, next){
 	var cart = new Cart();
+	cart.user = req.params.userid;
 	cart.save(function (err, returned){
 		if (!err) {
 			User.findByIdAndUpdate(req.params.userid, {$set: {cart: returned._id}}, function (err, user){
