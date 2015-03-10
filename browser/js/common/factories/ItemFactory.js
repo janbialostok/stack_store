@@ -33,6 +33,11 @@ app.factory('ItemFactory', function($http) {
     factory.deleteItem = function(productId) {
 	return $http.delete("/api/item/" + productId);
     };
+    factory.addItem = function(item) {
+    	return $http.post('/api/item/create', item).then(function(res) {
+    		return res.data;
+    	});
+    };
     
     return factory;
 });
