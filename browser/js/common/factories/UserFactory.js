@@ -40,7 +40,7 @@ app.factory('UserFactory', function($http, loginFactory) {
 		.then(function(res) {
 			return res.data;
 		});
-	}
+	};
 	factory.getByName = function(userName) {
 		return $http.get('/api/user/findBy/name/' + userName).then(function(res) {
 			return res.data;

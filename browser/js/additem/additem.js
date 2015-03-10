@@ -2,9 +2,23 @@
 
 app.config(function($stateProvider) {
 	$stateProvider.state('addItem', {
-		url: '/addItem',
+		url: '/itemData',
 		controller: 'AddItemCtrl',
 		templateUrl: 'js/additem/additem.html'
+	});
+
+	$stateProvider.state('addItem.edit', {
+		url: '/:itemId/edit',
+		controller: 'EditItemCtrl',
+		templateUrl: 'js/additem/additem.html'
+	});
+});
+
+app.controller('EditItemCtrl', function($scope, $stateParams, ItemFactory) {
+	console.log('in');
+	ItemFactory.getItem($stateParams.itemId).then(function(item) {
+		console.log(item);
+		$scope.item = item;
 	});
 });
 
@@ -20,8 +34,8 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 		tags: []
 	};
 
-	var tagDisplay = 'Available Tags'
-	$scope.singleTag = tagDisplay
+	var tagDisplay = 'Available Tags';
+	$scope.singleTag = tagDisplay;
 	$scope.success = false;
 
 	$scope.showSuccess = function() {
@@ -42,11 +56,11 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 	$scope.removeTag = function() {
 		if (!$scope.item.tags.length) return;
 		$scope.item.tags.pop();
-		var tag = $scope.item.tags[$scope.item.tags.length - 1]
+		var tag = $scope.item.tags[$scope.item.tags.length - 1];
 		$scope.singleTag = tagDisplay;
 		if ($scope.item.tags.length) $scope.availTags = CategoryFactory.getChildrenFor(tag);
 		else $scope.availTags = CategoryFactory.getFirstLevelOptions();
-	}
+	};
 
 	$scope.$watch('item.tags.length', function(newVal) {
 		if (newVal) $scope.addItemForm.tagForm.$setValidity('validateTag', true);
@@ -60,6 +74,6 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 				tags: []
 			};
 			$scope.showSuccess();
-		})
+		});
 	};
 });

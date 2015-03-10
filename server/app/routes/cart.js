@@ -46,8 +46,8 @@ router.delete('/user/:userid/item/:itemid', function (req, res, next){
 		if (!err) {
 			res.json(user.cart);
 		} else next(err);
-	})
-})
+	});
+});
 
 router.put('/update/:id', function (req, res){
 	Cart.findById(req.params.id, function (err, cart){
@@ -76,7 +76,7 @@ router.put('/update/:id', function (req, res){
 router.delete('/delete/:cartid/item/:itemid', function (req, res, next){
 	Cart.findById(req.params.cartid, function (err, cart){
 		var items = cart.items;
-		var newArray = []
+		var newArray = [];
 		var index;
 		items.forEach(function (item, i){
 			if (item.itemId.toString() !== req.params.itemid){

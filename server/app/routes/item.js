@@ -7,7 +7,7 @@ var hideOutOfStock = function(items) {
 	return items.filter(function(item) {
 		return item.quantity > 0;
 	});
-}
+};
 
 router.get('/findAll', function (req, res, next) {
     Item.find({}, function(err, items) {
@@ -38,7 +38,7 @@ router.get('/findBy/search/:searchString', function(req, res, next) {
 });
 
 router.post('/create', function (req, res, next){
-	if (!req.body.image) req.body.image = "http://www.catpicturesnyc.com/wp-content/uploads/2011/05/kitten_in_jeans_picture.jpg"
+	if (!req.body.image) req.body.image = "http://www.catpicturesnyc.com/wp-content/uploads/2011/05/kitten_in_jeans_picture.jpg";
 	var item = new Item(req.body);
 	item.save(function (err, newItem){
 		if (!err) res.json(newItem);
@@ -47,7 +47,7 @@ router.post('/create', function (req, res, next){
 });
 
 router.get('/:itemid/user/:userid', function (req, res, next){
-	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
+	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, items){
 		if (!err) res.json(hideOutOfStock(items));
 		else next(err);
 	});
