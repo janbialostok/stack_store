@@ -10,7 +10,6 @@ app.config(function($stateProvider) {
 
 app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, UserFactory, CartFactory, ItemFactory){
 	$scope.user = CurrentFactory.current.user;
-
 	var itemQuantity = [];
 	CartFactory.getCartByUserId($scope.user._id).then(function (cart){
 		$scope.cart = cart;
@@ -32,5 +31,4 @@ app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, User
 			});
 		});
 	});
-
 });
