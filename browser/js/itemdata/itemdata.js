@@ -1,14 +1,21 @@
 'use strict';
 
 app.config(function($stateProvider) {
-	$stateProvider.state('addItem', {
+	$stateProvider.state('itemData', {
+		abstract: true,
 		url: '/itemData',
+		controller: 'ItemDataCtrl',
+		template: '<ui-view></ui-view>'
+	});
+
+	$stateProvider.state('itemData.add', {
+		url: '/add',
 		controller: 'AddItemCtrl',
 		templateUrl: 'js/additem/additem.html'
 	});
 
-	$stateProvider.state('addItem.edit', {
-		url: '/:itemId/edit',
+	$stateProvider.state('itemData.edit', {
+		url: '/edit/:itemId',
 		controller: 'EditItemCtrl',
 		templateUrl: 'js/additem/additem.html'
 	});
@@ -22,7 +29,7 @@ app.controller('EditItemCtrl', function($scope, $stateParams, ItemFactory) {
 	});
 });
 
-app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryFactory, ItemFactory, $timeout) {
+app.controller('ItemDataCtrl', function($scope, CurrentFactory, $state, CategoryFactory, ItemFactory, $timeout) {
 	CurrentFactory.updateCurrentUser().then(function() {
 		if (!CurrentFactory.current.user.permLevel
 			|| CurrentFactory.current.user.permLevel === 'Guest')
