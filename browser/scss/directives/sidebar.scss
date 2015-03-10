@@ -1,7 +1,10 @@
 .sidebar {
-  background-color: #e7e7e7;
-  padding-left: 0;
-  padding-right: 0;
+  .category-div {
+    // background-color: rgba(231, 231, 231, 0.8);
+  }
+  background-color: rgba(231, 231, 231, 0.8);
+  border-radius: 10px;
+  padding: 10px 0 10px;
 }
 
 category-menu {
