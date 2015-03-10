@@ -38,6 +38,7 @@ router.get('/findBy/search/:searchString', function(req, res, next) {
 });
 
 router.post('/create', function (req, res, next){
+	if (!req.body.image) req.body.image = "http://www.catpicturesnyc.com/wp-content/uploads/2011/05/kitten_in_jeans_picture.jpg"
 	var item = new Item(req.body);
 	item.save(function (err, newItem){
 		if (!err) res.json(newItem);
