@@ -11,7 +11,15 @@ app.config(function($stateProvider) {
 app.controller("InventoryCtrl", function($scope, CurrentFactory, ItemFactory) {
     $scope.currentUser = CurrentFactory.current.user;
 
-    ItemFactory.getByUser($scope.currentUser._id).then(function(items) {
-	$scope.inventory = items;
-    });
+    var getAllInventory = function() {
+	return ItemFactory.getByUser($scope.currentUser._id).then(function(items) {
+	    $scope.inventory = items;
+	});	
+    };
+    
+    $scope.deleteInventoryItem = function(item) {
+	ItemFactory.deleteItem(item._id).then(getAllInventory());
+    };
+
+    getAllInventory();
 });

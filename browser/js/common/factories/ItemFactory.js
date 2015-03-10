@@ -30,6 +30,9 @@ app.factory('ItemFactory', function($http) {
 		return res.data;
 	    });
     };
+    factory.deleteItem = function(productId) {
+	return $http.delete("/api/item/" + productId);
+    };
     
     return factory;
 });
