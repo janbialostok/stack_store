@@ -38,6 +38,12 @@ app.factory('ItemFactory', function($http) {
     		return res.data;
     	});
     };
+    factory.updateItem = function(item) {
+    	return $http.put('/api/item/' + item._id, item).then(function(res) {
+    		console.log(res);
+    		return res.data;
+    	});
+    };
     
     return factory;
 });
