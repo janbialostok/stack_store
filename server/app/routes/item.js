@@ -7,7 +7,7 @@ var hideOutOfStock = function(items) {
 	return items.filter(function(item) {
 		return item.quantity > 0;
 	});
-}
+};
 
 router.get('/findAll', function (req, res, next) {
     Item.find({}, function(err, items) {
@@ -38,7 +38,7 @@ router.get('/findBy/search/:searchString', function(req, res, next) {
 });
 
 router.post('/create', function (req, res, next){
-	if (!req.body.image) req.body.image = "http://www.catpicturesnyc.com/wp-content/uploads/2011/05/kitten_in_jeans_picture.jpg"
+	if (!req.body.image) req.body.image = "http://www.catpicturesnyc.com/wp-content/uploads/2011/05/kitten_in_jeans_picture.jpg";
 	var item = new Item(req.body);
 	item.save(function (err, newItem){
 		if (!err) res.json(newItem);
@@ -47,7 +47,7 @@ router.post('/create', function (req, res, next){
 });
 
 router.get('/:itemid/user/:userid', function (req, res, next){
-	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
+	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, items){
 		if (!err) res.json(hideOutOfStock(items));
 		else next(err);
 	});
@@ -76,13 +76,10 @@ router.route('/:id')
 	})
 	.put(function (req, res){
 		for (var key in req.body){
-			if (req.body.hasOwnPropertyKey(key)){
-				if (key === 'reviews') req.item.reviews.push(req.body.reviews);
-				else req.item[key] = req.item[key];
-			}
+			req.item[key] = req.body[key];
 		}
 		req.item.save(function (err, item){
-			if (!err) res.status(200).end();
+			if (!err) res.json(item);
 			else res.status(400).end();
 		});
 	})
