@@ -53,15 +53,22 @@
 					<div class="form-group">
 						<label for="itemTags" class="col-sm-2 control-label">Tags</label>
 						<div class="col-sm-10">
-							<input type="text"
+						<select class="form-control"
+							name="itemTags"
+							>
+							<option selected="selected">Select Available Tag</option>
+							<option ng-repeat="tag in availTags">{{ tag }}</option>
+						</select>
+
+							<!-- <input type="text"
 								name="itemTags"
 								class="form-control"
 								id="itemTags"
 								typeahead="tag for tag in availTags | filter:$viewValue | limitTo:8"
 								ng-blur="addTag(singleTag)"
 								placeholder="Tags"
-								ng-model="singleTag">
-							</div>
+								ng-model="singleTag"> -->
+						</div>
 					</div>
 				</ng-form>
 
