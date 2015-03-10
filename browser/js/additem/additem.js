@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 	});
 });
 
-app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryFactory) {
+app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryFactory, ItemFactory, $timeout) {
 	CurrentFactory.updateCurrentUser().then(function() {
 		if (!CurrentFactory.current.user.permLevel
 			|| CurrentFactory.current.user.permLevel === 'Guest')
@@ -22,6 +22,15 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 
 	var tagDisplay = 'Available Tags'
 	$scope.singleTag = tagDisplay
+	$scope.success = false;
+
+	$scope.showSuccess = function() {
+		$scope.success = true;
+		$timeout(function() {
+			$scope.success = false;
+			$scope.$apply();
+		}, 2000);
+	};
 
 	$scope.addTag = function(tag) {
 		if ($scope.availTags.indexOf(tag) === -1) return;
@@ -43,4 +52,14 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 		if (newVal) $scope.addItemForm.tagForm.$setValidity('validateTag', true);
 		else $scope.addItemForm.tagForm.$setValidity('validateTag', false);
 	});
+
+	$scope.addItem = function(item) {
+		item.sellerID = CurrentFactory.current.user._id;
+		ItemFactory.addItem(item).then(function() {
+			$scope.item = {
+				tags: []
+			};
+			$scope.showSuccess();
+		})
+	};
 });

@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Add a new Item</div>
 		<div class="panel-body">
-			<form class="form-horizontal" name="addItemForm">
+			<form class="form-horizontal" name="addItemForm" ng-submit="addItemForm.$valid && addItem(item)">
 				<div class="form-group">
 					<label for="itemName" class="col-sm-2 control-label">Name*</label>
 					<div class="col-sm-10">
@@ -23,7 +23,7 @@
 							<input type="text"
 								required
 								name="itemPrice"
-								ng-pattern="/\d*\.{0,1}\d{2}/"								
+								ng-pattern="/^\d+\.{0,1}\d{0,2}$/"
 								class="form-control"
 								id="itemPrice"
 								placeholder="Price"
@@ -101,6 +101,11 @@
 						<button type="submit"
 							ng-class="{disabled: addItemForm.$invalid}"
 							class="btn btn-primary">Add New Item</button>
+					</div>
+				</div>
+				<div class="form-group" ng-show="success">
+					<div class="col-sm-12 success-indicator">
+						Item successfully added!
 					</div>
 				</div>
 			</form>
