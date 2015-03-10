@@ -18,7 +18,8 @@
 	  <td>{{ item.price | currency }}</td>
 	  <td>{{ item.size }}</td>
 	  <td>{{ item.quantity }}</td>
-	  <td>Edit | Delete</td>
+	  <td><button class="btn btn-warning btn-xs">Edit</button>
+	    <button class="btn btn-danger btn-xs" ng-click ="deleteInventoryItem(item)">Delete</button></td>
 	</tr>
       </table>
     </div>
