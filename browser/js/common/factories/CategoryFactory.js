@@ -33,54 +33,52 @@ app.factory('CategoryFactory', function() {
 		return arr;
 	};
 
+	var tops = {
+		long_sleeve: "end",
+		short_sleeve: "end"
+	}
+	var bottoms= {
+		skinny: "end",
+		slim: "end",
+		straight: "end",
+		boot: "end",
+		relaxed: "end"
+	}
+
+	var gender = {
+		tops: tops,
+		bottoms: bottoms
+	}
+
 	factory.categories_asObj = {
-		male: {
-			tops: {
-				long_sleeve: "male tops long_sleeve",
-				short_sleeve: "male tops short_sleeve"
-			},
-			bottoms: {
-				skinny: "male bottoms skinny",
-				slim: "male bottoms slim",
-				straight: "male bottoms straight",
-				boot: "male bottoms boot",
-				relaxed: "male bottoms relaxed"
-			}
-		},
-		female: {
-			tops: {
-				long_sleeve: "female tops long_sleeve",
-				short_sleeve: "female tops short_sleeve"
-			},
-			bottoms: {
-				skinny: "female bottoms skinny",
-				slim: "female bottoms slim",
-				straight: "female bottoms straight",
-				boot: "female bottoms boot",
-				relaxed: "female bottoms relaxed"
-			}
-		},
-		children: {
-			tops: {
-				long_sleeve: "children tops long_sleeve",
-				short_sleeve: "children tops short_sleeve"
-			},
-			bottoms: {
-				skinny: "children bottoms skinny",
-				slim: "children bottoms slim",
-				straight: "children bottoms straight",
-				boot: "children bottoms boot",
-				relaxed: "children bottoms relaxed"
-			}
-		}
+		male: gender,
+		female: gender,
+		children: gender
 	};
 
-	// factory.categories_asObj = {
-	// 	a: 'hi',
-	// 	b: 'hi'
-	// }
-
 	factory.categories_asArrLike = objToArrLike(factory.categories_asObj);
+
+	factory.getChildrenFor = function(key) {
+		function rec_getChildren(node) {
+			if (node.name == key) return node.children;
+			else {
+				for (var i = node.children.length - 1; i >= 0; i--) {
+					var found = rec_getChildren(node.children[i]);
+					if (found) return found;
+				};
+			}
+		}
+		for (var i = factory.categories_asArrLike.length - 1; i >= 0; i--) {
+			var found = rec_getChildren(factory.categories_asArrLike[i]);
+			if (found) return found.map(function(node) {
+				return node.name;
+			});
+		};
+	};
+
+	factory.getFirstLevelOptions = function() {
+		return Object.keys(factory.categories_asObj);
+	};
 
 	return factory;
 });

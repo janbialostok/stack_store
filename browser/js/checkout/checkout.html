@@ -1,0 +1,11 @@
+
+
+<div ng-show="user.permLevel == 'Guest' || user.permLevel == undefined" class="col-lg-12">
+	<div class="bg-danger noUserMessage">
+		<h3>What's your name again?<br/><a ui-sref="login">Please sign-in or create an account.</a><h3>
+	</div>
+</div>
+
+<div ng-show="user.permLevel !== 'Guest' && user.permLevel !== undefined">
+	<checkout-item></checkout-item>
+</div>
