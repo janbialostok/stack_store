@@ -4,7 +4,7 @@ app.factory('CurrentFactory', function($http, AuthService, CartFactory, $q, $coo
 	var factory = {};
 
 	factory.current = {
-		user: null,
+		user: null
 	};
 
 	factory.updateCurrentUser = function() {
