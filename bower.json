@@ -20,6 +20,7 @@
     "bootstrap": "~3.3.2",
     "lodash": "~3.3.1",
     "angular-bootstrap": "~0.12.1",
-    "angular-cookies": "~1.3.14"
+    "angular-cookies": "~1.3.14",
+    "stripe-angular": "~1.0.1"
   }
 }

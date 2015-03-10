@@ -44,6 +44,11 @@ app.factory('ItemFactory', function($http) {
     		return res.data;
     	});
     };
+    factory.updateInventory = function(itemId, quantity) {
+        return $http.put('/api/item/update/' + itemId + '/inventory', { quantity: quantity }).then(function (res){
+            return res.data;
+        });
+    }
     
     return factory;
 });
