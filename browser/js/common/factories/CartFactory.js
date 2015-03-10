@@ -31,14 +31,14 @@ app.factory('CartFactory', function($http) {
 	factory.getCartByUserId = function (userId) {
 		return $http.get('/api/cart/user/' + userId).then(function (res){
 			return res.data;
-		})
+		});
 	};
 
 	factory.updateCart = function (cartId, item){
 		return $http.put('/api/cart/update/' + cartId, item).then(function (res){
 			return res.data;
 		});
-	}
+	};
 
 	factory.deleteItem = function (cartId, item){
 		var query = {};
@@ -46,7 +46,7 @@ app.factory('CartFactory', function($http) {
 		return $http.delete('/api/cart/delete/' + cartId + '/item/' + item._id).then(function (res){
 			return res.data;
 		});
-	}
+	};
 
 	return factory;
 });
