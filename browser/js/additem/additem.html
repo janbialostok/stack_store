@@ -51,11 +51,11 @@
 							<select class="form-control"
 							 	ng-show="availTags.length"
 								ng-model="singleTag"
-								validate-tag
 								ng-change="addTag(singleTag)"
+								ng-options="tag as tag for tag in availTags"
 								name="itemTags">
-								<option selected="selected">{{singleTag}}</option>
-								<option ng-repeat="tag in availTags">{{ tag }}</option>
+								<option>{{singleTag}}</option>
+								<!-- <option ng-repeat="tag in availTags" val>{{ tag }}</option> -->
 							</select>
 						</div>
 					</div>
@@ -100,7 +100,7 @@
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
 						<button type="submit" class="btn btn-primary">Add New Item</button>
-						<pre> {{ addItemForm.tagForm | json }}
+						<pre> {{ addItemForm.tagForm | json }}</pre>
 					</div>
 				</div>
 			</form>

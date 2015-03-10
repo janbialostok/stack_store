@@ -38,4 +38,13 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 		if ($scope.item.tags.length) $scope.availTags = CategoryFactory.getChildrenFor(tag);
 		else $scope.availTags = CategoryFactory.getFirstLevelOptions();
 	}
+
+	$scope.$watch('item.tags.length', function(newVal) {
+		console.log('hi')
+		console.log(newVal)
+		
+
+		if (newVal) $scope.addItemForm.tagForm.$setValidity('validateTag', true);
+		else $scope.addItemForm.tagForm.$setValidity('validateTag', false);
+	});
 });
