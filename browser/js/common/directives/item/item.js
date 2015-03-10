@@ -19,9 +19,11 @@ app.directive('item', function() {
 		return newArr;
 	    };
 
-	    scope.fullStars = repeat(Math.floor(scope.data.rating));
-	    scope.emptyStars = repeat(Math.floor(5-scope.data.rating));
-	    scope.hasHalfStar = scope.fullStars.length + scope.emptyStars.length !== 5;
+		if (scope.data.rating) {
+			scope.fullStars = repeat(Math.floor(scope.data.rating));
+			scope.emptyStars = repeat(Math.floor(5-scope.data.rating));
+			scope.hasHalfStar = scope.fullStars.length + scope.emptyStars.length !== 5;	
+		}
 	}
     };
 });
