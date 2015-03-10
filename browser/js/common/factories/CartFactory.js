@@ -48,5 +48,15 @@ app.factory('CartFactory', function($http) {
 		});
 	};
 
+	factory.saveAddressOnCart = function (cartId, address) {
+		return $http.put('/api/cart/' + cartId + '/save/address', address).then(function (res){
+			return res.data;
+		});
+	}
+	factory.clearCart = function (userId){
+		return $http.put('/api/cart/' + userId + '/clear').then(function (res){
+			return res.data;
+		});
+	}
 	return factory;
 });

@@ -24,6 +24,16 @@ app.factory('UserFactory', function($http, loginFactory) {
 			return loginFactory.localLogin({username: user.name, password: 'temp'});
 		});
 	};
+	factory.saveAddressOnUser = function (user, address){
+		return $http.put('/api/user/' + user._id + '/save/address', address).then(function (res){
+			return res.data;
+		});
+	};
+	factory.convertToOrder = function (user, cart){
+		return $http.put('/api/user/' + user._id + '/order', cart).then(function (res){
+			return res.data;
+		});
+	};
 	factory.getAllUsers = function(options) {
 		return $http.get('/api/user/findAll', {params: options}).then(function(res) {
 			return res.data;
