@@ -56,7 +56,7 @@ app.controller('ItemCtrl', function($scope, $state, $stateParams, $timeout, Item
 				itemAdd.quantity = null;
 				CurrentFactory.updateCurrentUser().then(function(){
 					$scope.showAddMessage = true;
-					$timeout(function(){$scope.showAddMessage = false}, 3000);
+					$timeout(function(){$scope.showAddMessage = false}, 2000);
 				});
 			});	
 		}

@@ -1,47 +1,59 @@
 <section id="single_item" class="container">
 	<div class="row">
-		<div class="col-lg-5">
+		<div class="col-md-5 extra-bottom-padding">
 			<img class="img-responsive item_img" ng-src="{{item.image}}"/>
 		</div>
-		<div class="col-lg-7">
-			<div class="row">
-				<div class="col-lg-12 padding_ten">
-					<h3>{{item.name}}</h3>
-					<p>Sold By: <a ui-sref="user({ id: item.sellerID })">{{item.sellerName}}</a></p>
-					<a class="tag_btn" ng-repeat="tag in item.tags">{{tag | uppercase}}</a>
-					<span ng-show="showDescription">
-						<h4>Product Description</h4>
-						<p>{{item.description}}</p>
-					</span>
+		<div class="col-md-7">
+			<div class="row extra-bottom-padding">
+				<div class="col-md-10 col-md-offset-2 white">
+					<div class="panel panel-default panel-inverse">
+						<div class="panel-body no-top-padding">
+							<h3>{{item.name}}</h3>
+							<p>Sold By: <a ui-sref="user({ id: item.sellerID })">{{item.sellerName}}</a></p>
+							<p><a class="tag_btn" ng-repeat="tag in item.tags">{{tag | uppercase}}</a></p>
+							<span ng-show="showDescription">
+								<h4>Product Description</h4>
+								<p>{{item.description}}</p>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-10 col-sm-12 product_panel">
-					<div class="col-lg-6">
-						<p>Price: {{item.price | currency:"$":2}}</p>
-						<p>Size: {{item.size}}</p>
-						<span ng-class="{ inStock: item.quantity, soldOut: !item.quantity }">
-							<p ng-show="item.quantity">In Stock</p>
-							<p ng-show="!item.quantity">Sold Out</p>
-						</span>
-					</div>
-					<div class="col-lg-6">
-						<form name="addToCartForm" ng-submit="addToCartForm.$valid && addToCart(itemAdd)">
-							<div class="form-group">
-								<label for="quantity">Quantity</label>
-								<input type="number" name="quantity" class="form-control" min="1" max="{{item.quantity}}" ng-model="itemAdd.quantity" required>
+				<div class="col-md-10 col-md-offset-2"> <!-- product-panel-->
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-xs-6 no-left-padding">
+								<p>Price: {{item.price | currency:"$":2}}</p>
+								<p>Size: {{item.size}}</p>
+								<span ng-class="{ inStock: item.quantity, soldOut: !item.quantity }">
+									<p ng-show="item.quantity">In Stock</p>
+									<p ng-show="!item.quantity">Sold Out</p>
+								</span>
 							</div>
-							<button class="btn btn_primary" type="submit">Add to Cart</button>
-						</form>
+							<div class="col-xs-6 no-right-padding">
+								<form name="addToCartForm" ng-submit="addToCartForm.$valid && addToCart(itemAdd)">
+									<div class="form-group">
+										<label for="quantity">Quantity</label>
+										<input type="number" name="quantity" class="form-control" min="1" max="{{item.quantity}}" ng-model="itemAdd.quantity" required placeholder="Quantity">
+									</div>
+									<button class="btn btn-primary" type="submit">Add to Cart</button>
+								</form>
+								<span ng-show="showAddMessage" class="success-indicator"><br>Item Added</span>
+							</div>
+						</div>
 					</div>
-					<span ng-show="showAddMessage">Item Added</span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="col-lg-12 review_panel">
-			<review-panel class="container"></review-panel>
+	<div class="row"> <!-- review-panel-->
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<review-panel></review-panel>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
