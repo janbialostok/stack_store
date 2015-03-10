@@ -1,4 +1,4 @@
-<span ng-show="currentUser">
+<span ng-show="currentUser && currentUser !== 'Guest'">
 	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview, item._id)">
 		<div class="form-group">
 			<textarea class="form-control" name="review" ng-model="newReview.comment" placeholder="Leave a review..." ng-minLength="25" required></textarea>

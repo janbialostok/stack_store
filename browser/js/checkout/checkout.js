@@ -5,10 +5,14 @@ app.config(function($stateProvider) {
 		url: '/checkout',
 		controller: 'CheckoutCtrl',
 		templateUrl: 'js/checkout/checkout.html'
+	})
+	.state('checkoutView.payment',{
+		url: '/payment',
+		templateUrl: 'js/checkout/payment.html'
 	});
 });
 
-app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, UserFactory, CartFactory, ItemFactory){
+app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, UserFactory, CartFactory, ItemFactory, CreditFactory){
 	$scope.user = CurrentFactory.current.user;
 	var itemQuantity = [];
 	CartFactory.getCartByUserId($scope.user._id).then(function (cart){
@@ -31,4 +35,15 @@ app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, User
 			});
 		});
 	});
+
+	$scope.userCharged = false;
+	$scope.saveCustomer = function(status, response) {
+		CreditFactory.processPayment(status,response,$scope.user._id,$scope.total).then(function(res){
+			if (res.message.status == 'succeeded'){
+				$scope.user.cart = null;
+				$scope.userCharged = true;
+				CurrentFactory.updateCurrentUser();
+			}
+		}) 	
+  	};
 });
