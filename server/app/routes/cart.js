@@ -106,8 +106,9 @@ router.get('/:cartId/size', function(req, res, next) {
 });
 
 router.put('/:id/save/address', function (req, res, next){
-	var address = new Address(req.body);
-	Cart.findByIdAndUpdate(req.params.id, {$push: {shippingAddress: address}}, function (err, cart){
+	var shipping = new Address(req.body.shipping);
+	var billing = new Address(req.body.billing);
+	Cart.findByIdAndUpdate(req.params.id, {$push: {shippingAddress: shipping , billingAddress: billing}}, function (err, cart){
 		if (!err) res.json(cart);
 		else next(err);
 	});

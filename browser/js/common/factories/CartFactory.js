@@ -48,8 +48,12 @@ app.factory('CartFactory', function($http) {
 		});
 	};
 
-	factory.saveAddressOnCart = function (cartId, address) {
-		return $http.put('/api/cart/' + cartId + '/save/address', address).then(function (res){
+	factory.saveAddressOnCart = function (cartId, address, billing) {
+		var completeAddress = {
+			shipping : address,
+			billing : billing
+		}
+		return $http.put('/api/cart/' + cartId + '/save/address', completeAddress).then(function (res){
 			return res.data;
 		});
 	}

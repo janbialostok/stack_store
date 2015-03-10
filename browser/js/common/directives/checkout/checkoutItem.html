@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table">
 	<tbody class="invoice">
 		<tr>
 			<th>#</th>
@@ -95,7 +95,6 @@
 									value="address.phone"
 									ng-model="address.phone">
 							</div>
-							<button type="submit">Submit Order</button>
 						</form>
 					</div>
 				</div>
@@ -109,6 +108,89 @@
 				</label> 
 			</td>
 		</tr>
+		<tr ng-show="!sameShipping">
+			<td colspan="3" style="text-align:center">
+				<div class="panel panel-default">
+					<div class="panel-heading">Billing Address</div>
+					<div class="panel-body">
+						<form name="billingAddress" ng-submit="billingAddress.$valid && submitOrder(address)">
+							<div class="form-group">
+								<input type="text"
+									required
+									name="address1"
+									class="form-control"
+									placeholder="Address Line 1"
+									value="billing.address1"
+									ng-model="billing.address1">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									name="address2"
+									class="form-control"
+									placeholder="Address Line 2"
+									value="billing.address2"
+									ng-model="billing.address2">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="city"
+									class="form-control"
+									placeholder="City"
+									value="billing.city"
+									ng-model="billing.city">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="stateProv"
+									class="form-control"
+									placeholder="State or Province"
+									value="billing.stateProv"
+									ng-model="billing.stateProv">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="postalCode"
+									class="form-control"
+									placeholder="Postal Code"
+									value="billing.postalCode"
+									ng-model="billing.postalCode">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="country"
+									class="form-control"
+									placeholder="Country"
+									value="billing.country"
+									ng-model="billing.country">
+							</div>
+							<div class="form-group">
+								<input type="text"
+									required
+									name="phone"
+									class="form-control"
+									placeholder="Phone"
+									value="billing.phone"
+									ng-model="billing.phone">
+							</div>
+						</form>
+					</div>
+				</div>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<div ui-view>
+					<a ui-sref="checkoutView.payment">Proceed to Checkout</a>
+				</div>
+			</td>
+			<td>
+			</td>
 		</tr>
 	</tbody>
 </table>
