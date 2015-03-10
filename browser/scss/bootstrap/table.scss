@@ -1,0 +1,15 @@
+.table {
+	tr {
+		padding-right: 15px;
+		padding-left: 15px;
+		
+	}
+}
+
+.table-hover {
+	tbody {
+		tr:hover {
+			background-color: #CDCDCD;
+		}
+	}
+}

@@ -23,12 +23,32 @@ router.post('/signupGuest', function (req, res, next){
 	});
 });
 
+router.get('/findAll', function(req, res, next) {
+	var params = {};
+	if (Object.keys(req.query).length) {
+		for (var key in req.query) {
+			params[key] = req.query[key];
+		}
+	}
+	User.find(params, function(err, users) {
+		res.json(users);
+	});
+});
+
+router.get('/findBy/name/:name', function(req, res, next) {
+	User.findOne({name: req.params.name}, function(err, user) {
+		if (err) return next(err);
+		res.json(user);
+	});
+});
+
 router.get('/:userid/items/:itemid', function (req, res, next){
 	User.findById(req.params.userid).populate("items").exec(function (err, user){
 		if (!err) res.json(user.items);
 		else next(err);
 	});
 });
+
 
 router.get('/:id/reviews', function (req, res, next){
 	Review.find({ userId: req.params.id }, function (err, reviews){
