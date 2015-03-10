@@ -33,6 +33,8 @@ itemSchema.virtual('avgReview').get(function (){
 	var promises = [];
 	var self = this;
 	
+	// Returns a promise that is then converted to the actual values using
+	// the below static method.
 	if (this.reviews.length > 0) {
 		this.reviews.forEach(function (reviewId){
 			promises.push(Review.findOne({ _id: reviewId }).exec(function(err, review) {

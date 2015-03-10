@@ -27,21 +27,33 @@ router.get('/findAll', function (req, res, next) {
 router.get('/findBy/category/:categoryTags', function(req, res, next) {
 	Item.findByCategory(req.params.categoryTags, function(err, items) {
 		if (err) return next(err);
-		res.json(hideOutOfStock(items));
+		Item.waitForAvgs(items).then(function(items) {
+			res.json(hideOutOfStock(items));
+		}).catch(function(err) {
+			console.log(err);
+		});	
 	});
 });
 
 router.get("/findBy/user/:userId", function(req, res, next) {
     Item.findBySellerId(req.params.userId, function(err, items) {
-	if (err) return next(err);
-	res.json(items);
+		if (err) return next(err);
+		Item.waitForAvgs(items).then(function(items) {
+			res.json(items);
+		}).catch(function(err) {
+			console.log(err);
+		});	
     });
 });
 
 router.get('/findBy/search/:searchString', function(req, res, next) {
 	Item.findByPartialName(req.params.searchString, function(err, items) {
 		if (err) return next(err);
-		res.json(hideOutOfStock(items));
+		Item.waitForAvgs(items).then(function(items) {
+			res.json(hideOutOfStock(items));
+		}).catch(function(err) {
+			console.log(err);
+		});	
 	});
 });
 
@@ -56,7 +68,7 @@ router.post('/create', function (req, res, next){
 
 router.get('/:itemid/user/:userid', function (req, res, next){
 	Item.findById(req.params.itemid).populate("sellerID").exec(function (err, user){
-		if (!err) res.json(hideOutOfStock(items));
+		if (!err) res.json(hideOutOfStock(user));
 		else next(err);
 	});
 });
