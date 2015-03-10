@@ -40,10 +40,6 @@ app.controller('AddItemCtrl', function($scope, CurrentFactory, $state, CategoryF
 	}
 
 	$scope.$watch('item.tags.length', function(newVal) {
-		console.log('hi')
-		console.log(newVal)
-		
-
 		if (newVal) $scope.addItemForm.tagForm.$setValidity('validateTag', true);
 		else $scope.addItemForm.tagForm.$setValidity('validateTag', false);
 	});
