@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Add a new Item</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form class="form-horizontal" name="addItemForm">
 				<div class="form-group">
 					<label for="itemName" class="col-sm-2 control-label">Name*</label>
 					<div class="col-sm-10">
@@ -43,31 +43,20 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
-						{{ item.tags }}<br>
-						{{ availTags }}
-					</div>
-				</div>
 				<ng-form name="tagForm">
 					<div class="form-group">
-						<label for="itemTags" class="col-sm-2 control-label">Tags</label>
+						<label for="itemTags" class="col-sm-2 control-label">Tags*</label>
 						<div class="col-sm-10">
-						<select class="form-control"
-							name="itemTags"
-							>
-							<option selected="selected">Select Available Tag</option>
-							<option ng-repeat="tag in availTags">{{ tag }}</option>
-						</select>
-
-							<!-- <input type="text"
-								name="itemTags"
-								class="form-control"
-								id="itemTags"
-								typeahead="tag for tag in availTags | filter:$viewValue | limitTo:8"
-								ng-blur="addTag(singleTag)"
-								placeholder="Tags"
-								ng-model="singleTag"> -->
+							<p ng-click="removeTag()">{{ item.tags }}</p>
+							<select class="form-control"
+							 	ng-show="availTags.length"
+								ng-model="singleTag"
+								validate-tag
+								ng-change="addTag(singleTag)"
+								name="itemTags">
+								<option selected="selected">{{singleTag}}</option>
+								<option ng-repeat="tag in availTags">{{ tag }}</option>
+							</select>
 						</div>
 					</div>
 				</ng-form>
@@ -111,6 +100,7 @@
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
 						<button type="submit" class="btn btn-primary">Add New Item</button>
+						<pre> {{ addItemForm.tagForm | json }}
 					</div>
 				</div>
 			</form>
