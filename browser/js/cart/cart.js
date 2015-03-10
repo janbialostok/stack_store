@@ -35,7 +35,7 @@ app.controller('CartCtrl', function($scope, $state, $q, $timeout,CurrentFactory,
 						CartFactory.updateCart($scope.cart._id, item).then(function (updated){
 							CurrentFactory.updateCartSize(user);
 							$scope.updatedMessage = true;
-							$timeout(function(){$scope.updatedMessage = false}, 3000);
+							$timeout(function(){$scope.updatedMessage = false;}, 3000);
 						});
 					}
 				};
@@ -44,7 +44,7 @@ app.controller('CartCtrl', function($scope, $state, $q, $timeout,CurrentFactory,
 						$scope.cart.items.splice(updated.index, 1);
 						CurrentFactory.updateCartSize(user);
 						$scope.updatedMessage = true;
-						$timeout(function(){$scope.updatedMessage = false}, 3000);
+						$timeout(function(){$scope.updatedMessage = false;}, 3000);
 					});
 				};
 			});

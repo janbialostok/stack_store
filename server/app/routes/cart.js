@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var User = mongoose.model("User", User);
 var Item = mongoose.model("Item", Item);
 var Cart = mongoose.model("Cart", Cart);
+var Address = mongoose.model("Address", Address);
 
 router.put('/add', function (req, res, next){
 	User.findById(req.body.userId, function (err, user) {
@@ -46,8 +47,8 @@ router.delete('/user/:userid/item/:itemid', function (req, res, next){
 		if (!err) {
 			res.json(user.cart);
 		} else next(err);
-	})
-})
+	});
+});
 
 router.put('/update/:id', function (req, res){
 	Cart.findById(req.params.id, function (err, cart){
@@ -76,7 +77,7 @@ router.put('/update/:id', function (req, res){
 router.delete('/delete/:cartid/item/:itemid', function (req, res, next){
 	Cart.findById(req.params.cartid, function (err, cart){
 		var items = cart.items;
-		var newArray = []
+		var newArray = [];
 		var index;
 		items.forEach(function (item, i){
 			if (item.itemId.toString() !== req.params.itemid){
@@ -101,6 +102,28 @@ router.get('/:cartId/size', function(req, res, next) {
 	Cart.findById(req.params.cartId, function(err, cart) {
 		if (err) return next(err);
 		res.send({ size: cart.size() });
+	});
+});
+
+router.put('/:id/save/address', function (req, res, next){
+	var address = new Address(req.body);
+	Cart.findByIdAndUpdate(req.params.id, {$push: {shippingAddress: address}}, function (err, cart){
+		if (!err) res.json(cart);
+		else next(err);
+	});
+});
+
+router.put('/:userid/clear', function (req, res, next){
+	var cart = new Cart();
+	cart.user = req.params.userid;
+	cart.save(function (err, returned){
+		if (!err) {
+			User.findByIdAndUpdate(req.params.userid, {$set: {cart: returned._id}}, function (err, user){
+				if (!err) res.json(user);
+				else next(err);
+			});
+		}
+		else next(err);
 	});
 });
 
