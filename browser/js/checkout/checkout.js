@@ -36,10 +36,14 @@ app.controller('CheckoutCtrl', function($scope, $state, $q, CurrentFactory, User
 		});
 	});
 
+	$scope.userCharged = false;
 	$scope.saveCustomer = function(status, response) {
-		console.log(response);
 		CreditFactory.processPayment(status,response,$scope.user._id,$scope.total).then(function(res){
-			console.log(res);
+			if (res.message.status == 'succeeded'){
+				$scope.user.cart = null;
+				$scope.userCharged = true;
+				CurrentFactory.updateCurrentUser();
+			}
 		}) 	
   	};
 });
