@@ -76,13 +76,10 @@ router.route('/:id')
 	})
 	.put(function (req, res){
 		for (var key in req.body){
-			if (req.body.hasOwnPropertyKey(key)){
-				if (key === 'reviews') req.item.reviews.push(req.body.reviews);
-				else req.item[key] = req.item[key];
-			}
+			req.item[key] = req.body[key];
 		}
 		req.item.save(function (err, item){
-			if (!err) res.status(200).end();
+			if (!err) res.json(item);
 			else res.status(400).end();
 		});
 	})

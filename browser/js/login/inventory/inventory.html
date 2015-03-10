@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">{{ currentUser.name }}'s Inventory</div>
 		<div class="panel-body">
-			<button class="btn btn-success" ui-sref="addItem">Add Inventory Item</button>
+			<button class="btn btn-success" ui-sref="itemData.add">Add Inventory Item</button>
 		</div>
 		<table class="table table-bordered">
 			<tr>
@@ -19,7 +19,7 @@
 				<td>{{ item.price | currency }}</td>
 				<td>{{ item.size }}</td>
 				<td>{{ item.quantity }}</td>
-				<td><button class="btn btn-warning btn-xs" ui-sref="addItem.edit({itemId:item._id})">Edit</button>
+				<td><button class="btn btn-warning btn-xs" ui-sref="itemData.edit({itemId:item._id})">Edit</button>
 					<button class="btn btn-danger btn-xs" ng-click ="deleteInventoryItem(item)">Delete</button></td>
 			</tr>
 		</table>
