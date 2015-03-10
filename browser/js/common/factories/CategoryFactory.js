@@ -36,19 +36,19 @@ app.factory('CategoryFactory', function() {
 	var tops = {
 		long_sleeve: "end",
 		short_sleeve: "end"
-	}
+	};
 	var bottoms= {
 		skinny: "end",
 		slim: "end",
 		straight: "end",
 		boot: "end",
 		relaxed: "end"
-	}
+	};
 
 	var gender = {
 		tops: tops,
 		bottoms: bottoms
-	}
+	};
 
 	factory.categories_asObj = {
 		male: gender,
@@ -60,12 +60,12 @@ app.factory('CategoryFactory', function() {
 
 	factory.getChildrenFor = function(key) {
 		function rec_getChildren(node) {
-			if (node.name == key) return node.children;
+			if (node.name === key) return node.children;
 			else {
 				for (var i = node.children.length - 1; i >= 0; i--) {
 					var found = rec_getChildren(node.children[i]);
 					if (found) return found;
-				};
+				}
 			}
 		}
 		for (var i = factory.categories_asArrLike.length - 1; i >= 0; i--) {
@@ -73,7 +73,7 @@ app.factory('CategoryFactory', function() {
 			if (found) return found.map(function(node) {
 				return node.name;
 			});
-		};
+		}
 	};
 
 	factory.getFirstLevelOptions = function() {
