@@ -4,6 +4,11 @@
 		padding-left: 15px;
 		
 	}
+
+
+	> tbody > tr > td {
+		border-top: #8c8c8c 1px solid;
+	}
 }
 
 .table-hover {
@@ -11,5 +16,12 @@
 		tr:hover {
 			background-color: #CDCDCD;
 		}
+	}
+}
+
+.panel {
+	> .panel-body + .table, > .panel-body + .table-responsive {
+		border-top: #8c8c8c 1px solid;
+
 	}
 }
