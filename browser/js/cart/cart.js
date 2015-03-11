@@ -37,7 +37,7 @@ app.controller('CartCtrl', function($scope, $state, $q, $timeout, CurrentFactory
 					CartFactory.updateCart($scope.cart._id, item).then(function (updated){
 						CurrentFactory.updateCartSize(user);
 					});
-				};
+				}
 				$scope.cart.items[index].sellerName = returnedSeller.name;
 				$scope.cart.items[index].editQuantity = function (item){
 					if (item.quantity === 0) {
