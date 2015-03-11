@@ -23,6 +23,10 @@ body {
   background-size: cover;
 }
 
+.section {
+  margin-bottom: 20px;
+}
+
 
 @import 'directives/main';
 @import 'directives/item';

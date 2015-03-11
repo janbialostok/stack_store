@@ -1,23 +1,18 @@
-.noUserMessage {
-	width: 50%;
-	margin-left: 25%;
-	padding: 10%;
-	border-radius: 5px;
-
-	h3 {
-		color: black;
-	}
+.table-100 {
+	width: 100px;
 }
 
-.invoice {
-	color: black;
-	img {
-		height: auto;
-		width: 80%;
-	}
-	background: url(http://geekfree.net/wp-content/uploads/2014/09/natural-paper-background-texture-hd-5a0b.jpg) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+.table-200 {
+	width: 200px;
+}
+
+.table-300 {
+	width: 300px;
+}
+
+select.input-sm {
+	height: 20px;
+	padding-top: 0;
+	padding-bottom: 0;
+	line-height: 20px;
 }
