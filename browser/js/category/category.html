@@ -1,9 +1,9 @@
-<div class="col-xs-2 sidebar">
-	<category-menu horiz="false"></category-menu>
+<div class="col-xs-2" ng-show="showSidebar">
+	<side-bar></side-bar>
 </div>
-<div class="col-xs-10">
-	<div class="col-xs-12">
-		<h1> {{ categoryTags | catFilter }}</h1>
+<div class="col-xs-12 col-md-10">
+	<div class="col-xs-12 white">
+		<h3> {{ categoryTags | catFilter }}</h3>
 	</div>
 	<item-container itemarray="items"></item-container>
 </div>

@@ -1,4 +1,8 @@
-
-<cart-item item="item" ng-repeat="item in cart.items"></cart-item>
-<button class="btn btn-primary" ng-show="cart.items.length" ui-sref="checkoutView">Checkout</button>
-<div class="updated_message"><span ng-show="updatedMessage">Cart Updated</span></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Your Cart
+	</div>
+	<cart-item item="item" ng-repeat="item in cart.items"></cart-item>
+</div>
+<button class="btn btn-primary" ng-show="cart.items.length" ui-sref="checkoutView">Go To Checkout</button>
+<span class="updated_message success-indicator"><span ng-show="updatedMessage">Cart Updated</span></span>
