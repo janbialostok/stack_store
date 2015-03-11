@@ -7,6 +7,20 @@ var Address = mongoose.model("Address", Address);
 var Cart = mongoose.model("Cart");
 var stripe = require("stripe")("sk_test_ZmP124u1LXH6eDqO5myjaFwS");
 
+
+router.get('/:userId/orders', function (req, res, next){
+	console.log('testetsetsekjslfkjsdlkjsflk');
+	User.findById(req.params.userId)
+	.populate('orders')
+	.exec(function (err, user){
+		if (!err){
+			res.json(user.orders);
+		} else {
+			next(err);
+		}
+	});
+});
+
 router.post('/signup', function (req, res, next){
 	var user = new User(req.body);
 	user.save(function (err, savedUser){
@@ -128,22 +142,10 @@ router.post('/:userId/pay', function (req, res, next) {
 			if (err && err.type === 'StripeCardError') {
 				res.json({message:err});
 			} else {
-				res.json({message:charge})
+				res.json({message:charge});
 			}
 		}
 	);
-});
-
-router.get('/:userId/orders', function (req, res, next){
-	User.findById(req.params.userId)
-	.populate('orders')
-	.exec(function (err, user){
-		if (!err){
-			res.json(user.orders);
-		} else {
-			next(err);
-		}
-	});
 });
 
 

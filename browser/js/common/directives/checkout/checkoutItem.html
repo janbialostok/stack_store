@@ -1,3 +1,33 @@
+<div class="col-xs-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">Order Summary</div>
+		<table class="table table-bordered table-responsive">
+			<tr>
+				<th>#</th>
+				<th>Image</th>
+				<th>Description</th>
+				<th>Total</th>
+			</tr>
+			<tr ng-repeat="item in cart.items">
+				<!-- Change width styles to not be inline for td elements -->
+				<td>
+					{{$index+1}}
+				</td>
+				<td class="table-image">
+					<img class="img-responsive" ng-src="{{item.image}}"/>
+				</td>
+				<td>
+					<p>{{item.name}}</p>
+					<p>{{item.price | currency:"$":2}} x {{item.quantity}}</p>
+				</td>
+				<td>
+					<p>{{item.price * item.quantity | currency:"$":2}}</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
 <table class="table">
 	<tbody class="invoice">
 		<tr>
