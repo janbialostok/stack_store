@@ -1,40 +1,53 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Payment</div>
-  <div class="panel-body">
-    <form stripe:form="saveCustomer" id="payment-form" ng-show="!userCharged">
-      <span class="payment-errors"></span>
-      <div class="form-row form-group">
-        <input type="text" 
-               size="20" 
-               data-stripe="number" 
-               class="form-control"
-               placeholder="Card Number"/>
-      </div>
+<form stripe:form="saveCustomer" id="payment-form" ng-show="!userCharged">
+<div class="row">
+  <div class="col-xs-12 section">
+    <div class="panel panel-default">
+      <div class="panel-heading">Payment</div>
+      <div class="panel-body">
+        
+          <span class="payment-errors"></span>
+          <div class="form-row form-group">
+                <label>Card Number</label>
+            <input type="text" 
+                   size="20" 
+                   data-stripe="number" 
+                   class="form-control"
+                   placeholder="xxxx xxxx xxxx xxxx"/>
+          </div>
 
-      <div class="form-row form-group">
-        <input type="text" 
-               size="4" 
-               data-stripe="cvc" 
-               class="form-control"
-               placeholder="CVC"/>
-      </div>
+          <div class="form-row form-group">
+                <label>CVC</label>
+            <input type="text" 
+                   size="4" 
+                   data-stripe="cvc" 
+                   class="form-control"
+                   placeholder="xxx"/>
+          </div>
 
-      <div class="form-row form-group">
-        <label>
-          <span>Expiration: </span>
-          <input type="text" 
-                 size="3" 
-                 data-stripe="exp-month"
-                 placeholder="MM"/>
-        </label>
-        <span> / </span>
-        <input type="text" 
-               size="5" 
-               data-stripe="exp-year"
-               placeholder = "YYYY"/>
-      </div>
+          <div class="form-row form-group">
+            <label>
+              <span>Expiration: </span>
+              <input type="text" 
+                     size="3" 
+                     data-stripe="exp-month"
+                     placeholder="MM"/>
+            </label>
+            <span> / </span>
+            <input type="text" 
+                   size="5" 
+                   data-stripe="exp-year"
+                   placeholder = "YYYY"/>
+          </div>
 
-      <button class="btn btn-primary" type="submit" ng-click="submitOrder()">Checkout</button>
-    </form>
+          <!-- <button class="btn btn-primary" type="submit" ng-click="submitOrder()">Checkout</button> -->
+        
+      </div>
+    </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-xs-12 section">
+    <button type="submit" ng-click="submitOrder()" class="btn btn-success btn-block btn-lg">CHECKOUT!</button>
+  </div>
+</div>
+</form>

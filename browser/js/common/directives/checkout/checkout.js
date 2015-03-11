@@ -8,6 +8,8 @@ app.directive('checkoutItem', function (CurrentFactory, CartFactory, UserFactory
 		link: function(scope, elem, attr){
 			var user = CurrentFactory.current.user;
 			scope.sameShipping = false;
+			scope.showProceed = true;
+
 			scope.useShippingAsBilling = function(){
 				scope.sameShipping = !scope.sameShipping;
 			};
@@ -45,7 +47,11 @@ app.directive('checkoutItem', function (CurrentFactory, CartFactory, UserFactory
 						ItemFactory.updateInventory(item.itemId, item.quantity);
 					});
 				});
-			}
+			};
+
+			scope.hideProceed = function() {
+				scope.showProceed = false;
+			};
 		}
 	};
 });
