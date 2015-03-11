@@ -53,6 +53,12 @@ app.factory('CartFactory', function($http) {
 				});
 		};
 
+		factory.changeStatus = function(cartId, status) {
+				return $http.put("/api/cart/updatestatus/" + cartId, status).then(function(res) {
+						return res.data;
+				});
+		};
+
 		factory.deleteItem = function (cartId, item){
 				var query = {};
 				query.item = item;

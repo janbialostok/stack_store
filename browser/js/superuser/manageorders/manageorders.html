@@ -15,7 +15,7 @@
 	  <!-- <td>{{ order.calculateTotalCost(order) }}</td> -->
 	  <td>{{ order.status }}</td>
 	  <td>
-		<button class="btn btn-danger btn-xs" ng-show="order.status != 'Completed'" ng-click="">Cancel</button>
+		<button class="btn btn-danger btn-xs" ng-show="order.status == 'Pending'" ng-click="">Cancel</button>
 		<button class="btn btn-success btn-xs" ng-show="order.status == 'Pending'" ng-click="">Complete</button>
 	  </td>
 	</tr>

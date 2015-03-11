@@ -57,6 +57,13 @@ router.delete('/user/:userid/item/:itemid', function (req, res, next){
 	});
 });
 
+router.put("/update/:id/status", function(req, res) {
+		Cart.findById(req.params.id, function(err, order) {
+				order.status = req.body.status;
+				res.json(order);
+		});
+});
+
 router.put('/update/:id', function (req, res){
 	Cart.findById(req.params.id, function (err, cart){
 		var items = cart.items;

@@ -17,13 +17,13 @@ app.controller("ManageOrderCtrl", function($scope, CurrentFactory, CartFactory, 
 				});
 		};
 
-		// $scope.cancelOrder = function(order) {
-				
-		// };
+		$scope.cancelOrder = function(order) {
+				return CartFactory.changeStatus(order, "Cancel");
+		};
 
-		// $scope.completeOrder = function(order) {
-				
-		// };
+		$scope.completeOrder = function(order) {
+				return CartFactory.changeStatus(order, "Complete");
+		};
 		
 		getAllOrders();
 });
