@@ -12,10 +12,11 @@
 					<p>Size: {{item.size}}</p>
 					<form name="newQuantityForm" ng-submit="newQuantityForm.$valid && item.editQuantity(item)">
 						<label>Quantity: 
-							<input type="number" name="quantity" ng-model="item.quantity" min="0" required>
+							<input type="number" name="quantity" ng-model="item.quantity" min="0" max="{{item.inventory}}" required>
 						</label>
 						<button type="submit" class="btn btn-primary btn-small">Edit</button>
 					</form>
+					<span ng-show="item.wasModified">This item was over our available stock, your quantity on order has been modified</span>
 				</div>
 			<span>
 			<div class="col-lg-4">
