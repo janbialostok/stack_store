@@ -17,6 +17,12 @@ router.put('/add', function (req, res, next){
 	});
 });
 
+router.get("/all", function(req, res, next) {
+		Cart.find({ status: { $ne: "Open" }}, function(err, orders) {
+				res.json(orders);
+		});
+});
+
 router.get('/user/:userId', function (req, res, next){
 	User.findById(req.params.userId)
 		.populate('cart')

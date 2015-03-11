@@ -26,7 +26,5 @@ app.controller("OrderHistoryCtrl", function($scope, CurrentFactory, CartFactory,
 		});
 	};
 
-
-
 	getOrderHistory();
 });

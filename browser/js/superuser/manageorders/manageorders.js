@@ -8,4 +8,22 @@ app.config(function($stateProvider) {
 	});
 });
 
-//app.controller("ManageOrderCtrl", function($scope, ))
+app.controller("ManageOrderCtrl", function($scope, CurrentFactory, CartFactory, ItemFactory) {
+		$scope.currentUser = CurrentFactory.current.user;
+
+		var getAllOrders = function() {
+				return CartFactory.getAllOrders().then(function(orders) {
+						$scope.orderHistory = orders;
+				});
+		};
+
+		// $scope.cancelOrder = function(order) {
+				
+		// };
+
+		// $scope.completeOrder = function(order) {
+				
+		// };
+		
+		getAllOrders();
+});
