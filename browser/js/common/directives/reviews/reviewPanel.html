@@ -1,19 +1,22 @@
-<span ng-show="currentUser">
-	<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview, item._id)">
-		<div class="form-group">
-			<textarea class="form-control" name="review" ng-model="newReview.comment" placeholder="Leave a review..." ng-minLength="25" required></textarea>
+<span ng-show="currentUser && currentUser !== 'Guest'">
+	<div class="row">
+		<div class="col-md-6">
+			<form name="reviewCreateForm" ng-submit="reviewCreateForm.$valid && submitReview(newReview, item._id)">
+				<div class="form-group">
+					<textarea class="form-control" name="review" ng-model="newReview.comment" placeholder="Leave a review..." ng-minLength="25" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="rating">Rating:</label>
+					<rating ng-model="newReview.rating" max="5" readonly="false"></rating>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
 		</div>
-		<div class="form-group">
-			<label for="rating">Rating:</label>
-			<label>1 <input type="radio" name="rating" ng-model="newReview.rating" value="1" required></label>
-			<label>2 <input type="radio" name="rating" ng-model="newReview.rating" value="2" required></label>
-			<label>3 <input type="radio" name="rating" ng-model="newReview.rating" value="3" required></label>
-			<label>4 <input type="radio" name="rating" ng-model="newReview.rating" value="4" required></label>
-			<label>5 <input type="radio" name="rating" ng-model="newReview.rating" value="5" required></label>
-		</div>
-		<button type="submit" class="btn btn_primary">Submit</button>
-	</form>
+	</div>
 	<hr/>
 </span>
-<review ng-show="item.reviews.length" review="review" ng-repeat="review in item.reviews"></review>
+<div ng-show="item.reviews.length">
+	<h4>Reviews By Other Users:</h4>
+	<review review="review" ng-repeat="review in item.reviews"></review>
+</div>
 <h4 ng-show="!item.reviews.length">There are currently no reviews of this product.</h4>

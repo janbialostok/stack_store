@@ -1,5 +1,9 @@
 'use strict';
-var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt', 'ngCookies','ui.bootstrap']);
+var app = angular.module('StackStoreApp', ['ui.router', 'fsaPreBuilt', 'ngCookies','ui.bootstrap','stripe'])
+
+app.config(function () {
+	Stripe.setPublishableKey('pk_test_uSwBd12em6On5eM7L8xijyOh');
+});
 
 app.controller('MainController', function ($scope) {
 

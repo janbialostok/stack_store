@@ -1,24 +1,30 @@
 .panel {
-	// background-color: #e7e7e7;
+	background-color: rgba(231, 231, 231, 0.8);
+	border-radius: 10px;
+	border: 0;
 }
 
+.panel-inverse {
+	background-color: rgba(41, 42, 38, 0.8);
+}
+
+.panel-light {
+	background-color: #FAFAFA;
+}
+
+
 .panel-default {
-	color: #333;
-	
-	label {
-		color: #333;
-	}
-
 	.panel-heading {
-		background-color: #CCCCCC;
-		border-color: #000000;
-		border-color: #b8b8b8;
-		// color: #9d9d9d;
+		color: #979797;
+		background-color: #292A26;
+		border-color: #292A26;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
 	}
 
-	border-color: #b8b8b8;
+	border-color: #292A26;
 }
 
 hr {
-	border-color: #b8b8b8;
+	border-color: #8c8c8c;
 }

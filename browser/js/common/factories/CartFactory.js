@@ -31,14 +31,21 @@ app.factory('CartFactory', function($http) {
 	factory.getCartByUserId = function (userId) {
 		return $http.get('/api/cart/user/' + userId).then(function (res){
 			return res.data;
-		})
+		});
 	};
+
+	factory.getOrdersByUserId = function (userId) {
+		return $http.get('/api/user/' + userId + '/orders').then(function (res) {
+			console.log("response", res)
+			return res.data;
+		})
+	}
 
 	factory.updateCart = function (cartId, item){
 		return $http.put('/api/cart/update/' + cartId, item).then(function (res){
 			return res.data;
 		});
-	}
+	};
 
 	factory.deleteItem = function (cartId, item){
 		var query = {};
@@ -46,7 +53,21 @@ app.factory('CartFactory', function($http) {
 		return $http.delete('/api/cart/delete/' + cartId + '/item/' + item._id).then(function (res){
 			return res.data;
 		});
-	}
+	};
 
+	factory.saveAddressOnCart = function (cartId, address, billing) {
+		var completeAddress = {
+			shipping : address,
+			billing : billing
+		}
+		return $http.put('/api/cart/' + cartId + '/save/address', completeAddress).then(function (res){
+			return res.data;
+		});
+	}
+	factory.clearCart = function (userId){
+		return $http.put('/api/cart/' + userId + '/clear').then(function (res){
+			return res.data;
+		});
+	}
 	return factory;
 });

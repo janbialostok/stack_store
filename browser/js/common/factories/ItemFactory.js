@@ -33,6 +33,22 @@ app.factory('ItemFactory', function($http) {
     factory.deleteItem = function(productId) {
 	return $http.delete("/api/item/" + productId);
     };
+    factory.addItem = function(item) {
+    	return $http.post('/api/item/create', item).then(function(res) {
+    		return res.data;
+    	});
+    };
+    factory.updateItem = function(item) {
+    	return $http.put('/api/item/' + item._id, item).then(function(res) {
+    		console.log(res);
+    		return res.data;
+    	});
+    };
+    factory.updateInventory = function(itemId, quantity) {
+        return $http.put('/api/item/update/' + itemId + '/inventory', { quantity: quantity }).then(function (res){
+            return res.data;
+        });
+    };
     
     return factory;
 });

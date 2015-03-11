@@ -2,7 +2,6 @@
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var validate = require("mongoose-validator");
-var Address = mongoose.model('Address');
 var Promise = require('bluebird');
 
 // mongoose.connect("mongodb://localhost/stack_store");
@@ -10,6 +9,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongodb connection error: '));
 
 var Schema = mongoose.Schema;
+var Address = mongoose.model('Address');
+var Item = mongoose.model('Item');
 
 var cartSchema = new Schema({
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -22,7 +23,8 @@ var cartSchema = new Schema({
 	}],
 	status: { type: String, required: true, default: 'Open' },
 	billingAddress: [Address.schema],
-	shippingAddress: [Address.schema]
+	shippingAddress: [Address.schema],
+	date: { type: Date, required: true, default: Date.now }
 });
 
 cartSchema.methods.size = function() {
@@ -67,6 +69,32 @@ cartSchema.statics.addItemById = function(cartId, itemObj) {
 		});
 	});	
 };
+
+cartSchema.methods.calculateTotalCost = function() {
+	var self = this;
+	var total = 0;
+	self.items.forEach(function(item) {
+		console.log(item);
+		Item.findById(item.itemId)
+		.exec()
+		.then(function (err, fullItem){
+			total += item.quantity*fullItem.price;
+		});
+	});
+	return total;
+};
+
+cartSchema.statics.getSummary = function(cartObj) {
+	var itemList = [];
+
+	cartObj.items.forEach(function(itemRef) {
+		Item.findById(itemRef._id, function(err, item) {
+			itemList.push(itemRef.quantity + " " + item.name);
+		});
+	});
+
+	return itemList;
+}
 
 mongoose.model("Cart", cartSchema);
 // module.exports = mongoose.model('Cart', cartSchema);

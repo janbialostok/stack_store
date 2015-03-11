@@ -17,4 +17,17 @@ app.controller("UserCtrl", function($scope, $stateParams, ItemFactory, UserFacto
 	    $scope.username = user.name;
 	});	
     });
+
+    function updateSizebar() {
+		var width = window.innerWidth;
+    	if (width < 992) $scope.showSidebar = false;
+    	else $scope.showSidebar = true;
+    }
+    updateSizebar();
+
+
+    $(window).resize(function() {
+    	updateSizebar();
+    	$scope.$apply();
+    });
 });

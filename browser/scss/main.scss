@@ -3,7 +3,7 @@
 }
 
 body {
-  color: white;
+  // color: white;
 }
 
 @mixin clearfix {
@@ -15,7 +15,8 @@ body {
 }
 
 .full {
-  background: url(http://www.fullhdwpp.com/wp-content/uploads/Denim_Seal_www.FullHDWpp.com_.jpg) no-repeat center center fixed; 
+  // background: url(http://www.fullhdwpp.com/wp-content/uploads/Denim_Seal_www.FullHDWpp.com_.jpg) no-repeat center center fixed; 
+  background: url('/img/denim_seal_www.fullhdwpp.com_.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -24,6 +25,7 @@ body {
 
 
 @import 'directives/main';
+@import 'directives/item';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
@@ -31,5 +33,7 @@ body {
 @import 'bootstrap/panel';
 @import 'bootstrap/padding';
 @import 'bootstrap/textEdits';
+@import 'checkout/checkout';
 @import 'bootstrap/table';
 @import 'login/main';
+@import 'cart/main';

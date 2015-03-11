@@ -1,0 +1,21 @@
+<div class="col-sm-10 col-sm-offset-1">
+  <div class="panel panel-default">
+	<div class="panel-heading">{{ currentUser.name }}'s Order History</div>
+	<div class="panel-body">
+	  <table class="table table-bordered">
+		<tr>
+		  <th>Date/Time</th>
+		  <th>Name</th>
+		  <th>Total</th>
+		  <th>Status</th>
+		</tr>
+		<tr ng-repeat="order in orderHistory">
+		  <td>{{ order.date }}</td>
+		  <td>{{ currentUser.name }}</td>
+		  <td>{{ order.subtotal | currency:"$":2 }}</td>
+		  <td>{{ order.status }}</td>
+		</tr>
+	  </table>
+	</div>
+  </div>
+</div>

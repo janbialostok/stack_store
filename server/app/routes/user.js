@@ -3,6 +3,9 @@ var router = require("express").Router();
 var mongoose = require("mongoose");
 var User = mongoose.model("User");
 var Review = mongoose.model("Review");
+var Address = mongoose.model("Address", Address);
+var Cart = mongoose.model("Cart");
+var stripe = require("stripe")("sk_test_ZmP124u1LXH6eDqO5myjaFwS");
 
 router.post('/signup', function (req, res, next){
 	var user = new User(req.body);
@@ -94,6 +97,52 @@ router.get('/:userid/items/:itemid', function (req, res, next){
 	User.findById(req.params.userid).populate("items").exec(function (err, user){
 		if (!err) res.json(user.items);
 		else next(err);
+	});
+});
+
+router.put('/:id/save/address', function (req, res, next){
+	var address = new Address(req.body);
+	User.findByIdAndUpdate(req.user._id, {$push: {address: address}}, function (err, user){
+		if (!err) res.json(user);
+		else next(err);
+	});
+});
+
+router.put('/:id/order', function (req, res, next){
+	Cart.findByIdAndUpdate(req.body._id, {$set: {status: 'Pending'}}, function (err, cart){
+		User.findByIdAndUpdate(req.user._id, {$push: {orders: cart._id}}, function (err, user){
+			if (!err) res.json(user);
+			else next(err);
+		});
+	});
+});
+
+router.post('/:userId/pay', function (req, res, next) {
+	var stripeToken = req.body.token;
+	var charge = stripe.charges.create({
+		amount: req.body.total*100,
+		currency: "usd",
+		source: stripeToken,
+		description: req.user.name
+		}, function (err, charge) {
+			if (err && err.type === 'StripeCardError') {
+				res.json({message:err});
+			} else {
+				res.json({message:charge})
+			}
+		}
+	);
+});
+
+router.get('/:userId/orders', function (req, res, next){
+	User.findById(req.params.userId)
+	.populate('orders')
+	.exec(function (err, user){
+		if (!err){
+			res.json(user.orders);
+		} else {
+			next(err);
+		}
 	});
 });
 
