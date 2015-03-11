@@ -134,5 +134,17 @@ router.post('/:userId/pay', function (req, res, next) {
 	);
 });
 
+router.get('/:userId/orders', function (req, res, next){
+	User.findById(req.params.userId)
+	.populate('orders')
+	.exec(function (err, user){
+		if (!err){
+			res.json(user.orders);
+		} else {
+			next(err);
+		}
+	});
+});
+
 
 module.exports = router;
