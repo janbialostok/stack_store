@@ -14,4 +14,17 @@ app.controller('SearchCtrl', function($scope, $stateParams, ItemFactory) {
 	ItemFactory.getBySearchString($scope.searchString).then(function(items) {
 		$scope.searchResults = items;
 	});
+
+    function updateSizebar() {
+		var width = window.innerWidth;
+    	if (width < 992) $scope.showSidebar = false;
+    	else $scope.showSidebar = true;
+    }
+    updateSizebar();
+
+
+    $(window).resize(function() {
+    	updateSizebar();
+    	$scope.$apply();
+    });
 });

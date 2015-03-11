@@ -1,7 +1,7 @@
-<div class="col-xs-2 sidebar">
+<div class="col-xs-2" ng-show="showSidebar">
 	<side-bar></side-bar>
 </div>
-<div class="col-xs-10">
+<div class="col-xs-12 col-md-10">
 	<items-with-title
 		title="Search Results For: {{ searchString }}"
 		items="searchResults">

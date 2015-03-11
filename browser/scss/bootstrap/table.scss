@@ -11,6 +11,12 @@
 	}
 }
 
+.table-bordered {
+	> tbody > tr > td, > tbody > tr > th {
+		border: #8c8c8c 1px solid;
+	}
+}
+
 .table-hover {
 	tbody {
 		tr:hover {
@@ -20,8 +26,11 @@
 }
 
 .panel {
-	> .panel-body + .table, > .panel-body + .table-responsive {
+	> .panel-body + .table, > .panel-body + .table-responsive,
+	> .table + .panel-body, > .table-responsive + .panel-body {
 		border-top: #8c8c8c 1px solid;
-
 	}
+	// > .table + .panel-body, > .table-responsive + .panel-body {
+	// 	border-top: #8c8c8c 1px solid;
+	// }
 }
