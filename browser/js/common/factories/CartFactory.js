@@ -34,6 +34,13 @@ app.factory('CartFactory', function($http) {
 		});
 	};
 
+	factory.getOrdersByUserId = function (userId) {
+		return $http.get('/api/user/' + userId + '/orders').then(function (res) {
+			console.log("response", res)
+			return res.data;
+		})
+	}
+
 	factory.updateCart = function (cartId, item){
 		return $http.put('/api/cart/update/' + cartId, item).then(function (res){
 			return res.data;

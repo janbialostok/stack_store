@@ -70,16 +70,18 @@ cartSchema.statics.addItemById = function(cartId, itemObj) {
 	});	
 };
 
-cartSchema.statics.calculateTotalCost = function(cartObj) {
-	var totalCost = 0;
-	
-	cartObj.items.forEach(function(itemRef) {
-		Item.findById(itemRef._id, function(err, item) {
-			totalCost += item.price*itemRef.quantity;
+cartSchema.methods.calculateTotalCost = function() {
+	var self = this;
+	var total = 0;
+	self.items.forEach(function(item) {
+		console.log(item);
+		Item.findById(item.itemId)
+		.exec()
+		.then(function (err, fullItem){
+			total += item.quantity*fullItem.price;
 		});
 	});
-
-	return totalCost;
+	return total;
 };
 
 cartSchema.statics.getSummary = function(cartObj) {

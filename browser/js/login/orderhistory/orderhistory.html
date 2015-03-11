@@ -5,14 +5,14 @@
 	  <table class="table table-bordered">
 		<tr>
 		  <th>Date/Time</th>
-		  <th>Items</th>
+		  <th>Name</th>
 		  <th>Total</th>
 		  <th>Status</th>
 		</tr>
 		<tr ng-repeat="order in orderHistory">
 		  <td>{{ order.date }}</td>
-		  <td>{{ order.getSummary(order) }}</td>
-		  <td>{{ order.calculateTotalCost(order) }}</td>
+		  <td>{{ currentUser.name }}</td>
+		  <td>{{ order.subtotal | currency:"$":2 }}</td>
 		  <td>{{ order.status }}</td>
 		</tr>
 	  </table>

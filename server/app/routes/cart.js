@@ -30,6 +30,7 @@ router.get('/user/:userId', function (req, res, next){
 		});
 	});
 
+
 router.put('/:cartId/mergeWith/user/:userId', function(req, res, next) {
 	User.findById(req.params.userId).exec()
 	.then(function(user) {
